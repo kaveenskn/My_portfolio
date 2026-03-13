@@ -15,7 +15,7 @@ export default function ProjectsPage() {
       <Navbar />
       <SocialIcons />
       
-      <div className="relative z-10 pt-20"> {/* Padding for the fixed Navbar */}
+      <div className="relative z-10"> {/* Padding removed here to fix background gap */}
         <ProjectsSection />
       </div>
     </main>
