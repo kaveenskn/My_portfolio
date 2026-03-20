@@ -11,7 +11,7 @@ export default function Home() {
   const isLight = theme === "light";
 
   return (
-    <main className={`relative min-h-screen overflow-hidden selection:bg-portfolio-accent selection:text-white transition-colors duration-500 ${
+    <main className={`relative min-h-screen selection:bg-portfolio-accent selection:text-white transition-colors duration-500 ${
       isLight ? "bg-[#f8f9fa]" : "bg-portfolio-dark"
     }`}>
       

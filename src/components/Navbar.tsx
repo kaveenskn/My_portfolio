@@ -9,9 +9,9 @@ import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
+  { name: "About me", href: "/about" },
   { name: "Projects", href: "/projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -40,11 +40,10 @@ export default function Navbar() {
         }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        className={`flex items-center justify-between w-full max-w-[1000px] h-[70px] px-6 md:px-10 rounded-full border backdrop-blur-md shadow-2xl transition-colors duration-500 ${
-          isLight 
-          ? "bg-white/70 border-black/5 shadow-black/5" 
+        className={`flex items-center justify-between w-full max-w-[1000px] h-[70px] px-6 md:px-10 rounded-full border backdrop-blur-md shadow-2xl transition-colors duration-500 ${isLight
+          ? "bg-white/70 border-black/5 shadow-black/5"
           : "bg-black/40 border-white/10 shadow-black"
-        }`}
+          }`}
       >
         {/* Logo / Brand */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -65,11 +64,10 @@ export default function Navbar() {
                 <li key={link.name} className="relative">
                   <Link
                     href={link.href}
-                    className={`transition-colors duration-300 text-sm font-semibold tracking-wide ${
-                      isActive 
-                        ? (isLight ? "text-black" : "text-white") 
-                        : (isLight ? "text-gray-500 hover:text-black" : "text-gray-400 hover:text-white")
-                    }`}
+                    className={`transition-colors duration-300 text-sm font-semibold tracking-wide ${isActive
+                      ? (isLight ? "text-black" : "text-white")
+                      : (isLight ? "text-gray-500 hover:text-black" : "text-gray-400 hover:text-white")
+                      }`}
                   >
                     {link.name}
                     {isActive && (
@@ -89,9 +87,8 @@ export default function Navbar() {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 ${
-                isLight ? "bg-black/5 text-black" : "bg-white/5 text-white"
-              }`}
+              className={`p-2 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 ${isLight ? "bg-black/5 text-black" : "bg-white/5 text-white"
+                }`}
               aria-label="Toggle theme"
             >
               {isLight ? <Moon size={18} /> : <Sun size={18} />}
