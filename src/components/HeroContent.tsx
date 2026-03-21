@@ -176,7 +176,7 @@ export default function HeroContent() {
           <div className="relative min-h-[100px] md:min-h-[150px] w-full flex items-center md:items-start justify-center md:justify-end">
             <h2 className={`text-2xl md:text-4xl lg:text-5xl font-bold leading-[1.2] md:leading-[1.05] tracking-tight ${isLight ? "text-gray-900" : "text-white"
               }`}>
-              <span className={`text-transparent bg-clip-text bg-gradient-to-r font-extrabold ${isLight ? "from-purple-600 to-violet-800" : "from-purple-400 to-violet-600"
+              <span className={`text-transparent bg-clip-text bg-gradient-to-r font-extrabold pr-2 py-2 ${isLight ? "from-purple-600 to-violet-800" : "from-purple-400 to-violet-600"
                 }`}>
                 {displayText}
               </span>

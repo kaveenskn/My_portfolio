@@ -29,12 +29,12 @@ export const PROJECTS_DATA: Project[] = [
   },
   {
     id: "03",
-    title: "Fast Food Website",
+    title: "Saree Shop Landing Page",
     category: "Web",
-    desc: "A highly responsive fast-food ordering website with dynamic animations and seamless navigation.",
-    technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "MongoDB"],
-    image: "/project3.jpg",
-    color: "from-red-500/20 to-orange-600/20"
+    desc: "A modern and responsive saree shop landing page designed to showcase elegant collections with smooth animations and an engaging user experience.",
+    technologies: ["React", "Tailwind CSS", "Framer Motion"],
+    image: "/project_images/Sareeshop.png",
+    color: "from-orange-500/20 to-green-600/20"
   },
   {
     id: "04",

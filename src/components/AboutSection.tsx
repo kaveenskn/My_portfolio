@@ -54,7 +54,7 @@ export default function AboutSection() {
           <h1 className={`text-4xl md:text-5xl font-black mb-3 tracking-tight ${isLight ? "text-gray-900" : "text-white"
             }`}>
             Shanmugaraja<br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-violet-600">Kaveen</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-violet-600 pr-2 py-2">Kaveen</span>
           </h1>
           <p className={`${isLight ? "text-purple-600" : "text-purple-400"
             } font-semibold mb-10 text-base flex items-center gap-2 opacity-90`}>
