@@ -40,9 +40,9 @@ export default function Navbar() {
         }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        className={`flex items-center justify-between w-full max-w-[1000px] h-[70px] px-6 md:px-10 rounded-full border backdrop-blur-md shadow-2xl transition-colors duration-500 ${isLight
-          ? "bg-white/70 border-black/5 shadow-black/5"
-          : "bg-black/40 border-white/10 shadow-black"
+        className={`flex items-center justify-between w-full max-w-[1000px] h-[70px] px-6 md:px-10 rounded-full border backdrop-blur-md transition-all duration-500 ${isLight
+          ? "bg-white/70 border-gray-200/50 shadow-[0_8px_30px_rgba(0,0,0,0.04)]"
+          : "bg-black/40 border-purple-500/30 shadow-[0_0_15px_rgba(139,92,246,0.1)]"
           }`}
       >
         {/* Logo / Brand */}

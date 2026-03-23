@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Instagram, Linkedin, Github, Twitter, Mail, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Background from "@/components/Background";
 import { useTheme } from "@/components/ThemeProvider";
 
 export default function ContactPage() {
@@ -41,12 +42,9 @@ export default function ContactPage() {
   ];
 
   return (
-    <main className={`relative w-full h-screen overflow-hidden flex flex-col selection:bg-purple-500/30 ${
-      isLight ? "bg-[#f8f9fa]" : "bg-[#0a0a0a]"
-    }`}>
-      {/* Background Effects */}
-      <div className={`fixed inset-0 ${isLight ? "bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.05),transparent_50%)]" : "bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.1),transparent_50%)]"} pointer-events-none`} />
-      <div className="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
+    <main className="relative w-full h-screen overflow-hidden flex flex-col selection:bg-purple-500/30">
+      <Background />
+      {/* Background Effects - Handled by Background component */}
 
       <Navbar />
       
@@ -138,9 +136,9 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className={`p-8 md:p-10 rounded-[36px] border shadow-2xl relative overflow-hidden ${
+            className={`p-8 md:p-10 rounded-[36px] border shadow-2xl relative overflow-hidden transition-all duration-500 ${
               isLight 
-              ? "bg-gradient-to-br from-white via-purple-50/50 to-purple-100/50 border-purple-200 shadow-purple-500/10" 
+              ? "bg-white/80 border-gray-200/50 shadow-[0_20px_50px_rgba(0,0,0,0.06)]" 
               : "bg-gradient-to-br from-purple-900/20 via-[#0a0a0a] to-[#050505] border-purple-500/20 shadow-purple-900/20"
             }`}
           >

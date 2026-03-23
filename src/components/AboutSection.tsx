@@ -6,13 +6,59 @@ import { useState } from "react";
 import { CheckCircle2, Mail, Download, Code2, Database, BrainCircuit, ShieldAlert, X, User } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
+const Hexagon = ({ size, color, duration, delay, opacity, x, y }: {
+  size: number;
+  color: string;
+  duration: number;
+  delay: number;
+  opacity: number;
+  x: string;
+  y: string;
+}) => (
+  <motion.div
+    initial={{ rotate: 0, scale: 0.8, opacity: 0 }}
+    animate={{
+      rotate: 360,
+      scale: [0.9, 1.1, 0.9],
+      opacity: [opacity * 0.5, opacity, opacity * 0.5]
+    }}
+    transition={{
+      rotate: { duration, repeat: Infinity, ease: "linear" },
+      scale: { duration: duration * 0.5, repeat: Infinity, ease: "easeInOut" },
+      opacity: { duration: duration * 0.5, repeat: Infinity, ease: "easeInOut" },
+      delay
+    }}
+    style={{ width: size, height: size, left: x, top: y }}
+    className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
+  >
+    <svg viewBox="0 0 100 100" className="w-full h-full">
+      <path
+        d="M50 5 L93.3 30 L93.3 80 L50 105 L6.7 80 L6.7 30 Z"
+        fill="none"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  </motion.div>
+);
+
 export default function AboutSection() {
   const { theme } = useTheme();
   const isLight = theme === "light";
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   return (
-    <div className="w-full max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start py-10">
+    <div className="relative w-full max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start py-10">
+
+      {/* === Background Hexagons === */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-visible">
+        <Hexagon size={120} color={isLight ? "#9333ea" : "#a855f7"} duration={20} delay={0} opacity={0.25} x="-5%" y="10%" />
+        <Hexagon size={180} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={25} delay={2} opacity={0.15} x="105%" y="25%" />
+        <Hexagon size={100} color={isLight ? "#6d28d9" : "#7c3aed"} duration={18} delay={4} opacity={0.2} x="85%" y="90%" />
+        <Hexagon size={150} color={isLight ? "#9333ea" : "#a855f7"} duration={22} delay={1} opacity={0.2} x="5%" y="85%" />
+        <Hexagon size={140} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={30} delay={3} opacity={0.15} x="50%" y="60%" />
+      </div>
 
       {/* === LEFT COLUMN: Profile Card === */}
       <motion.div
@@ -20,23 +66,14 @@ export default function AboutSection() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
         className={`lg:col-span-5 w-full backdrop-blur-3xl border rounded-[60px] p-10 md:p-14 flex flex-col items-center text-center sticky top-24 transition-all duration-500 group overflow-hidden ${isLight
-          ? "bg-gradient-to-br from-white to-gray-50 border-black/5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] hover:border-purple-500/50"
-          : "bg-gradient-to-br from-[#111111] to-[#1a1a1a] border-white/10 shadow-lg shadow-black/50 hover:border-purple-500/50 hover:shadow-[0_0_80px_-15px_rgba(139,92,246,0.25)]"
+          ? "bg-white/80 border-gray-200/50 shadow-[0_15px_35px_rgba(0,0,0,0.05)] hover:border-purple-500/30"
+          : "bg-gradient-to-b from-purple-600/40 via-[#0D0D0D] to-[#101010] border-purple-500/40 shadow-xl shadow-black/20 hover:border-purple-500/80 hover:shadow-2xl hover:shadow-black/40"
           }`}
       >
-        {/* Dynamic Background Glows for Maximum Vibrancy */}
-        {/* Bottom-Right Glow (Purple/Blue) */}
-        <div className="absolute -bottom-24 -right-24 w-[350px] h-[350px] bg-purple-600/30 blur-[120px] pointer-events-none opacity-60 group-hover:opacity-100 group-hover:bg-purple-600/40 transition-all duration-700" />
-        <div className="absolute -bottom-12 -right-12 w-[250px] h-[250px] bg-blue-600/20 blur-[90px] pointer-events-none opacity-40 group-hover:opacity-60 transition-all duration-700" />
 
-        {/* Top-Left Glow (Violet/Cyan) */}
-        <div className="absolute -top-20 -left-20 w-[200px] h-[200px] bg-violet-600/10 blur-[80px] pointer-events-none opacity-0 group-hover:opacity-30 transition-all duration-700" />
 
         <div className="relative z-10 w-full flex flex-col items-center">
           <div className="relative w-full aspect-square max-w-[320px] mb-10 group/img">
-            {/* Main Glow behind image */}
-            <div className={`absolute -inset-4 rounded-[70px] blur-3xl opacity-0 group-hover/img:opacity-100 transition-opacity duration-700 ${isLight ? "bg-purple-200/50" : "bg-purple-600/20"
-              }`} />
 
             <div className={`relative w-full h-full rounded-[60px] overflow-hidden border-2 transition-all duration-700 group-hover/img:scale-[1.02] ${isLight ? "border-purple-500/10 shadow-xl" : "border-white/10 shadow-[0_0_30px_rgba(139,92,246,0.1)]"
               }`}>
@@ -89,8 +126,8 @@ export default function AboutSection() {
               transition={{ duration: 0.4 }}
               onClick={() => setIsAboutOpen(true)}
               className={`cursor-pointer backdrop-blur-3xl border rounded-[60px] p-10 md:p-14 flex flex-col items-center justify-center gap-6 relative overflow-hidden group transition-all duration-500 min-h-[400px] h-full ${isLight
-                ? "bg-white/70 border-black/5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] hover:border-purple-500/30"
-                : "bg-[#111111] border-white/10 shadow-lg shadow-black/50 hover:bg-[#151515] hover:border-purple-500/50 hover:shadow-[0_0_60px_-15px_rgba(139,92,246,0.3)]"
+                ? "bg-white/80 border-gray-200/50 shadow-[0_15px_35px_rgba(0,0,0,0.05)] hover:border-purple-500/30"
+                : "bg-gradient-to-b from-purple-600/40 via-[#0D0D0D] to-[#101010] border-purple-500/40 shadow-xl shadow-black/20 hover:border-purple-500/80 hover:shadow-2xl hover:shadow-black/40"
                 }`}
             >
               <div className={`w-32 h-32 md:w-40 md:h-40 rounded-full flex items-center justify-center border-2 transition-all duration-500 group-hover:scale-110 ${isLight ? "bg-purple-100/50 border-purple-500/20 text-purple-600" : "bg-purple-500/10 border-purple-500/30 text-purple-400"
@@ -101,8 +138,6 @@ export default function AboutSection() {
                 <h2 className={`text-4xl font-black mb-2 ${isLight ? "text-gray-900" : "text-white"}`}>About Me</h2>
                 <p className={`text-sm font-bold uppercase tracking-[0.3em] ${isLight ? "text-purple-600/60" : "text-purple-400/60"}`}>Click to Explore</p>
               </div>
-              {/* Radial glow for icon mode */}
-              <div className="absolute inset-0 bg-radial-gradient from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </motion.div>
           ) : (
             <motion.div
@@ -112,10 +147,11 @@ export default function AboutSection() {
               exit={{ opacity: 0, y: 30 }}
               transition={{ duration: 0.5 }}
               className={`backdrop-blur-3xl border rounded-[60px] p-10 md:p-14 relative overflow-hidden transition-all duration-500 ${isLight
-                ? "bg-white/70 border-black/5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)]"
-                : "bg-[#111111] border-white/10 shadow-lg shadow-black/50"
+                ? "bg-white/80 border-gray-200/50 shadow-[0_15px_35px_rgba(0,0,0,0.05)]"
+                : "bg-gradient-to-b from-purple-600/40 via-[#0D0D0D] to-[#101010] border-purple-500/40 shadow-xl shadow-black/20"
                 }`}
             >
+
               {/* Close Button */}
               <button
                 onClick={(e) => {
@@ -160,11 +196,12 @@ export default function AboutSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className={`backdrop-blur-3xl border rounded-[60px] p-10 md:p-14 transition-all duration-500 ${isLight
-            ? "bg-white/70 border-black/5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)]"
-            : "bg-[#111111] border-white/10 shadow-lg shadow-black/50 hover:bg-[#151515] hover:border-purple-500/40 hover:shadow-[0_0_60px_-15px_rgba(139,92,246,0.3)]"
+          className={`backdrop-blur-3xl border rounded-[60px] p-10 md:p-14 transition-all duration-500 group overflow-hidden ${isLight
+            ? "bg-white/80 border-gray-200/50 shadow-[0_15px_35px_rgba(0,0,0,0.05)] hover:border-purple-500/30"
+            : "bg-gradient-to-b from-purple-600/40 via-[#0D0D0D] to-[#101010] border-purple-500/40 shadow-xl shadow-black/20 hover:border-purple-500/80 hover:shadow-2xl hover:shadow-black/40"
             }`}
         >
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Journey Section */}
             <div>
@@ -199,11 +236,11 @@ export default function AboutSection() {
                     key={i}
                     className={`p-4 rounded-3xl border flex flex-col items-center gap-3 transition-all duration-300 group hover:-translate-y-1 ${isLight
                       ? "bg-white border-black/5 text-gray-900 hover:shadow-lg hover:border-purple-500/20"
-                      : "bg-[#1a1a1a] border-white/10 text-white hover:bg-purple-500/[0.1] hover:border-purple-500/50 hover:-translate-y-2 hover:shadow-[0_10px_30px_-10px_rgba(139,92,246,0.4)]"
+                      : "bg-[#1a1a1a] border-white/10 text-white hover:bg-purple-500/[0.1] hover:border-purple-500/50 hover:-translate-y-2 hover:shadow-xl hover:shadow-black/40"
                       }`}
                   >
                     <skill.icon size={24} className={`${isLight ? "text-purple-600" : "text-purple-500"
-                      } group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.5)] transition-all`} />
+                      } group-hover:scale-110 transition-all`} />
                     <span className="text-xs font-bold uppercase tracking-widest opacity-80">{skill.name}</span>
                   </div>
                 ))}

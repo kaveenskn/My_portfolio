@@ -96,21 +96,26 @@ export default function HeroContent() {
     <div className="relative z-10 w-full min-h-[100dvh] pt-32 md:pt-32 flex items-center justify-center overflow-hidden">
 
       {/* === Large Purple Glow Behind Image === */}
-      <div className="absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full bg-purple-600/20 blur-[120px] pointer-events-none z-0"></div>
-      <div className="absolute left-1/2 top-[50%] -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] md:w-[500px] md:h-[500px] rounded-full bg-violet-500/15 blur-[80px] pointer-events-none z-0"></div>
+      {/* === Large Purple Glow Behind Image === */}
+      <div className={`absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[700px] md:h-[700px] rounded-full blur-[120px] pointer-events-none z-0 ${isLight ? "bg-purple-300/20" : "bg-purple-600/20"
+        }`}></div>
+      <div className={`absolute left-1/2 top-[50%] -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] md:w-[500px] md:h-[500px] rounded-full blur-[80px] pointer-events-none z-0 ${isLight ? "bg-violet-300/15" : "bg-violet-500/15"
+        }`}></div>
 
-      {/* === Rotating Hexagons (Desktop Only) === */}
-      <div className="hidden md:block absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none z-0">
-        {/* Center/Right Cluster */}
-        <Hexagon size={450} color={isLight ? "#9333ea" : "#a855f7"} duration={20} delay={0} opacity={0.3} x="50%" y="50%" />
-        <Hexagon size={600} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={30} delay={2} opacity={0.15} x="53%" y="48%" />
-        <Hexagon size={350} color={isLight ? "#6d28d9" : "#7c3aed"} duration={25} delay={5} opacity={0.25} x="47%" y="52%" />
+      {/* === Rotating Hexagons (Desktop Only - Dark Mode Only) === */}
+      {!isLight && (
+        <div className="hidden md:block absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none z-0">
+          {/* Center/Right Cluster */}
+          <Hexagon size={450} color={isLight ? "#9333ea" : "#a855f7"} duration={20} delay={0} opacity={0.3} x="50%" y="50%" />
+          <Hexagon size={600} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={30} delay={2} opacity={0.15} x="53%" y="48%" />
+          <Hexagon size={350} color={isLight ? "#6d28d9" : "#7c3aed"} duration={25} delay={5} opacity={0.25} x="47%" y="52%" />
 
-        {/* Left Cluster */}
-        <Hexagon size={400} color={isLight ? "#9333ea" : "#a855f7"} duration={22} delay={1} opacity={0.2} x="20%" y="45%" />
-        <Hexagon size={550} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={35} delay={3} opacity={0.1} x="22%" y="42%" />
-        <Hexagon size={300} color={isLight ? "#6d28d9" : "#7c3aed"} duration={28} delay={6} opacity={0.15} x="18%" y="48%" />
-      </div>
+          {/* Left Cluster */}
+          <Hexagon size={400} color={isLight ? "#9333ea" : "#a855f7"} duration={22} delay={1} opacity={0.2} x="20%" y="45%" />
+          <Hexagon size={550} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={35} delay={3} opacity={0.1} x="22%" y="42%" />
+          <Hexagon size={300} color={isLight ? "#6d28d9" : "#7c3aed"} duration={28} delay={6} opacity={0.15} x="18%" y="48%" />
+        </div>
+      )}
 
       {/* === Content Layout: 3-column flex === */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between px-6 md:px-20 gap-12 md:gap-0">
@@ -120,9 +125,9 @@ export default function HeroContent() {
           initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="w-full md:w-[35%] h-auto md:h-[200px] flex flex-col items-center md:items-start justify-center md:justify-start text-center md:text-left z-20 order-2 md:order-1"
+          className="w-full md:w-[35%] h-auto md:h-[200px] flex flex-col items-center md:items-start justify-center md:justify-start text-center md:text-left z-20 order-2 md:order-1 -translate-y-8 md:-translate-y-12"
         >
-          <span className={`tracking-[0.25em] uppercase text-xs md:text-sm font-medium mb-3 bg-clip-text text-transparent bg-gradient-to-r ${isLight ? "from-purple-600 to-violet-800" : "from-purple-400 to-violet-600"
+          <span className={`tracking-[0.25em] uppercase text-xs md:text-sm font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r ${isLight ? "from-purple-600 to-indigo-600" : "from-purple-400 to-violet-600"
             }`}>
             Hello, I&apos;m
           </span>
@@ -141,12 +146,14 @@ export default function HeroContent() {
           className="w-full md:w-[30%] flex justify-center items-end z-10 order-1 md:order-2"
         >
           <div className="relative w-[240px] h-[300px] md:w-[340px] md:h-[440px] lg:w-[380px] lg:h-[500px]">
-            {/* Mobile-Only Hexagons (precisely behind the image) */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none z-[-1] md:hidden">
-              <Hexagon size={300} color={isLight ? "#9333ea" : "#a855f7"} duration={22} delay={0} opacity={0.3} x="50%" y="50%" />
-              <Hexagon size={380} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={32} delay={2} opacity={0.2} x="50%" y="50%" />
-              <Hexagon size={250} color={isLight ? "#6d28d9" : "#7c3aed"} duration={26} delay={4} opacity={0.25} x="50%" y="50%" />
-            </div>
+            {/* Mobile-Only Hexagons (precisely behind the image - Dark Mode Only) */}
+            {!isLight && (
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none z-[-1] md:hidden">
+                <Hexagon size={300} color={isLight ? "#9333ea" : "#a855f7"} duration={22} delay={0} opacity={0.3} x="50%" y="50%" />
+                <Hexagon size={380} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={32} delay={2} opacity={0.2} x="50%" y="50%" />
+                <Hexagon size={250} color={isLight ? "#6d28d9" : "#7c3aed"} duration={26} delay={4} opacity={0.25} x="50%" y="50%" />
+              </div>
+            )}
 
             <Image
               src="/profile.png"
@@ -167,7 +174,7 @@ export default function HeroContent() {
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="w-full md:w-[35%] h-auto md:h-[200px] flex flex-col items-center md:items-end justify-center md:justify-start text-center md:text-right z-20 order-3 md:order-3"
+          className="w-full md:w-[35%] h-auto md:h-[200px] flex flex-col items-center md:items-end justify-center md:justify-start text-center md:text-right z-20 order-3 md:order-3 -translate-y-8 md:-translate-y-12"
         >
           <span className={`${isLight ? "text-purple-600" : "text-purple-400"
             } tracking-[0.35em] uppercase text-xs md:text-sm font-semibold mb-3`}>
@@ -176,7 +183,7 @@ export default function HeroContent() {
           <div className="relative min-h-[100px] md:min-h-[150px] w-full flex items-center md:items-start justify-center md:justify-end">
             <h2 className={`text-2xl md:text-4xl lg:text-5xl font-bold leading-[1.2] md:leading-[1.05] tracking-tight ${isLight ? "text-gray-900" : "text-white"
               }`}>
-              <span className={`text-transparent bg-clip-text bg-gradient-to-r font-extrabold pr-2 py-2 ${isLight ? "from-purple-600 to-violet-800" : "from-purple-400 to-violet-600"
+              <span className={`text-transparent bg-clip-text bg-gradient-to-r font-extrabold pr-2 py-2 ${isLight ? "from-purple-600 to-indigo-600" : "from-purple-400 to-violet-600"
                 }`}>
                 {displayText}
               </span>

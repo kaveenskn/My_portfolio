@@ -13,6 +13,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import { Project, PROJECTS_DATA } from "@/data/projects";
+import ProjectBackground, { AnimatedGithubLogo } from "./ProjectBackground";
+
 
 const ProjectCard = ({ project }: { project: Project }) => {
   const { theme } = useTheme();
@@ -36,13 +38,10 @@ const ProjectCard = ({ project }: { project: Project }) => {
         <div
           className={`absolute inset-0 backface-hidden rounded-[40px] border overflow-hidden group transition-all duration-500 ${isFlipped ? "pointer-events-none" : "pointer-events-auto"
             } ${isLight
-              ? "bg-gradient-to-br from-white to-gray-50 border-black/5 shadow-2xl shadow-black/5 hover:border-purple-500/50"
-              : "bg-gradient-to-br from-[#0D0D0D] to-[#151515] border-white/5 hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]"
+              ? "bg-white/80 border-gray-200/50 shadow-[0_15px_35px_rgba(0,0,0,0.05)] hover:border-purple-500/30"
+              : "bg-gradient-to-b from-purple-600/40 via-[#0D0D0D] to-[#101010] border-purple-500/40 shadow-xl shadow-black/20 hover:border-purple-500/80 hover:shadow-2xl hover:shadow-black/40"
             }`}
         >
-          {/* Dynamic Background Glows */}
-          <div className="absolute -bottom-24 -right-24 w-[350px] h-[350px] bg-purple-600/40 blur-[120px] pointer-events-none opacity-80 group-hover:opacity-100 group-hover:bg-purple-600/50 transition-all duration-700" />
-          <div className="absolute -bottom-12 -right-12 w-[250px] h-[250px] bg-blue-600/30 blur-[90px] pointer-events-none opacity-60 group-hover:opacity-80 transition-all duration-700" />
 
           {/* Content */}
           <div className="relative z-10 p-8 md:p-10 h-full flex flex-col">
@@ -103,7 +102,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/20 backdrop-blur-[2px]">
-                <div className="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center text-white shadow-[0_0_20px_rgba(139,92,246,0.5)]">
+                <div className="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center text-white shadow-lg shadow-black/20">
                   <ExternalLink size={20} />
                 </div>
               </div>
@@ -115,8 +114,8 @@ const ProjectCard = ({ project }: { project: Project }) => {
         <div
           className={`absolute inset-0 backface-hidden rounded-[40px] border overflow-hidden p-8 md:p-12 flex flex-col [transform:rotateY(180deg)] ${isFlipped ? "pointer-events-auto z-20" : "pointer-events-none z-0"
             } ${isLight
-              ? "bg-gradient-to-br from-white to-gray-50 border-black/5 shadow-2xl"
-              : "bg-gradient-to-br from-[#0D0D0D] to-[#151515] border-white/5"
+              ? "bg-white/80 border-gray-200/50 shadow-[0_15px_35px_rgba(0,0,0,0.05)]"
+              : "bg-gradient-to-b from-purple-600/40 via-[#0D0D0D] to-[#101010] border-purple-500/40 shadow-xl shadow-black/20"
             }`}
         >
           {/* Background Glow */}
@@ -163,6 +162,42 @@ const ProjectCard = ({ project }: { project: Project }) => {
   );
 };
 
+const Hexagon = ({ size, color, duration, delay, opacity, className }: {
+  size: number;
+  color: string;
+  duration: number;
+  delay: number;
+  opacity: number;
+  className: string;
+}) => (
+  <motion.div
+    initial={{ rotate: 0, scale: 0.8, opacity: 0 }}
+    animate={{
+      rotate: 360,
+      scale: [0.9, 1.1, 0.9],
+      opacity: [opacity * 0.5, opacity, opacity * 0.5]
+    }}
+    transition={{
+      rotate: { duration, repeat: Infinity, ease: "linear" },
+      scale: { duration: duration * 0.5, repeat: Infinity, ease: "easeInOut" },
+      opacity: { duration: duration * 0.5, repeat: Infinity, ease: "easeInOut" },
+      delay
+    }}
+    style={{ width: size, height: size }}
+    className={`absolute pointer-events-none z-0 ${className}`}
+  >
+    <svg viewBox="0 0 100 100" className="w-full h-full">
+      <path
+        d="M50 5 L93.3 30 L93.3 80 L50 105 L6.7 80 L6.7 30 Z"
+        fill="none"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  </motion.div>
+);
+
 export default function ProjectsSection() {
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -170,25 +205,42 @@ export default function ProjectsSection() {
   return (
     <section className={`relative w-full py-24 md:py-32 overflow-hidden transition-colors duration-500 ${isLight ? "bg-[#f8f9fa]" : "bg-[#050505]"
       }`}>
-      {/* Dynamic Background Glow */}
-      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[150px] -z-10 ${isLight ? "bg-purple-500/5" : "bg-purple-900/10"
-        }`} />
+      {/* Dynamic Background Glow & Particles */}
+      <ProjectBackground />
+
 
       {/* Title Header */}
-      <div className="max-w-[1440px] mx-auto px-6 pt-5 mb-16 md:mb-24 flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 pt-5 mb-16 md:mb-24 flex flex-col items-center">
+
+        {/* Corner Ambient Hexagons */}
+        <div className="absolute inset-0 pointer-events-none hidden md:block">
+          <Hexagon size={180} color={isLight ? "#9333ea" : "#a855f7"} duration={20} delay={0} opacity={0.15} className="top-24 left-4" />
+          <Hexagon size={120} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={25} delay={2} opacity={0.25} className="top-40 left-32" />
+
+          <Hexagon size={200} color={isLight ? "#6d28d9" : "#7c3aed"} duration={22} delay={1} opacity={0.25} className="top-20 right-4" />
+          <Hexagon size={140} color={isLight ? "#9333ea" : "#a855f7"} duration={28} delay={3} opacity={0.25} className="top-48 right-32" />
+        </div>
+
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-purple-400 text-xs font-black uppercase tracking-[0.2em] mb-6 ${isLight ? "bg-black/5 border-black/5" : "bg-white/5 border-white/10"
-            }`}
+          initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-6 md:mb-8"
         >
-          <Sparkles size={14} />
-          Case Studies
+          <div className="scale-75 md:scale-100">
+            <AnimatedGithubLogo
+              size={120}
+              duration={8}
+              glowColor={isLight ? "rgba(168,85,247,0.5)" : "rgba(168,85,247,0.8)"}
+              className={`relative opacity-100 ${isLight ? "text-purple-700" : "text-purple-400"}`}
+            />
+          </div>
         </motion.div>
+
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className={`text-4xl md:text-6xl lg:text-7xl font-bold text-center tracking-tighter leading-tight ${isLight ? "text-gray-900" : "text-white"
+          className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center tracking-tighter leading-tight ${isLight ? "text-gray-900" : "text-white"
             }`}
         >
           My <span className={`text-transparent bg-clip-text bg-gradient-to-r block md:inline pr-2 py-2 ${isLight ? "from-purple-600 to-violet-800" : "from-purple-400 to-violet-600"
@@ -197,7 +249,7 @@ export default function ProjectsSection() {
       </div>
 
       {/* Slider Container */}
-      <div className="relative w-full">
+      <div className="relative z-10 w-full">
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={40}
