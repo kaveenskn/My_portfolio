@@ -8,7 +8,7 @@
 }
 
 .light {
-  --background: #fdfcff;
+  --background: #cac6c6;
   --foreground: #111111;
 }
 
@@ -41,12 +41,15 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
   .perspective-1000 {
     perspective: 1000px;
   }
+
   .preserve-3d {
     transform-style: preserve-3d;
   }
+
   .backface-hidden {
     backface-visibility: hidden;
   }

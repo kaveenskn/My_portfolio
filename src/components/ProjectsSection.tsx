@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Sparkles } from "lucide-react";
+import { ExternalLink, Sparkles, Github } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 
@@ -38,8 +38,8 @@ const ProjectCard = ({ project }: { project: Project }) => {
         <div
           className={`absolute inset-0 backface-hidden rounded-[40px] border overflow-hidden group transition-all duration-500 ${isFlipped ? "pointer-events-none" : "pointer-events-auto"
             } ${isLight
-              ? "bg-white/80 border-gray-200/50 shadow-[0_15px_35px_rgba(0,0,0,0.05)] hover:border-purple-500/30"
-              : "bg-gradient-to-b from-purple-600/40 via-[#0D0D0D] to-[#101010] border-purple-500/40 shadow-xl shadow-black/20 hover:border-purple-500/80 hover:shadow-2xl hover:shadow-black/40"
+              ? "bg-white/80 border-gray-200/50 shadow-[0_20px_50px_rgba(0,0,0,0.12)] hover:border-purple-500/30"
+              : "bg-gradient-to-b from-purple-600/40 via-[#0D0D0D] to-[#101010] border-purple-500/40 shadow-[0_20px_60px_rgba(0,0,0,0.6)] hover:border-purple-500/80 hover:shadow-2xl hover:shadow-black/40"
             }`}
         >
 
@@ -94,16 +94,32 @@ const ProjectCard = ({ project }: { project: Project }) => {
               Learn More <Sparkles size={14} className="animate-pulse" />
             </button>
 
-            {/* Project Image */}
+            {/* Project Image & Action Buttons */}
             <div className="relative mt-auto w-full h-[180px] md:h-[220px] rounded-[24px] overflow-hidden bg-white/[0.03] border border-white/5 group-hover:border-purple-500/20">
               <img
                 src={project.image}
                 alt={project.title}
                 className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/20 backdrop-blur-[2px]">
-                <div className="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center text-white shadow-lg shadow-black/20">
-                  <ExternalLink size={20} />
+              <div className="absolute inset-0 flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/40 backdrop-blur-[2px]">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white border border-white/20 shadow-xl transition-all duration-300 transform hover:scale-110 group/link"
+                  onClick={(e) => e.stopPropagation()}
+                  title="View Source on GitHub"
+                >
+                  <Github size={24} className="group-hover/link:scale-110 transition-transform" />
+                </a>
+                <div className="w-14 h-14 rounded-full bg-purple-600/80 hover:bg-purple-600 flex items-center justify-center text-white border border-purple-400/30 shadow-xl transition-all duration-300 transform hover:scale-110 cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // Optional: add navigation logic if project has a live link
+                  }}
+                  title="View Live Demo"
+                >
+                  <ExternalLink size={24} />
                 </div>
               </div>
             </div>
@@ -210,42 +226,43 @@ export default function ProjectsSection() {
 
 
       {/* Title Header */}
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 pt-5 mb-16 md:mb-24 flex flex-col items-center">
-
-        {/* Corner Ambient Hexagons */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-24 md:pt-32 mb-16 md:mb-32 flex flex-col items-center justify-center">
+        
+        {/* Corner Ambient Hexagons - Repositioned for clarity */}
         <div className="absolute inset-0 pointer-events-none hidden md:block">
-          <Hexagon size={180} color={isLight ? "#9333ea" : "#a855f7"} duration={20} delay={0} opacity={0.15} className="top-24 left-4" />
-          <Hexagon size={120} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={25} delay={2} opacity={0.25} className="top-40 left-32" />
-
-          <Hexagon size={200} color={isLight ? "#6d28d9" : "#7c3aed"} duration={22} delay={1} opacity={0.25} className="top-20 right-4" />
-          <Hexagon size={140} color={isLight ? "#9333ea" : "#a855f7"} duration={28} delay={3} opacity={0.25} className="top-48 right-32" />
+          <Hexagon size={180} color={isLight ? "#9333ea" : "#a855f7"} duration={20} delay={0} opacity={0.15} className="top-0 left-4" />
+          <Hexagon size={120} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={25} delay={2} opacity={0.25} className="top-12 left-32" />
+          
+          <Hexagon size={200} color={isLight ? "#6d28d9" : "#7c3aed"} duration={22} delay={1} opacity={0.25} className="top-0 right-4" />
+          <Hexagon size={140} color={isLight ? "#9333ea" : "#a855f7"} duration={28} delay={3} opacity={0.25} className="top-20 right-32" />
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
-          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-6 md:mb-8"
-        >
-          <div className="scale-75 md:scale-100">
+        <div className="flex flex-row items-center justify-center gap-5 md:gap-10 relative z-20">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex-shrink-0"
+          >
             <AnimatedGithubLogo
-              size={120}
+              size={isLight ? 70 : 85}
               duration={8}
-              glowColor={isLight ? "rgba(168,85,247,0.5)" : "rgba(168,85,247,0.8)"}
+              glowColor={isLight ? "rgba(168,85,247,0.4)" : "rgba(168,85,247,0.7)"}
               className={`relative opacity-100 ${isLight ? "text-purple-700" : "text-purple-400"}`}
             />
-          </div>
-        </motion.div>
+          </motion.div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className={`text-5xl md:text-6xl lg:text-7xl font-bold text-center tracking-tighter leading-tight ${isLight ? "text-gray-900" : "text-white"
-            }`}
-        >
-          My <span className={`text-transparent bg-clip-text bg-gradient-to-r block md:inline pr-2 py-2 ${isLight ? "from-purple-600 to-violet-800" : "from-purple-400 to-violet-600"
-            }`}>Projects</span>
-        </motion.h2>
+          <motion.h2
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className={`text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none ${isLight ? "text-gray-900" : "text-white"
+              }`}
+          >
+            My <span className={`text-transparent bg-clip-text bg-gradient-to-r ${isLight ? "from-purple-600 to-violet-800" : "from-purple-400 to-violet-600"
+              }`}>Projects</span>
+          </motion.h2>
+        </div>
       </div>
 
       {/* Slider Container */}

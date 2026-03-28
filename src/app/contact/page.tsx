@@ -42,16 +42,16 @@ export default function ContactPage() {
   ];
 
   return (
-    <main className="relative w-full h-screen overflow-hidden flex flex-col selection:bg-purple-500/30">
+    <main className="relative w-full min-h-screen overflow-x-hidden flex flex-col selection:bg-purple-500/30">
       <Background />
       {/* Background Effects - Handled by Background component */}
 
       <Navbar />
       
-      <div className="relative z-10 container mx-auto px-6 h-screen w-full flex flex-col lg:flex-row-reverse items-center justify-center pt-28 pb-8 gap-10 lg:gap-24">
+      <div className="relative z-10 container mx-auto px-6 min-h-screen w-full flex flex-col-reverse lg:flex-row-reverse items-center justify-center pt-32 pb-16 gap-12 lg:gap-24">
         
         {/* Left Side: 3D Slanted Phone Graphic */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center perspective-1000 h-[480px] md:h-[580px] relative">
+        <div className="w-full lg:w-1/2 flex items-center justify-center perspective-1000 h-[400px] md:h-[500px] lg:h-[580px] relative">
           
           <motion.div
             initial={{ rotateX: 60, rotateY: -30, rotateZ: -10, y: 50, opacity: 0 }}
@@ -109,7 +109,7 @@ export default function ContactPage() {
                 }}
                 whileHover={{ scale: 1.15, z: 120 }}
                 whileTap={{ scale: 0.95 }}
-                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 md:p-4 rounded-2xl shadow-xl backdrop-blur-md border cursor-pointer hover:shadow-2xl transition-all ${
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 md:p-4 rounded-2xl shadow-2xl backdrop-blur-md border cursor-pointer hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] transition-all ${
                   isLight ? "bg-white/90 border-white shadow-black/10" : "bg-white/10 border-white/30 shadow-black/50 hover:bg-white/20"
                 } ${item.color}`}
               >
@@ -136,10 +136,10 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className={`p-8 md:p-10 rounded-[36px] border shadow-2xl relative overflow-hidden transition-all duration-500 ${
+            className={`p-8 md:p-10 rounded-[36px] border relative overflow-hidden transition-all duration-500 ${
               isLight 
-              ? "bg-white/80 border-gray-200/50 shadow-[0_20px_50px_rgba(0,0,0,0.06)]" 
-              : "bg-gradient-to-br from-purple-900/20 via-[#0a0a0a] to-[#050505] border-purple-500/20 shadow-purple-900/20"
+              ? "bg-gradient-to-b from-purple-100 to-white border-purple-200/50 shadow-[0_15px_60px_rgba(168,85,247,0.25)]" 
+              : "bg-gradient-to-b from-purple-900/40 to-[#050505] border-purple-500/30 shadow-[0_15px_60px_rgba(168,85,247,0.35)]"
             }`}
           >
             <div className="mb-8">
