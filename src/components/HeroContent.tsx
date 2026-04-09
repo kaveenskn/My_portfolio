@@ -108,12 +108,10 @@ export default function HeroContent() {
           {/* Center/Right Cluster */}
           <Hexagon size={450} color={isLight ? "#9333ea" : "#a855f7"} duration={20} delay={0} opacity={0.3} x="50%" y="50%" />
           <Hexagon size={600} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={30} delay={2} opacity={0.15} x="53%" y="48%" />
-          <Hexagon size={350} color={isLight ? "#6d28d9" : "#7c3aed"} duration={25} delay={5} opacity={0.25} x="47%" y="52%" />
 
           {/* Left Cluster */}
           <Hexagon size={400} color={isLight ? "#9333ea" : "#a855f7"} duration={22} delay={1} opacity={0.2} x="20%" y="45%" />
           <Hexagon size={550} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={35} delay={3} opacity={0.1} x="22%" y="42%" />
-          <Hexagon size={300} color={isLight ? "#6d28d9" : "#7c3aed"} duration={28} delay={6} opacity={0.15} x="18%" y="48%" />
         </div>
       )}
 
@@ -151,7 +149,6 @@ export default function HeroContent() {
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none z-[-1] md:hidden">
                 <Hexagon size={300} color={isLight ? "#9333ea" : "#a855f7"} duration={22} delay={0} opacity={0.3} x="50%" y="50%" />
                 <Hexagon size={380} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={32} delay={2} opacity={0.2} x="50%" y="50%" />
-                <Hexagon size={250} color={isLight ? "#6d28d9" : "#7c3aed"} duration={26} delay={4} opacity={0.25} x="50%" y="50%" />
               </div>
             )}
 

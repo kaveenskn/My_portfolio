@@ -27,7 +27,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
   };
 
   return (
-    <div className="perspective-1000 w-[300px] md:w-[400px] h-[500px] md:h-[600px]">
+    <div className="perspective-1000 w-[300px] md:w-[400px] h-[450px] md:h-[500px]">
       <motion.div
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
@@ -46,34 +46,34 @@ const ProjectCard = ({ project }: { project: Project }) => {
           {/* Content */}
           <div className="relative z-10 p-8 md:p-10 h-full flex flex-col">
             {/* Header */}
-            <div className="flex justify-between items-start mb-6 md:mb-8">
-              <span className={`text-4xl md:text-6xl font-bold leading-none transition-colors ${isLight ? "text-black group-hover:text-purple-600" : "text-white group-hover:text-purple-400"
+            <div className="flex justify-between items-start mb-4 md:mb-6">
+              <span className={`text-4xl md:text-5xl font-bold leading-none transition-colors ${isLight ? "text-black group-hover:text-purple-600" : "text-white group-hover:text-purple-400"
                 }`}>
                 {project.id}
               </span>
-              <div className={`text-xs md:text-sm font-bold uppercase tracking-widest ${isLight ? "text-purple-600/60" : "text-purple-400/80"
+              <div className={`text-[10px] md:text-xs font-bold uppercase tracking-widest ${isLight ? "text-purple-600/60" : "text-purple-400/80"
                 }`}>
                 {project.category}
               </div>
             </div>
 
             {/* Title & Info */}
-            <div className="mb-6 md:mb-8">
-              <h3 className={`text-2xl md:text-3xl font-bold mb-4 leading-tight transition-colors ${isLight ? "text-gray-900 group-hover:text-purple-600" : "text-white group-hover:text-purple-400"
+            <div className="mb-4 md:mb-6">
+              <h3 className={`text-xl md:text-2xl font-bold mb-3 leading-tight transition-colors ${isLight ? "text-gray-900 group-hover:text-purple-600" : "text-white group-hover:text-purple-400"
                 }`}>
                 {project.title}
               </h3>
 
-              <div className="space-y-3">
-                <p className={`text-[10px] md:text-xs font-black uppercase tracking-widest ${isLight ? "text-gray-400" : "text-gray-500"
+              <div className="space-y-2">
+                <p className={`text-[9px] md:text-[10px] font-black uppercase tracking-widest ${isLight ? "text-gray-400" : "text-gray-500"
                   }`}>
                   Technologies used
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, i) => (
+                  {project.technologies.slice(0, 3).map((tech, i) => (
                     <span
                       key={i}
-                      className={`text-[10px] md:text-xs px-3 py-1 rounded-full border ${isLight
+                      className={`text-[9px] md:text-[10px] px-2 py-1 rounded-full border ${isLight
                         ? "bg-black/5 border-black/5 text-gray-700"
                         : "bg-white/5 border-white/10 text-gray-400"
                         }`}
@@ -81,6 +81,11 @@ const ProjectCard = ({ project }: { project: Project }) => {
                       {tech}
                     </span>
                   ))}
+                  {project.technologies.length > 3 && (
+                    <span className={`text-[9px] md:text-[10px] px-2 py-1 rounded-full border ${isLight ? "bg-black/5 border-black/5 text-gray-700" : "bg-white/5 border-white/10 text-gray-400"}`}>
+                      +{project.technologies.length - 3}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -88,14 +93,14 @@ const ProjectCard = ({ project }: { project: Project }) => {
             {/* Flip Button */}
             <button
               onClick={handleFlip}
-              className={`mt-4 inline-flex items-center gap-2 text-[10px] md:text-sm font-bold uppercase tracking-widest transition-all ${isLight ? "text-purple-600 hover:text-purple-800" : "text-purple-400 hover:text-purple-300"
+              className={`mt-2 inline-flex items-center gap-2 text-[10px] md:text-sm font-bold uppercase tracking-widest transition-all ${isLight ? "text-purple-600 hover:text-purple-800" : "text-purple-400 hover:text-purple-300"
                 }`}
             >
               Learn More <Sparkles size={14} className="animate-pulse" />
             </button>
 
             {/* Project Image & Action Buttons */}
-            <div className="relative mt-auto w-full h-[180px] md:h-[220px] rounded-[24px] overflow-hidden bg-white/[0.03] border border-white/5 group-hover:border-purple-500/20">
+            <div className="relative mt-auto w-full h-[140px] md:h-[180px] rounded-[24px] overflow-hidden bg-white/[0.03] border border-white/5 group-hover:border-purple-500/20">
               <img
                 src={project.image}
                 alt={project.title}
@@ -115,7 +120,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 <div className="w-14 h-14 rounded-full bg-purple-600/80 hover:bg-purple-600 flex items-center justify-center text-white border border-purple-400/30 shadow-xl transition-all duration-300 transform hover:scale-110 cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
-                    // Optional: add navigation logic if project has a live link
+                    window.open(project.Livelink, "_blank");
                   }}
                   title="View Live Demo"
                 >
@@ -219,20 +224,20 @@ export default function ProjectsSection() {
   const isLight = theme === "light";
 
   return (
-    <section className={`relative w-full py-24 md:py-32 overflow-hidden transition-colors duration-500 ${isLight ? "bg-[#f8f9fa]" : "bg-[#050505]"
+    <section className={`relative w-full py-10 md:py-16 overflow-hidden transition-colors duration-500 ${isLight ? "bg-[#f8f9fa]" : "bg-[#050505]"
       }`}>
       {/* Dynamic Background Glow & Particles */}
       <ProjectBackground />
 
 
       {/* Title Header */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-24 md:pt-32 mb-16 md:mb-32 flex flex-col items-center justify-center">
-        
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-10 md:pt-16 mb-12 md:mb-16 flex flex-col items-center justify-center">
+
         {/* Corner Ambient Hexagons - Repositioned for clarity */}
         <div className="absolute inset-0 pointer-events-none hidden md:block">
           <Hexagon size={180} color={isLight ? "#9333ea" : "#a855f7"} duration={20} delay={0} opacity={0.15} className="top-0 left-4" />
           <Hexagon size={120} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={25} delay={2} opacity={0.25} className="top-12 left-32" />
-          
+
           <Hexagon size={200} color={isLight ? "#6d28d9" : "#7c3aed"} duration={22} delay={1} opacity={0.25} className="top-0 right-4" />
           <Hexagon size={140} color={isLight ? "#9333ea" : "#a855f7"} duration={28} delay={3} opacity={0.25} className="top-20 right-32" />
         </div>

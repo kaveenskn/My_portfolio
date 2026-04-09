@@ -7,6 +7,7 @@ export interface Project {
   image: string;
   color: string;
   github?: string;
+  Livelink: string
 }
 
 export const PROJECTS_DATA: Project[] = [
@@ -18,7 +19,8 @@ export const PROJECTS_DATA: Project[] = [
     technologies: ["React", "Node.js", "MongoDB", "AI Integration"],
     image: "/project_images/futureHive.png",
     color: "from-blue-500/20 to-cyan-600/20",
-    github: "https://github.com/yourusername/futurehive"
+    github: "https://github.com/yourusername/futurehive",
+    Livelink: ""
   },
   {
     id: "02",
@@ -28,7 +30,8 @@ export const PROJECTS_DATA: Project[] = [
     technologies: ["Figma", "Adobe XD", "UI/UX", "Prototyping"],
     image: "/project_images/icecreamshop.png",
     color: "from-blue-500/20 to-cyan-600/20",
-    github: "https://github.com/yourusername/ice-cream-ui"
+    github: "https://github.com/yourusername/ice-cream-ui",
+    Livelink: ""
   },
   {
     id: "03",
@@ -38,7 +41,8 @@ export const PROJECTS_DATA: Project[] = [
     technologies: ["React", "Tailwind CSS", "Framer Motion"],
     image: "/project_images/Sareeshop.png",
     color: "from-orange-500/20 to-green-600/20",
-    github: "https://github.com/yourusername/saree-shop"
+    github: "https://github.com/yourusername/saree-shop",
+    Livelink: "https://saree-shop-landingpage.vercel.app"
   },
   {
     id: "04",
@@ -48,7 +52,8 @@ export const PROJECTS_DATA: Project[] = [
     technologies: ["React Native", "Firebase", "Expo", "Redux"],
     image: "/project4.jpg",
     color: "from-emerald-500/20 to-teal-600/20",
-    github: "https://github.com/yourusername/fitness-tracker"
+    github: "https://github.com/yourusername/fitness-tracker",
+    Livelink: ""
   },
   {
     id: "05",
@@ -58,6 +63,7 @@ export const PROJECTS_DATA: Project[] = [
     technologies: ["OpenAI API", "LangChain", "Next.js", "Vector DB"],
     image: "/project5.jpg",
     color: "from-fuchsia-500/20 to-pink-600/20",
-    github: "https://github.com/yourusername/ai-portfolio-assistant"
+    github: "https://github.com/yourusername/ai-portfolio-assistant",
+    Livelink: ""
   }
 ];
