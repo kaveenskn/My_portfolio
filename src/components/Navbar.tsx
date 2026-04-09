@@ -8,10 +8,11 @@ import { Sun, Moon, Sparkles } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "About me", href: "/about" },
-  { name: "Projects", href: "/projects" },
-  { name: "Contact", href: "/contact" },
+  { name: "Home", href: "#home" },
+  { name: "About Me", href: "#about" },
+  { name: "Studies & Skills", href: "#studies-skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
