@@ -9,7 +9,7 @@ export default function StudiesAndSkillsSection() {
   const isLight = theme === "light";
 
   return (
-    <section className={`relative w-full py-16 md:py-24 overflow-hidden transition-colors duration-500 ${isLight ? "bg-[#f8f9fa]" : "bg-[#050505]"}`}>
+    <section className={`relative w-full py-16 md:py-24 overflow-hidden transition-colors duration-500`}>
       
       {/* Title Header */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-6 mb-16 flex flex-col items-center justify-center">

@@ -183,64 +183,19 @@ const ProjectCard = ({ project }: { project: Project }) => {
   );
 };
 
-const Hexagon = ({ size, color, duration, delay, opacity, className }: {
-  size: number;
-  color: string;
-  duration: number;
-  delay: number;
-  opacity: number;
-  className: string;
-}) => (
-  <motion.div
-    initial={{ rotate: 0, scale: 0.8, opacity: 0 }}
-    animate={{
-      rotate: 360,
-      scale: [0.9, 1.1, 0.9],
-      opacity: [opacity * 0.5, opacity, opacity * 0.5]
-    }}
-    transition={{
-      rotate: { duration, repeat: Infinity, ease: "linear" },
-      scale: { duration: duration * 0.5, repeat: Infinity, ease: "easeInOut" },
-      opacity: { duration: duration * 0.5, repeat: Infinity, ease: "easeInOut" },
-      delay
-    }}
-    style={{ width: size, height: size }}
-    className={`absolute pointer-events-none z-0 ${className}`}
-  >
-    <svg viewBox="0 0 100 100" className="w-full h-full">
-      <path
-        d="M50 5 L93.3 30 L93.3 80 L50 105 L6.7 80 L6.7 30 Z"
-        fill="none"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  </motion.div>
-);
-
 export default function ProjectsSection() {
   const { theme } = useTheme();
   const isLight = theme === "light";
 
   return (
-    <section className={`relative w-full py-10 md:py-16 overflow-hidden transition-colors duration-500 ${isLight ? "bg-[#f8f9fa]" : "bg-[#050505]"
-      }`}>
+    <section className={`relative w-full py-10 md:py-16 overflow-hidden transition-colors duration-500`}>
       {/* Dynamic Background Glow & Particles */}
       <ProjectBackground />
 
 
       {/* Title Header */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-10 md:pt-16 mb-12 md:mb-16 flex flex-col items-center justify-center">
-
-        {/* Corner Ambient Hexagons - Repositioned for clarity */}
-        <div className="absolute inset-0 pointer-events-none hidden md:block">
-          <Hexagon size={180} color={isLight ? "#9333ea" : "#a855f7"} duration={20} delay={0} opacity={0.15} className="top-0 left-4" />
-          <Hexagon size={120} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={25} delay={2} opacity={0.25} className="top-12 left-32" />
-
-          <Hexagon size={200} color={isLight ? "#6d28d9" : "#7c3aed"} duration={22} delay={1} opacity={0.25} className="top-0 right-4" />
-          <Hexagon size={140} color={isLight ? "#9333ea" : "#a855f7"} duration={28} delay={3} opacity={0.25} className="top-20 right-32" />
-        </div>
+        {/* Project background hexagons removed - now handled by global Background.tsx */}
 
         <div className="flex flex-row items-center justify-center gap-5 md:gap-10 relative z-20">
           <motion.div

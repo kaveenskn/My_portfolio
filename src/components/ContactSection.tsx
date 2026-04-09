@@ -118,10 +118,7 @@ export default function ContactSection() {
 
         </motion.div>
 
-        {/* Background Ambient Glow Behind Phone  */}
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] blur-[100px] -z-10 rounded-full ${
-          isLight ? "bg-purple-500/20" : "bg-purple-600/30"
-        }`} />
+        {/* Contact background glow removed - now handled by global Background.tsx */}
       </div>
 
       {/* Right Side: Redesigned Compact Contact Form */}

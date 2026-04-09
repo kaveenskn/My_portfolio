@@ -15,7 +15,7 @@ export default function Home() {
   const isLight = theme === "light";
 
   return (
-    <main className="relative min-h-screen selection:bg-purple-500/30 overflow-hidden">
+    <main className="relative min-h-screen selection:bg-purple-500/30 overflow-x-hidden">
       <Background />
       
       {/* Background Glow Effect - Handled by Background component */}

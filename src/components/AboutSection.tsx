@@ -6,43 +6,6 @@ import { useState } from "react";
 import { CheckCircle2, Mail, Download, Code2, Database, BrainCircuit, ShieldAlert, X, User } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
-const Hexagon = ({ size, color, duration, delay, opacity, x, y }: {
-  size: number;
-  color: string;
-  duration: number;
-  delay: number;
-  opacity: number;
-  x: string;
-  y: string;
-}) => (
-  <motion.div
-    initial={{ rotate: 0, scale: 0.8, opacity: 0 }}
-    animate={{
-      rotate: 360,
-      scale: [0.9, 1.1, 0.9],
-      opacity: [opacity * 0.5, opacity, opacity * 0.5]
-    }}
-    transition={{
-      rotate: { duration, repeat: Infinity, ease: "linear" },
-      scale: { duration: duration * 0.5, repeat: Infinity, ease: "easeInOut" },
-      opacity: { duration: duration * 0.5, repeat: Infinity, ease: "easeInOut" },
-      delay
-    }}
-    style={{ width: size, height: size, left: x, top: y }}
-    className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
-  >
-    <svg viewBox="0 0 100 100" className="w-full h-full">
-      <path
-        d="M50 5 L93.3 30 L93.3 80 L50 105 L6.7 80 L6.7 30 Z"
-        fill="none"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  </motion.div>
-);
-
 export default function AboutSection() {
   const { theme } = useTheme();
   const isLight = theme === "light";
@@ -64,14 +27,7 @@ export default function AboutSection() {
 
       <div className="relative w-full max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center px-6">
 
-        {/* === Background Hexagons === */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-visible hidden md:block">
-          <Hexagon size={120} color={isLight ? "#9333ea" : "#a855f7"} duration={20} delay={0} opacity={0.25} x="-5%" y="10%" />
-          <Hexagon size={180} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={25} delay={2} opacity={0.15} x="105%" y="25%" />
-          <Hexagon size={100} color={isLight ? "#6d28d9" : "#7c3aed"} duration={18} delay={4} opacity={0.2} x="85%" y="90%" />
-          <Hexagon size={150} color={isLight ? "#9333ea" : "#a855f7"} duration={22} delay={1} opacity={0.2} x="5%" y="85%" />
-          <Hexagon size={140} color={isLight ? "#7c3aed" : "#8b5cf6"} duration={30} delay={3} opacity={0.15} x="50%" y="60%" />
-        </div>
+        {/* About background hexagons removed - now handled by global Background.tsx */}
 
         {/* === LEFT COLUMN: Profile Card === */}
         <div className="lg:col-span-5 flex justify-center sticky top-24 z-10 w-full">

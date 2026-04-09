@@ -91,10 +91,8 @@ export default function ProjectBackground() {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 select-none">
-      {/* Background glow layers */}
-      <div className={`absolute inset-0 transition-opacity duration-1000 ${
-        isLight ? "bg-purple-50/20" : "bg-[#050505]"
-      }`} />
+      {/* Background glow layers (color removed to allow global background to show through) */}
+      <div className="absolute inset-0 transition-opacity duration-1000 bg-transparent" />
       
       {/* Radial depth light */}
       <div className={`absolute inset-0 ${
@@ -105,48 +103,7 @@ export default function ProjectBackground() {
       
       {mounted && (
         <>
-          {/* Top Left Blob */}
-          <motion.div
-            animate={{
-              x: [0, 120, 0],
-              y: [0, 70, 0],
-              scale: [1, 1.3, 1],
-              rotate: [0, 90, 0]
-            }}
-            transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-            className={`absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full blur-[120px] ${
-              isLight ? "bg-fuchsia-300/30 mix-blend-multiply" : "bg-purple-900/30"
-            }`}
-          />
-          
-          {/* Bottom Right Blob */}
-          <motion.div
-            animate={{
-              x: [0, -100, 0],
-              y: [0, -80, 0],
-              scale: [1, 1.2, 1],
-              rotate: [0, -90, 0]
-            }}
-            transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
-            className={`absolute bottom-[-20%] right-[-10%] w-[500px] h-[700px] rounded-full blur-[130px] ${
-              isLight ? "bg-indigo-300/30 mix-blend-multiply" : "bg-blue-900/30"
-            }`}
-          />
-
-          {/* Center Blob */}
-          <motion.div
-            animate={{
-              x: [0, -60, 60, 0],
-              y: [0, 100, -50, 0],
-              scale: [1, 1.4, 1.1, 1],
-            }}
-            transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
-            className={`absolute top-[20%] left-[30%] w-[400px] h-[400px] rounded-full blur-[100px] ${
-              isLight ? "bg-teal-200/40 mix-blend-multiply" : "bg-teal-900/20"
-            }`}
-          />
-
-
+          {/* Section-specific background elements moved to global Background.tsx or simplified */}
         </>
       )}
     </div>
