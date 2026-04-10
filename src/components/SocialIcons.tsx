@@ -20,7 +20,7 @@ export default function SocialIcons() {
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-      className="hidden md:flex fixed left-10 bottom-12 flex-col items-center gap-5 z-40"
+      className="hidden md:flex absolute left-10 bottom-12 flex-col items-center gap-5 z-40"
     >
       {socialLinks.map((social) => (
         <Link 
@@ -29,7 +29,7 @@ export default function SocialIcons() {
           target="_blank" 
           rel="noopener noreferrer"
           className={`${
-            isLight ? "text-gray-600 hover:text-purple-600" : "text-gray-500 hover:text-purple-400"
+            isLight ? "text-gray-600 hover:text-cyan-600" : "text-gray-500 hover:text-cyan-400"
           } transition-all duration-300`}
           aria-label={social.name}
         >

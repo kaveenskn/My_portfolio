@@ -38,8 +38,8 @@ const ProjectCard = ({ project }: { project: Project }) => {
         <div
           className={`absolute inset-0 backface-hidden rounded-[40px] border overflow-hidden group transition-all duration-500 ${isFlipped ? "pointer-events-none" : "pointer-events-auto"
             } ${isLight
-              ? "bg-white/80 border-gray-200/50 shadow-[0_20px_50px_rgba(0,0,0,0.12)] hover:border-purple-500/30"
-              : "bg-gradient-to-b from-purple-600/40 via-[#0D0D0D] to-[#101010] border-purple-500/40 shadow-[0_20px_60px_rgba(0,0,0,0.6)] hover:border-purple-500/80 hover:shadow-2xl hover:shadow-black/40"
+              ? "bg-white/80 border-gray-200/50 shadow-[0_20px_50px_rgba(0,0,0,0.12)] hover:border-cyan-500/30"
+              : "bg-gradient-to-b from-blue-600/20 via-[#0D0D0D] to-[#101010] border-blue-500/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)] hover:border-cyan-500/60 hover:shadow-2xl hover:shadow-black/40"
             }`}
         >
 
@@ -47,11 +47,11 @@ const ProjectCard = ({ project }: { project: Project }) => {
           <div className="relative z-10 p-8 md:p-10 h-full flex flex-col">
             {/* Header */}
             <div className="flex justify-between items-start mb-4 md:mb-6">
-              <span className={`text-4xl md:text-5xl font-bold leading-none transition-colors ${isLight ? "text-black group-hover:text-purple-600" : "text-white group-hover:text-purple-400"
+              <span className={`text-4xl md:text-5xl font-bold leading-none transition-colors ${isLight ? "text-black group-hover:text-cyan-600" : "text-white group-hover:text-cyan-400"
                 }`}>
                 {project.id}
               </span>
-              <div className={`text-[10px] md:text-xs font-bold uppercase tracking-widest ${isLight ? "text-purple-600/60" : "text-purple-400/80"
+              <div className={`text-[10px] md:text-xs font-bold uppercase tracking-widest ${isLight ? "text-cyan-600/60" : "text-cyan-400/80"
                 }`}>
                 {project.category}
               </div>
@@ -59,7 +59,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
             {/* Title & Info */}
             <div className="mb-4 md:mb-6">
-              <h3 className={`text-xl md:text-2xl font-bold mb-3 leading-tight transition-colors ${isLight ? "text-gray-900 group-hover:text-purple-600" : "text-white group-hover:text-purple-400"
+              <h3 className={`text-xl md:text-2xl font-bold mb-3 leading-tight transition-colors ${isLight ? "text-gray-900 group-hover:text-cyan-600" : "text-white group-hover:text-cyan-400"
                 }`}>
                 {project.title}
               </h3>
@@ -93,14 +93,14 @@ const ProjectCard = ({ project }: { project: Project }) => {
             {/* Flip Button */}
             <button
               onClick={handleFlip}
-              className={`mt-2 inline-flex items-center gap-2 text-[10px] md:text-sm font-bold uppercase tracking-widest transition-all ${isLight ? "text-purple-600 hover:text-purple-800" : "text-purple-400 hover:text-purple-300"
+              className={`mt-2 inline-flex items-center gap-2 text-[10px] md:text-sm font-bold uppercase tracking-widest transition-all ${isLight ? "text-cyan-600 hover:text-cyan-800" : "text-cyan-400 hover:text-cyan-300"
                 }`}
             >
-              Learn More <Sparkles size={14} className="animate-pulse" />
+              Learn More
             </button>
 
             {/* Project Image & Action Buttons */}
-            <div className="relative mt-auto w-full h-[140px] md:h-[180px] rounded-[24px] overflow-hidden bg-white/[0.03] border border-white/5 group-hover:border-purple-500/20">
+            <div className="relative mt-auto w-full h-[140px] md:h-[180px] rounded-[24px] overflow-hidden bg-white/[0.03] border border-white/5 group-hover:border-cyan-500/20">
               <img
                 src={project.image}
                 alt={project.title}
@@ -117,7 +117,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 >
                   <Github size={24} className="group-hover/link:scale-110 transition-transform" />
                 </a>
-                <div className="w-14 h-14 rounded-full bg-purple-600/80 hover:bg-purple-600 flex items-center justify-center text-white border border-purple-400/30 shadow-xl transition-all duration-300 transform hover:scale-110 cursor-pointer"
+                <div className="w-14 h-14 rounded-full bg-cyan-600/80 hover:bg-cyan-600 flex items-center justify-center text-white border border-cyan-400/30 shadow-xl transition-all duration-300 transform hover:scale-110 cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     window.open(project.Livelink, "_blank");
@@ -136,11 +136,11 @@ const ProjectCard = ({ project }: { project: Project }) => {
           className={`absolute inset-0 backface-hidden rounded-[40px] border overflow-hidden p-8 md:p-12 flex flex-col [transform:rotateY(180deg)] ${isFlipped ? "pointer-events-auto z-20" : "pointer-events-none z-0"
             } ${isLight
               ? "bg-white/80 border-gray-200/50 shadow-[0_15px_35px_rgba(0,0,0,0.05)]"
-              : "bg-gradient-to-b from-purple-600/40 via-[#0D0D0D] to-[#101010] border-purple-500/40 shadow-xl shadow-black/20"
+              : "bg-gradient-to-b from-blue-600/20 via-[#0D0D0D] to-[#101010] border-blue-500/30 shadow-xl shadow-black/20"
             }`}
         >
           {/* Background Glow */}
-          <div className="absolute inset-0 bg-purple-600/5 blur-[80px] pointer-events-none" />
+          <div className="absolute inset-0 bg-cyan-600/5 blur-[80px] pointer-events-none" />
 
           <div className="relative z-10 flex flex-col h-full">
             <div className="flex justify-between items-center mb-8">
@@ -170,7 +170,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 onClick={handleFlip}
                 className={`w-full py-4 rounded-2xl font-bold uppercase tracking-widest text-xs transition-all ${isLight
                   ? "bg-black text-white hover:bg-gray-800"
-                  : "bg-purple-600 text-white hover:bg-purple-700 shadow-[0_5px_20px_rgba(139,92,246,0.3)]"
+                  : "bg-cyan-600 text-white hover:bg-cyan-700 shadow-[0_5px_20px_rgba(59,130,246,0.3)]"
                   }`}
               >
                 Go Back
@@ -207,8 +207,8 @@ export default function ProjectsSection() {
             <AnimatedGithubLogo
               size={isLight ? 70 : 85}
               duration={8}
-              glowColor={isLight ? "rgba(168,85,247,0.4)" : "rgba(168,85,247,0.7)"}
-              className={`relative opacity-100 ${isLight ? "text-purple-700" : "text-purple-400"}`}
+              glowColor={isLight ? "rgba(6,182,212,0.4)" : "rgba(6,182,212,0.7)"}
+              className={`relative opacity-100 ${isLight ? "text-cyan-700" : "text-cyan-400"}`}
             />
           </motion.div>
 
@@ -219,7 +219,7 @@ export default function ProjectsSection() {
             className={`text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none ${isLight ? "text-gray-900" : "text-white"
               }`}
           >
-            My <span className={`text-transparent bg-clip-text bg-gradient-to-r ${isLight ? "from-purple-600 to-violet-800" : "from-purple-400 to-violet-600"
+            My <span className={`text-transparent bg-clip-text bg-gradient-to-r ${isLight ? "from-cyan-600 to-blue-800" : "from-cyan-400 to-blue-600"
               }`}>Projects</span>
           </motion.h2>
         </div>
@@ -229,7 +229,7 @@ export default function ProjectsSection() {
       <div className="relative z-10 w-full">
         <Swiper
           modules={[Autoplay, Pagination]}
-          spaceBetween={40}
+          spaceBetween={2}
           slidesPerView={1}
           breakpoints={{
             768: {

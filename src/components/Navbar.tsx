@@ -1,9 +1,9 @@
 "use client";
 
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sun, Moon, Sparkles } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
@@ -17,64 +17,61 @@ const navLinks = [
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
-  const pathname = usePathname();
-  const [hidden, setHidden] = useState(false);
-  const { scrollY } = useScroll();
+  const [activeTab, setActiveTab] = useState("#home");
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    if (latest > previous && latest > 10) {
-      setHidden(true);
-    } else {
-      setHidden(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setActiveTab(window.location.hash || "#home");
+      
+      const handleHashChange = () => {
+        setActiveTab(window.location.hash || "#home");
+      };
+      
+      window.addEventListener("hashchange", handleHashChange);
+      return () => window.removeEventListener("hashchange", handleHashChange);
     }
-  });
+  }, []);
 
   const isLight = theme === "light";
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4">
       <motion.nav
-        variants={{
-          visible: { y: 0, opacity: 1 },
-          hidden: { y: "-150%", opacity: 0 },
-        }}
-        animate={hidden ? "hidden" : "visible"}
-        transition={{ duration: 0.35, ease: "easeInOut" }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className={`flex items-center justify-between w-full max-w-[1000px] h-[70px] px-6 md:px-10 rounded-full border backdrop-blur-md transition-all duration-500 ${isLight
           ? "bg-white/70 border-gray-200/50 shadow-[0_12px_40px_rgba(0,0,0,0.1)]"
-          : "bg-black/40 border-purple-500/30 shadow-[0_0_25px_rgba(139,92,246,0.25)]"
+          : "bg-black/40 border-cyan-500/30 shadow-[0_0_25px_rgba(6,182,212,0.25)]"
           }`}
       >
         {/* Logo / Brand */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white shadow-lg shadow-purple-500/20 group-hover:scale-110 transition-transform">
-            <Sparkles size={20} />
-          </div>
-          <span className={`text-lg font-bold tracking-tight ${isLight ? "text-gray-900" : "text-white"}`}>
+        <Link href="/" className="flex items-center group">
+          <span className={`text-xl md:text-2xl font-black tracking-tighter transition-colors ${isLight ? "text-gray-900 group-hover:text-cyan-600" : "text-white group-hover:text-cyan-400"}`}>
             S.Kaveen
           </span>
         </Link>
 
         {/* Menu Items */}
         <div className="flex items-center gap-8">
-          <ul className="hidden md:flex items-center gap-8">
+          <ul className="hidden md:flex items-center gap-8 md:gap-10">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive = activeTab === link.href;
               return (
-                <li key={link.name} className="relative">
+                <li key={link.name} className="relative group">
                   <Link
                     href={link.href}
-                    className={`transition-colors duration-300 text-sm font-semibold tracking-wide ${isActive
-                      ? (isLight ? "text-black" : "text-white")
-                      : (isLight ? "text-gray-500 hover:text-black" : "text-gray-400 hover:text-white")
+                    onClick={() => setActiveTab(link.href)}
+                    className={`relative py-1 transition-all duration-300 text-[10px] md:text-[12px] font-bold tracking-[0.15em] uppercase ${isActive
+                      ? (isLight ? "text-cyan-600" : "text-cyan-400")
+                      : (isLight ? "text-gray-400 group-hover:text-cyan-500" : "text-gray-500 group-hover:text-cyan-300")
                       }`}
                   >
                     {link.name}
                     {isActive && (
                       <motion.div
                         layoutId="nav-underline"
-                        className={`absolute -bottom-1 left-0 right-0 h-0.5 rounded-full ${isLight ? "bg-black" : "bg-white"}`}
+                        className={`absolute -bottom-1.5 left-0 right-0 h-[3px] rounded-full ${isLight ? "bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.4)]" : "bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)]"}`}
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}

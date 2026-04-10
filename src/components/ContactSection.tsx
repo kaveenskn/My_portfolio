@@ -36,7 +36,7 @@ export default function ContactSection() {
     { Icon: Linkedin, color: "text-blue-500", delay: 0.4, x: 90, y: -120, href: "https://linkedin.com/in/yourprofile" },
     { Icon: Github, color: isLight ? "text-gray-800" : "text-white", delay: 0.6, x: -110, y: 50, href: "https://github.com/yourprofile" },
     { Icon: Twitter, color: "text-sky-400", delay: 0.8, x: 100, y: 70, href: "https://twitter.com/yourprofile" },
-    { Icon: Mail, color: "text-purple-500", delay: 1.0, x: 0, y: -160, href: "mailto:your@email.com" },
+    { Icon: Mail, color: "text-cyan-500", delay: 1.0, x: 0, y: -160, href: "mailto:your@email.com" },
   ];
 
   return (
@@ -51,12 +51,12 @@ export default function ContactSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.5, ease: "easeOut" }}
           className={`relative w-[260px] md:w-[280px] h-[520px] md:h-[580px] rounded-[48px] border-[14px] preserve-3d shadow-2xl ${
-            isLight ? "bg-white border-gray-200 shadow-gray-300" : "bg-[#0a0a0a] border-[#1a1a1a] shadow-purple-900/20"
+            isLight ? "bg-white border-gray-200 shadow-gray-300" : "bg-[#0a0a0a] border-[#1a1a1a] shadow-cyan-900/20"
           }`}
         >
           {/* Phone Screen Glow & Interface */}
           <div className={`absolute inset-0 rounded-[34px] overflow-hidden flex flex-col items-center justify-center ${
-             isLight ? "bg-gradient-to-br from-purple-50 to-white" : "bg-gradient-to-br from-[#111] to-[#050505]"
+             isLight ? "bg-gradient-to-br from-cyan-50 to-white" : "bg-gradient-to-br from-[#111] to-[#050505]"
           }`}>
             
             {/* Massive Center Light Beam */}
@@ -64,7 +64,7 @@ export default function ContactSection() {
               animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[150%] blur-[50px] ${
-                isLight ? "bg-purple-400/40" : "bg-purple-600/50"
+                isLight ? "bg-cyan-400/40" : "bg-cyan-600/50"
               }`}
             />
 
@@ -72,8 +72,8 @@ export default function ContactSection() {
             <div className="absolute top-4 w-1/3 h-1.5 rounded-full bg-black/20 dark:bg-white/20" />
             <div className="absolute bottom-4 w-1/3 h-1.5 rounded-full bg-black/20 dark:bg-white/20" />
 
-            <Sparkles size={64} className={`relative z-10 animate-pulse ${isLight ? "text-purple-600" : "text-purple-400"}`} />
-            <p className={`relative z-10 mt-4 text-xs font-bold uppercase tracking-widest ${isLight ? "text-purple-600" : "text-purple-400"}`}>
+            <Sparkles size={64} className={`relative z-10 animate-pulse ${isLight ? "text-cyan-600" : "text-cyan-400"}`} />
+            <p className={`relative z-10 mt-4 text-xs font-bold uppercase tracking-widest ${isLight ? "text-cyan-600" : "text-cyan-400"}`}>
               Drop a line
             </p>
           </div>
@@ -130,15 +130,15 @@ export default function ContactSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className={`p-8 md:p-10 rounded-[36px] border relative overflow-hidden transition-all duration-500 ${
             isLight 
-            ? "bg-gradient-to-b from-purple-100 to-white border-purple-200/50 shadow-[0_15px_60px_rgba(168,85,247,0.25)]" 
-            : "bg-gradient-to-b from-purple-900/40 to-[#050505] border-purple-500/30 shadow-[0_15px_60px_rgba(168,85,247,0.35)]"
+            ? "bg-gradient-to-b from-cyan-100 to-white border-cyan-200/50 shadow-[0_15px_60px_rgba(6,182,212,0.25)]" 
+            : "bg-gradient-to-b from-cyan-900/40 to-[#050505] border-cyan-500/30 shadow-[0_15px_60px_rgba(6,182,212,0.35)]"
           }`}
         >
           <div className="mb-8">
             <h2 className={`text-4xl md:text-5xl font-black mb-2 tracking-tighter ${
               isLight ? "text-gray-900" : "text-white"
             }`}>
-              Say <span className="text-purple-500">Hello_</span>
+              Say <span className="text-cyan-500">Hello_</span>
             </h2>
             <p className={`text-xs md:text-sm font-medium ${isLight ? "text-gray-500" : "text-gray-400"}`}>
               Drop a message and let's work together.
@@ -154,8 +154,8 @@ export default function ContactSection() {
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
                 className={`w-full px-5 py-4 rounded-xl border bg-transparent outline-none transition-all text-sm font-medium ${
                   isLight 
-                  ? "border-black/5 focus:border-purple-500 hover:bg-black/5 focus:bg-white text-black placeholder:text-gray-400" 
-                  : "border-white/5 focus:border-purple-500 hover:bg-white/5 focus:bg-[#111] text-white placeholder:text-gray-500"
+                  ? "border-black/5 focus:border-cyan-500 hover:bg-black/5 focus:bg-white text-black placeholder:text-gray-400" 
+                  : "border-white/5 focus:border-cyan-500 hover:bg-white/5 focus:bg-[#111] text-white placeholder:text-gray-500"
                 }`}
                 placeholder="Your Name"
               />
@@ -169,8 +169,8 @@ export default function ContactSection() {
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
                 className={`w-full px-5 py-4 rounded-xl border bg-transparent outline-none transition-all text-sm font-medium ${
                   isLight 
-                  ? "border-black/5 focus:border-purple-500 hover:bg-black/5 focus:bg-white text-black placeholder:text-gray-400" 
-                  : "border-white/5 focus:border-purple-500 hover:bg-white/5 focus:bg-[#111] text-white placeholder:text-gray-500"
+                  ? "border-black/5 focus:border-cyan-500 hover:bg-black/5 focus:bg-white text-black placeholder:text-gray-400" 
+                  : "border-white/5 focus:border-cyan-500 hover:bg-white/5 focus:bg-[#111] text-white placeholder:text-gray-500"
                 }`}
                 placeholder="Email Address"
               />
@@ -184,8 +184,8 @@ export default function ContactSection() {
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
                 className={`w-full px-5 py-4 rounded-xl border bg-transparent outline-none transition-all resize-none text-sm font-medium ${
                   isLight 
-                  ? "border-black/5 focus:border-purple-500 hover:bg-black/5 focus:bg-white text-black placeholder:text-gray-400" 
-                  : "border-white/5 focus:border-purple-500 hover:bg-white/5 focus:bg-[#111] text-white placeholder:text-gray-500"
+                  ? "border-black/5 focus:border-cyan-500 hover:bg-black/5 focus:bg-white text-black placeholder:text-gray-400" 
+                  : "border-white/5 focus:border-cyan-500 hover:bg-white/5 focus:bg-[#111] text-white placeholder:text-gray-500"
                 }`}
                 placeholder="Project Details..."
               />
@@ -196,8 +196,8 @@ export default function ContactSection() {
               disabled={status === "submitting"}
               className={`w-full py-4 mt-2 rounded-xl font-bold uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 transition-all shadow-lg ${
                 isLight
-                ? "bg-black text-white hover:bg-purple-600 hover:shadow-purple-500/20"
-                : "bg-white text-black hover:bg-purple-500 hover:text-white hover:shadow-purple-500/20"
+                ? "bg-black text-white hover:bg-cyan-600 hover:shadow-cyan-500/20"
+                : "bg-white text-black hover:bg-cyan-500 hover:text-white hover:shadow-cyan-500/20"
               }`}
             >
               {status === "idle" && (

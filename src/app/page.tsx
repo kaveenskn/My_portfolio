@@ -22,7 +22,6 @@ export default function Home() {
 
       {/* Components */}
       <Navbar />
-      <SocialIcons />
       
       {/* Sections sequentially */}
       <div className="flex flex-col relative z-10 w-full">
