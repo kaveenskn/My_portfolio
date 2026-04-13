@@ -188,13 +188,13 @@ export default function ProjectsSection() {
   const isLight = theme === "light";
 
   return (
-    <section className={`relative w-full py-10 md:py-16 overflow-hidden transition-colors duration-500`}>
+    <section className={`relative w-full pt-4 md:pt-8 pb-10 md:pb-16 overflow-hidden transition-colors duration-500`}>
       {/* Dynamic Background Glow & Particles */}
       <ProjectBackground />
 
 
       {/* Title Header */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-10 md:pt-16 mb-12 md:mb-16 flex flex-col items-center justify-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-0 mb-8 md:mb-10 flex flex-col items-center justify-center">
         {/* Project background hexagons removed - now handled by global Background.tsx */}
 
         <div className="flex flex-row items-center justify-center gap-5 md:gap-10 relative z-20">
@@ -216,7 +216,7 @@ export default function ProjectsSection() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className={`text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-none ${isLight ? "text-gray-900" : "text-white"
+            className={`text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-none ${isLight ? "text-gray-900" : "text-white"
               }`}
           >
             My <span className={`text-transparent bg-clip-text bg-gradient-to-r ${isLight ? "from-cyan-600 to-blue-800" : "from-cyan-400 to-blue-600"

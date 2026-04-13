@@ -40,30 +40,64 @@ export const PROJECTS_DATA: Project[] = [
     desc: "A modern and responsive saree shop landing page designed to showcase elegant collections with smooth animations and an engaging user experience.",
     technologies: ["React", "Tailwind CSS", "Framer Motion"],
     image: "/project_images/Sareeshop.png",
-    color: "from-orange-500/20 to-green-600/20",
+    color: "from-cyan-500/20 to-blue-600/20",
     github: "https://github.com/yourusername/saree-shop",
     Livelink: "https://saree-shop-landingpage.vercel.app"
   },
+
   {
     id: "04",
-    title: "Fitness Tracker App",
-    category: "Mobile",
-    desc: "A comprehensive fitness tracking mobile application to monitor workouts, diet, and health metrics.",
-    technologies: ["React Native", "Firebase", "Expo", "Redux"],
-    image: "/project4.jpg",
-    color: "from-emerald-500/20 to-teal-600/20",
-    github: "https://github.com/yourusername/fitness-tracker",
+    title: "Saree Bazar",
+    category: "E-commerce Web Application",
+    desc: "Interactive saree shopping platform with virtual try-on (IDM-VTON) and smooth scroll-based animations to enhance user experience and satisfaction.",
+    technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "IDM-VTON"],
+    image: "/project_images/sareeBazar.png",
+    color: "from-pink-500/20 to-rose-600/20",
+    github: "https://github.com/yourusername/sareebazar",
     Livelink: ""
   },
   {
     id: "05",
-    title: "AI Portfolio Assistant",
-    category: "AI",
-    desc: "An intelligent portfolio assistant capable of answering questions about my work and providing personalized recommendations.",
-    technologies: ["OpenAI API", "LangChain", "Next.js", "Vector DB"],
-    image: "/project5.jpg",
-    color: "from-fuchsia-500/20 to-pink-600/20",
-    github: "https://github.com/yourusername/ai-portfolio-assistant",
+    title: "Memora",
+    category: "Mobile Application",
+    desc: "Memory mapping mobile app that allows users to save trips on a map, store media in the cloud, share memories, follow users, chat, and manage private memories.",
+    technologies: ["React Native", "Expo Go", "Tailwind CSS", "Firebase", "OpenStreetMap"],
+    image: "/project_images/memora.png",
+    color: "from-green-500/20 to-emerald-600/20",
+    github: "https://github.com/yourusername/memora",
+    Livelink: ""
+  },  {
+    id: "06",
+    title: "InternQuest",
+    category: "Web Application",
+    desc: "Web-based platform that helps students find internships based on their skills and interests with an interactive UI and smooth animations.",
+    technologies: ["React", "Node.js", "Express.js", "GSAP"],
+    image: "/project_images/internquest.png",
+    color: "from-purple-500/20 to-indigo-600/20",
+    github: "https://github.com/yourusername/internquest",
+    Livelink: ""
+  },
+  {
+    id: "07",
+    title: "MyAssistant",
+    category: "AI Web Application",
+    desc: "RAG-based personal assistant that answers queries about the user using a local LLM (LLaMA 3 via Ollama) with intelligent and context-aware responses.",
+    technologies: ["React", "FastAPI", "LangChain", "Ollama", "LLaMA 3"],
+    image: "/project_images/myassistant.png",
+    color: "from-orange-500/20 to-amber-600/20",
+    github: "https://github.com/yourusername/myassistant",
+    Livelink: ""
+  }, 
+  {
+    id: "08",
+    title: "InternQuest (V2)",
+    category: "Web Application",
+    desc: "Web-based platform that helps students find internships based on their skills and interests with an interactive UI and smooth animations.",
+    technologies: ["React", "Node.js", "Express.js", "GSAP"],
+    image: "/project_images/internquest.png",
+    color: "from-purple-500/20 to-indigo-600/20",
+    github: "https://github.com/yourusername/internquest",
     Livelink: ""
   }
+
 ];

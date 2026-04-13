@@ -22,31 +22,32 @@ export default function Home() {
 
       {/* Components */}
       <Navbar />
+      <SocialIcons />
       
       {/* Sections sequentially */}
       <div className="flex flex-col relative z-10 w-full">
         {/* Home Section */}
-        <section id="home" className="flex items-center justify-center w-full min-h-screen">
+        <section id="home" className="flex items-center justify-center w-full min-h-screen scroll-mt-28">
           <HeroContent />
         </section>
         
         {/* About Section */}
-        <section id="about" className="w-full py-16 md:py-20">
+        <section id="about" className="w-full pt-4 md:pt-8 pb-16 md:pb-20 scroll-mt-28">
           <AboutSection />
         </section>
 
         {/* Studies & Skills Section */}
-        <section id="studies-skills" className="w-full">
+        <section id="studies-skills" className="w-full scroll-mt-28">
           <StudiesAndSkillsSection />
         </section>
         
         {/* Projects Section */}
-        <div id="projects" className="w-full">
+        <div id="projects" className="w-full scroll-mt-28">
           <ProjectsSection />
         </div>
 
         {/* Contact Section */}
-        <section id="contact" className="w-full py-16 md:py-24">
+        <section id="contact" className="w-full pt-4 md:pt-8 pb-16 md:pb-24 scroll-mt-28">
           <ContactSection />
         </section>
       </div>

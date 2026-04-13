@@ -40,7 +40,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <div className="relative w-full flex flex-col py-24 px-6 md:px-12 lg:pl-36 lg:pr-10 overflow-hidden" id="about">
+    <div className="relative w-full flex flex-col py-24 px-6 md:px-12 lg:pl-36 lg:pr-10 overflow-hidden">
       {/* Section Title */}
       <div className="w-full flex items-center justify-center mb-16 md:mb-20">
         <motion.h2
@@ -79,7 +79,7 @@ export default function AboutSection() {
 
           {/* Paragraph */}
           <p className={`text-base md:text-lg leading-[1.8] mb-12 max-w-2xl font-medium ${isLight ? "text-gray-600" : "text-gray-400"}`}>
-            I&apos;m a passionate full-stack developer pursuing Software Engineering at Sabaragamuwa University of Sri Lanka. I love turning complex problems into elegant, user-centric solutions. When I&apos;m not coding, I&apos;m exploring new technologies or building exciting side projects.
+            I&apos;m a passionate full-stack developer pursuing Software Engineering at Sabaragamuwa University of Sri Lanka. I am particularly interested in mobile application development and love turning complex problems into elegant, user-centric solutions. When I&apos;m not coding, I&apos;m exploring new technologies or building exciting side projects.
           </p>
 
           {/* Contact Grid */}
