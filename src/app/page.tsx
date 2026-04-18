@@ -32,22 +32,22 @@ export default function Home() {
         </section>
         
         {/* About Section */}
-        <section id="about" className="w-full pt-4 md:pt-8 pb-16 md:pb-20 scroll-mt-28">
+        <section id="about" className="w-full pt-0 pb-16 md:pb-20 scroll-mt-20">
           <AboutSection />
         </section>
 
         {/* Studies & Skills Section */}
-        <section id="studies-skills" className="w-full scroll-mt-28">
+        <section id="studies-skills" className="w-full scroll-mt-20">
           <StudiesAndSkillsSection />
         </section>
         
         {/* Projects Section */}
-        <div id="projects" className="w-full scroll-mt-28">
+        <div id="projects" className="w-full scroll-mt-20">
           <ProjectsSection />
         </div>
 
         {/* Contact Section */}
-        <section id="contact" className="w-full pt-4 md:pt-8 pb-16 md:pb-24 scroll-mt-28">
+        <section id="contact" className="w-full pt-0 pb-16 md:pb-24 scroll-mt-20">
           <ContactSection />
         </section>
       </div>

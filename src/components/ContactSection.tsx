@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Instagram, Linkedin, Github, Twitter, Mail, Sparkles } from "lucide-react";
+import { Send, Instagram, Linkedin, Github, Facebook, Mail, Sparkles } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
 
 export default function ContactSection() {
@@ -13,14 +13,38 @@ export default function ContactSection() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
-    setTimeout(() => {
-      setStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-      setTimeout(() => setStatus("idle"), 3000);
-    }, 1500);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/shanmugarajakaveen4@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `New Contact from ${formData.name}`,
+        }),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setStatus("idle"), 3000);
+      } else {
+        setStatus("idle");
+        alert("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("idle");
+      alert("Failed to send message. Please try again.");
+    }
   };
 
   const WhatsappIcon = ({ size }: { size: number }) => (
@@ -32,10 +56,10 @@ export default function ContactSection() {
   // Social icons for the popup animation
   const popIcons = [
     { Icon: WhatsappIcon, color: "text-green-500", delay: 0.1, x: 0, y: 150, href: "https://wa.me/yournumber" },
-    { Icon: Instagram, color: "text-pink-500", delay: 0.2, x: -90, y: -80, href: "https://instagram.com/yourprofile" },
-    { Icon: Linkedin, color: "text-blue-500", delay: 0.4, x: 90, y: -120, href: "https://linkedin.com/in/yourprofile" },
-    { Icon: Github, color: isLight ? "text-gray-800" : "text-white", delay: 0.6, x: -110, y: 50, href: "https://github.com/yourprofile" },
-    { Icon: Twitter, color: "text-sky-400", delay: 0.8, x: 100, y: 70, href: "https://twitter.com/yourprofile" },
+    { Icon: Instagram, color: "text-pink-500", delay: 0.2, x: -90, y: -80, href: "https://www.instagram.com/mztr_kaveen_?igsh=cThoZHpsbzh2YXM3&utm_source=qr" },
+    { Icon: Linkedin, color: "text-blue-500", delay: 0.4, x: 90, y: -120, href: "https://www.linkedin.com/in/shanmugaraja-kaveen/" },
+    { Icon: Github, color: isLight ? "text-gray-800" : "text-white", delay: 0.6, x: -110, y: 50, href: "https://github.com/kaveenskn" },
+    { Icon: Facebook, color: "text-blue-600", delay: 0.8, x: 100, y: 70, href: "https://www.facebook.com/share/1TLjA11Aeh/" },
     { Icon: Mail, color: "text-cyan-500", delay: 1.0, x: 0, y: -160, href: "mailto:your@email.com" },
   ];
 

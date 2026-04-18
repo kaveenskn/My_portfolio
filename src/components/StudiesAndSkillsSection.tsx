@@ -9,10 +9,10 @@ export default function StudiesAndSkillsSection() {
   const isLight = theme === "light";
 
   return (
-    <section className={`relative w-full pt-4 md:pt-8 pb-8 md:pb-12 overflow-hidden transition-colors duration-500`}>
+    <section className={`relative w-full pt-4 md:pt-8 pb-10 md:pb-16 overflow-hidden transition-colors duration-500`}>
       
       {/* Title Header */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 mb-24 md:mb-28 flex flex-col items-center justify-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-0 mb-8 md:mb-10 flex flex-col items-center justify-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -19,7 +19,7 @@ export const PROJECTS_DATA: Project[] = [
     technologies: ["React", "Node.js", "MongoDB", "AI Integration"],
     image: "/project_images/futureHive.png",
     color: "from-blue-500/20 to-cyan-600/20",
-    github: "https://github.com/yourusername/futurehive",
+    github: "https://github.com/kaveenskn/FutureHive-CapstoneProject.git",
     Livelink: ""
   },
   {
@@ -30,7 +30,7 @@ export const PROJECTS_DATA: Project[] = [
     technologies: ["Figma", "Adobe XD", "UI/UX", "Prototyping"],
     image: "/project_images/icecreamshop.png",
     color: "from-blue-500/20 to-cyan-600/20",
-    github: "https://github.com/yourusername/ice-cream-ui",
+    github: "https://github.com/kaveenskn/IceCream_shop.git",
     Livelink: ""
   },
   {
@@ -41,7 +41,7 @@ export const PROJECTS_DATA: Project[] = [
     technologies: ["React", "Tailwind CSS", "Framer Motion"],
     image: "/project_images/Sareeshop.png",
     color: "from-cyan-500/20 to-blue-600/20",
-    github: "https://github.com/yourusername/saree-shop",
+    github: "https://github.com/kaveenskn/Saree_shop_landingpage.git",
     Livelink: "https://saree-shop-landingpage.vercel.app"
   },
 
@@ -64,17 +64,17 @@ export const PROJECTS_DATA: Project[] = [
     technologies: ["React Native", "Expo Go", "Tailwind CSS", "Firebase", "OpenStreetMap"],
     image: "/project_images/memora.png",
     color: "from-green-500/20 to-emerald-600/20",
-    github: "https://github.com/yourusername/memora",
+    github: "https://github.com/Kavisheak/Memora.git",
     Livelink: ""
-  },  {
+  }, {
     id: "06",
     title: "InternQuest",
     category: "Web Application",
     desc: "Web-based platform that helps students find internships based on their skills and interests with an interactive UI and smooth animations.",
     technologies: ["React", "Node.js", "Express.js", "GSAP"],
-    image: "/project_images/internquest.png",
+    image: "/project_images/InternQuest.png",
     color: "from-purple-500/20 to-indigo-600/20",
-    github: "https://github.com/yourusername/internquest",
+    github: "https://github.com/kaveenskn/InternQuest-web-Group2.git",
     Livelink: ""
   },
   {
@@ -86,17 +86,6 @@ export const PROJECTS_DATA: Project[] = [
     image: "/project_images/myassistant.png",
     color: "from-orange-500/20 to-amber-600/20",
     github: "https://github.com/yourusername/myassistant",
-    Livelink: ""
-  }, 
-  {
-    id: "08",
-    title: "InternQuest (V2)",
-    category: "Web Application",
-    desc: "Web-based platform that helps students find internships based on their skills and interests with an interactive UI and smooth animations.",
-    technologies: ["React", "Node.js", "Express.js", "GSAP"],
-    image: "/project_images/internquest.png",
-    color: "from-purple-500/20 to-indigo-600/20",
-    github: "https://github.com/yourusername/internquest",
     Livelink: ""
   }
 

@@ -40,7 +40,7 @@ export default function AboutSection() {
   ];
 
   return (
-    <div className="relative w-full flex flex-col py-24 px-6 md:px-12 lg:pl-36 lg:pr-10 overflow-hidden">
+    <div className="relative w-full flex flex-col pt-4 pb-24 px-6 md:px-12 lg:pl-36 lg:pr-10 overflow-hidden">
       {/* Section Title */}
       <div className="w-full flex items-center justify-center mb-16 md:mb-20">
         <motion.h2
