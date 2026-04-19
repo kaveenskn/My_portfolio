@@ -3,13 +3,13 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, Menu } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
   { name: "Home", href: "#home" },
-  { name: "About Me", href: "#about" },
-  { name: "Studies & Skills", href: "#studies-skills" },
+  { name: "About me", href: "#about" },
+  { name: "Skills", href: "#studies-skills" },
   { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
 ];
@@ -17,6 +17,15 @@ const navLinks = [
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [activeTab, setActiveTab] = useState("#home");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const observerOptions = {
@@ -53,45 +62,48 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full flex items-center justify-between h-[70px] px-6 md:px-8 lg:px-12 border-b border-white/[0.08]"
-        style={{
-          backgroundColor: "rgba(5, 10, 25, 0.75)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
-        }}
+        className={`w-full transition-all duration-300 ${
+          isScrolled 
+            ? isLight 
+              ? "bg-white/95 shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-b border-gray-200 backdrop-blur-xl" 
+              : "bg-[#030b1a]/95 shadow-[0_20px_60px_rgba(0,0,0,0.95)] border-b border-white/10 backdrop-blur-xl" 
+            : isLight 
+              ? "bg-white/80 backdrop-blur-lg border-b border-gray-200/60 shadow-md"
+              : "bg-[#030b1a]/80 backdrop-blur-lg border-b border-white/5 shadow-xl"
+        }`}
       >
-        <div className="w-full max-w-[1400px] mx-auto flex items-center justify-between">
+        <div className="w-full max-w-[1400px] mx-auto flex items-center justify-between h-[76px] px-6 lg:px-12">
           
           {/* Logo / Brand */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="flex items-center justify-center w-8 h-8 rounded bg-[#00D4FF]/10 border border-[#00D4FF]/30 shadow-[0_0_8px_rgba(0,212,255,0.4)] group-hover:shadow-[0_0_15px_rgba(0,212,255,0.7)] group-hover:bg-[#00D4FF]/20 transition-all duration-300">
-              <span className="text-[#00D4FF] font-bold text-[13px] tracking-[0.1em]">SK</span>
+            <div className={`flex items-center justify-center w-10 h-10 rounded-full ${isLight ? "bg-[#00D4FF]/20" : "bg-[#00D4FF]/10"} border border-[#00D4FF]/30 shadow-[0_0_20px_rgba(0,212,255,0.6)] group-hover:shadow-[0_0_35px_rgba(0,212,255,1)] transition-all duration-300`}>
+              <span className="text-[#00D4FF] font-bold text-[15px] tracking-wider">SK</span>
             </div>
-            <span className="text-white font-[600] text-lg tracking-wide hidden sm:block group-hover:text-white/90 transition-colors">
+            <span className={`font-[700] text-lg tracking-wide hidden sm:block transition-colors ${isLight ? "text-gray-900 group-hover:text-gray-700" : "text-white group-hover:text-white/90"}`}>
               S.Kaveen
             </span>
           </Link>
 
           {/* Menu Items */}
-          <ul className="hidden md:flex items-center gap-6 lg:gap-8 xl:gap-10 h-full">
+          <ul className="hidden md:flex items-center gap-2 lg:gap-4 xl:gap-6">
             {navLinks.map((link) => {
               const isActive = activeTab === link.href;
               return (
-                <li key={link.name} className="relative h-full flex items-center">
+                <li key={link.name} className="relative">
                   <Link
                     href={link.href}
                     onClick={() => setActiveTab(link.href)}
-                    className={`relative py-3 transition-colors duration-300 text-[13px] font-medium tracking-[1.5px] uppercase ${
+                    className={`relative px-5 py-2.5 rounded-full transition-colors duration-300 text-[14px] font-[600] tracking-wide ${
                       isActive
-                        ? "text-white"
-                        : "text-white/65 hover:text-white"
+                        ? isLight ? "text-white" : "text-[#050a19]"
+                        : isLight ? "text-gray-600 hover:text-gray-900" : "text-gray-300 hover:text-white"
                     }`}
                   >
-                    {link.name}
+                    <span className="relative z-10">{link.name}</span>
                     {isActive && (
                       <motion.div
-                        layoutId="nav-underline-main"
-                        className="absolute -bottom-[21px] left-0 right-0 h-[2px] bg-[#00D4FF] shadow-[0_0_8px_rgba(0,212,255,0.8)]"
+                        layoutId="nav-pill"
+                        className="absolute inset-0 rounded-full bg-[#00D4FF] shadow-[0_0_35px_rgba(0,212,255,1)]"
                         transition={{ type: "spring", stiffness: 350, damping: 30 }}
                       />
                     )}
@@ -102,29 +114,31 @@ export default function Navbar() {
           </ul>
 
           {/* Right Side Tools */}
-          <div className="flex items-center gap-4 lg:gap-5">
+          <div className="flex items-center gap-4">
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="flex items-center justify-center w-9 h-9 rounded-full border border-[#00D4FF]/40 text-white/80 hover:text-white hover:border-[#00D4FF] hover:bg-[#00D4FF]/10 transition-all duration-300"
+              className={`flex items-center justify-center w-10 h-10 rounded-full border transition-all duration-300 ${
+                isLight 
+                  ? "border-gray-200 text-gray-500 hover:bg-gray-100 hover:shadow-[0_0_15px_rgba(0,0,0,0.15)]" 
+                  : "border-white/10 text-white/70 hover:bg-white/5 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+              }`}
               aria-label="Toggle theme"
             >
-              {isLight ? <Moon size={16} /> : <Sun size={16} />}
+              {isLight ? <Moon size={18} /> : <Sun size={18} />}
             </button>
 
             {/* Hire Me CTA Button */}
             <a
               href="#contact"
-              className="hidden sm:flex items-center justify-center px-4 lg:px-5 py-2 rounded border border-[#00D4FF] text-[#00D4FF] text-[11px] font-bold tracking-[1.5px] uppercase hover:bg-[#00D4FF] hover:text-[#050a19] transition-all duration-300 shadow-[0_0_10px_rgba(0,212,255,0.15)] hover:shadow-[0_0_15px_rgba(0,212,255,0.5)]"
+              className="hidden sm:flex items-center justify-center px-7 py-2.5 rounded-full bg-[#00D4FF] text-[#050a19] text-[13.5px] font-bold tracking-wide shadow-[0_0_20px_rgba(0,212,255,0.5)] hover:shadow-[0_0_40px_rgba(0,212,255,1)] transition-all duration-300"
             >
               Hire Me
             </a>
 
-            {/* Mobile Menu Button placeholder */}
-            <button className="md:hidden p-2 text-white/80 hover:text-white transition-colors duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
+            {/* Mobile Menu Button  */}
+            <button className={`md:hidden p-2 transition-colors duration-300 ${isLight ? "text-gray-800" : "text-white"}`}>
+              <Menu size={24} />
             </button>
           </div>
           

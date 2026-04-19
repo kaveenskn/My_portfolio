@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
-import { MapPin, Mail, Phone, Calendar, Download, Code2, Smartphone, Bot, Database } from "lucide-react";
+import { MapPin, Mail, Phone, Calendar, Download } from "lucide-react";
 import CartoonBoy from "./CartoonBoy";
 
 export default function AboutSection() {
@@ -30,13 +30,6 @@ export default function AboutSection() {
       label: "AVAILABILITY",
       value: "Open to opportunities",
     },
-  ];
-
-  const pillBadges = [
-    "Full Stack Developer",
-    "Mobile App Developer",
-    "OpenAI API Integration",
-    "Backend & Architecture"
   ];
 
   return (

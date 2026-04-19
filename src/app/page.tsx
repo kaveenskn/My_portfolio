@@ -8,12 +8,8 @@ import StudiesAndSkillsSection from "@/components/StudiesAndSkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
 import Background from "@/components/Background";
-import { useTheme } from "@/components/ThemeProvider";
 
 export default function Home() {
-  const { theme } = useTheme();
-  const isLight = theme === "light";
-
   return (
     <main className="relative min-h-screen selection:bg-purple-500/30 overflow-x-hidden">
       <Background />

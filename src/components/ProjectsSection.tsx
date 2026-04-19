@@ -2,8 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Sparkles, Github } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import Image from "next/image";
 
 
 // Swiper imports
@@ -101,10 +102,12 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
             {/* Project Image & Action Buttons */}
             <div className="relative mt-auto w-full h-[140px] md:h-[180px] rounded-[24px] overflow-hidden bg-white/[0.03] border border-white/5 group-hover:border-cyan-500/20">
-              <img
+              <Image
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-700"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-contain p-4 group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/40 backdrop-blur-[2px]">
                 <a

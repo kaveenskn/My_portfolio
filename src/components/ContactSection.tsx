@@ -178,7 +178,7 @@ export default function ContactSection() {
                 Say <span className="text-cyan-500">Hello_</span>
               </h2>
               <p className={`text-xs md:text-sm font-medium ${isLight ? "text-gray-500" : "text-gray-400"}`}>
-                Drop a message and let's work together.
+                Drop a message and let&apos;s work together.
               </p>
             </div>
 
