@@ -21,7 +21,7 @@ export default function Home() {
       <SocialIcons />
       
       {/* Sections sequentially */}
-      <div className="flex flex-col relative z-10 w-full">
+      <div className="flex flex-col gap-20 md:gap-32 relative z-10 w-full">
         {/* Home Section */}
         <section id="home" className="flex items-center justify-center w-full min-h-screen scroll-mt-28">
           <HeroContent />

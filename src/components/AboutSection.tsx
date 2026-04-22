@@ -63,7 +63,7 @@ export default function AboutSection() {
           </div>
 
           {/* Heading */}
-          <h2 className={`text-5xl lg:text-6xl font-black mb-6 leading-[1.1] tracking-tight ${isLight ? "text-gray-900" : "text-white"}`}>
+          <h2 className={`text-4xl lg:text-5xl font-black mb-6 leading-[1.1] tracking-tight ${isLight ? "text-gray-900" : "text-white"}`}>
             Building <br className="hidden md:block" />
             <span className={`text-transparent bg-clip-text bg-gradient-to-r ${isLight ? "from-blue-600 to-cyan-400" : "from-blue-500 to-cyan-300"}`}>
               innovative software
@@ -71,7 +71,7 @@ export default function AboutSection() {
           </h2>
 
           {/* Paragraph */}
-          <p className={`text-base md:text-lg leading-[1.8] mb-12 max-w-2xl font-medium ${isLight ? "text-gray-600" : "text-gray-400"}`}>
+          <p className={`text-base md:text-md leading-[1.8] mb-12 max-w-2xl font-medium ${isLight ? "text-gray-600" : "text-gray-400"}`}>
             I&apos;m a passionate full-stack developer pursuing Software Engineering at Sabaragamuwa University of Sri Lanka. I am particularly interested in mobile application development and love turning complex problems into elegant, user-centric solutions. When I&apos;m not coding, I&apos;m exploring new technologies or building exciting side projects.
           </p>
 

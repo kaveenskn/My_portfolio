@@ -197,7 +197,7 @@ export default function ProjectsSection() {
 
 
       {/* Title Header */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-0 mb-8 md:mb-10 flex flex-col items-center justify-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-12 pt-0 mb-8 md:mb-10 flex flex-col items-center justify-center">
         {/* Project background hexagons removed - now handled by global Background.tsx */}
 
         <div className="flex flex-row items-center justify-center gap-5 md:gap-10 relative z-20">
@@ -229,20 +229,22 @@ export default function ProjectsSection() {
       </div>
 
       {/* Slider Container */}
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6">
         <Swiper
           modules={[Autoplay, Pagination]}
-          spaceBetween={2}
           slidesPerView={1}
+          spaceBetween={20}
           breakpoints={{
             768: {
               slidesPerView: 2,
+              spaceBetween: 25,
             },
             1200: {
               slidesPerView: 3,
+              spaceBetween: 30,
             },
           }}
-          centeredSlides={true}
+          centeredSlides={false}
           loop={true}
           watchSlidesProgress={true}
           autoplay={{
@@ -252,7 +254,7 @@ export default function ProjectsSection() {
           }}
           speed={1000}
           grabCursor={true}
-          className="w-full !overflow-visible"
+          className="w-full overflow-hidden"
         >
           {PROJECTS_DATA.map((project) => (
             <SwiperSlide key={project.id} className="py-10">

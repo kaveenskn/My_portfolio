@@ -30,28 +30,6 @@ export default function Background() {
         }}
       />
 
-      {/* Faint Geometric Hexagon Outline */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-[0.07]">
-        <motion.svg
-          initial={{ rotate: 0, scale: 0.9, opacity: 0 }}
-          animate={{ rotate: 360, scale: 1, opacity: 1 }}
-          transition={{
-            rotate: { duration: 60, repeat: Infinity, ease: "linear" },
-            opacity: { duration: 2 },
-            scale: { duration: 2 }
-          }}
-          viewBox="0 0 100 100"
-          className="w-[120vh] h-[120vh] text-cyan-400"
-        >
-          <path
-            d="M50 5 L93.3 30 L93.3 80 L50 105 L6.7 80 L6.7 30 Z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.2"
-            strokeLinecap="round"
-          />
-        </motion.svg>
-      </div>
 
       {/* Subtle Texture Overlay */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-black/20" />

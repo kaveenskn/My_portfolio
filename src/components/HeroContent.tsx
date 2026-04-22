@@ -1,172 +1,252 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { useTheme } from "./ThemeProvider";
 import { useState, useEffect } from "react";
-import { ArrowRight, Download, Sparkles } from "lucide-react";
+import { useTheme } from "./ThemeProvider";
 
-const roles = [
-  "Full Stack Web Developer",
-  "Mobile App Developer",
-  "AI API Integration Developer",
-  "Python Developer"
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] },
+  },
+};
+
+const stats = [
+  { value: "10+", label: "Projects" },
 ];
 
 export default function HeroContent() {
+  const [pulse, setPulse] = useState(true);
   const { theme } = useTheme();
   const isLight = theme === "light";
 
-  const [displayText, setDisplayText] = useState("");
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(150);
-
   useEffect(() => {
-    const handleTyping = () => {
-      const currentRole = roles[roleIndex];
-
-      if (!isDeleting) {
-        setDisplayText(currentRole.substring(0, displayText.length + 1));
-        setTypingSpeed(100);
-
-        if (displayText === currentRole) {
-          setIsDeleting(true);
-          setTypingSpeed(2000);
-        }
-      } else {
-        setDisplayText(currentRole.substring(0, displayText.length - 1));
-        setTypingSpeed(50);
-
-        if (displayText === "") {
-          setIsDeleting(false);
-          setRoleIndex((prev) => (prev + 1) % roles.length);
-          setTypingSpeed(500);
-        }
-      }
-    };
-
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [displayText, isDeleting, roleIndex, typingSpeed]);
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
-  };
+    const id = setInterval(() => setPulse((p) => !p), 1200);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <div className="relative z-10 w-full min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-[#00D4FF]/10 rounded-full blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#3B82F6]/10 rounded-full blur-[150px] pointer-events-none -z-10" />
+    <div className="relative z-10 w-full min-h-screen flex items-center justify-center pt-32 pb-16 overflow-hidden">
+
+      {/* Grid Pattern Background - adapting opacity for light mode */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          backgroundSize: "70px 70px",
+          backgroundImage: isLight
+            ? "linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px)"
+            : "linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
+        }}
+      />
+
+      {/* Subtle cyan/blue glow top-left */}
+      <div
+        className="absolute top-0 left-0 w-[50vw] h-[50vh] pointer-events-none z-0"
+        style={{
+          background: isLight
+            ? "radial-gradient(ellipse at top left, rgba(37,99,235,0.08) 0%, transparent 65%)"
+            : "radial-gradient(ellipse at top left, rgba(0,229,255,0.06) 0%, transparent 65%)",
+        }}
+      />
+
+      {/* Rotating Hexagon Background - Specific to Hero */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-[0.08] pointer-events-none z-0 overflow-hidden">
+        <motion.svg
+          initial={{ rotate: 0, scale: 0.8, opacity: 0 }}
+          animate={{ rotate: 360, scale: 1, opacity: 1 }}
+          transition={{
+            rotate: { duration: 50, repeat: Infinity, ease: "linear" },
+            opacity: { duration: 3 },
+            scale: { duration: 3 }
+          }}
+          viewBox="0 0 100 100"
+          className="w-[110vh] h-[110vh] text-cyan-500"
+        >
+          <path
+            d="M50 5 L93.3 30 L93.3 80 L50 105 L6.7 80 L6.7 30 Z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.15"
+            strokeLinecap="round"
+          />
+        </motion.svg>
+      </div>
 
       <motion.div
+        className="relative z-10 w-full max-w-[1100px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-6 items-center"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="w-full max-w-[1280px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-16"
       >
-        {/* Left Column: Text Content */}
-        <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-          <motion.div variants={itemVariants} className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00D4FF]/30 bg-[#00D4FF]/5 backdrop-blur-sm shadow-[0_0_15px_rgba(0,212,255,0.1)]">
-            <Sparkles className="w-4 h-4 text-[#00D4FF]" />
-            <span className="text-[#00D4FF] uppercase tracking-wider text-xs font-bold">
-              Welcome to my portfolio
+        {/* ============ LEFT COLUMN ============ */}
+        <div className="flex flex-col items-start text-left">
+
+          {/* Accent header label */}
+          <motion.div variants={itemVariants} className="flex items-center gap-3 mb-7">
+            <div className={`w-8 h-[2px] ${isLight ? "bg-blue-600" : "bg-[#00e5ff]"}`} />
+            <span
+              className={`text-[11px] font-black tracking-[0.15em] uppercase ${isLight ? "text-blue-600" : "text-[#00e5ff]"}`}
+            >
+              // PORTFOLIO_ –
             </span>
           </motion.div>
 
-          <motion.h1
-            variants={itemVariants}
-            className={`text-5xl sm:text-5xl lg:text-6xl font-[800] leading-[1.1] tracking-tight mb-4 ${isLight ? "text-gray-900" : "text-white"}`}
-          >
-            Hi, I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00D4FF] to-[#3B82F6]">Shanmugaraja</span>
-            <br />
-            Kaveen
-          </motion.h1>
-
-          <motion.div variants={itemVariants} className="h-[40px] sm:h-[48px] mb-6 flex items-center justify-center lg:justify-start">
-            <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold ${isLight ? "text-gray-700" : "text-gray-200"}`}>
-              I am a{" "}
-              <span className="text-[#00D4FF]">
-                {displayText}
-              </span>
-              <motion.span
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                className="inline-block w-[3px] h-[24px] sm:h-[32px] ml-1 bg-[#00D4FF] align-middle"
-              />
-            </h2>
+          {/* Name block */}
+          <motion.div variants={itemVariants} className="mb-6">
+            <h1
+              className={`font-black leading-[1.0] tracking-tight ${isLight ? "text-gray-900" : "text-[#f8f9fa]"}`}
+              style={{
+                fontSize: "clamp(42px, 6vw, 85px)",
+              }}
+            >
+              Shanmugaraja
+            </h1>
+            <h1
+              className={`font-black leading-[1.0] tracking-tight ${isLight ? "text-blue-600" : "text-[#00e5ff]"}`}
+              style={{
+                fontSize: "clamp(42px, 6vw, 85px)",
+              }}
+            >
+              Kaveen<span className={isLight ? "text-blue-600" : "text-[#00e5ff]"}>.</span>
+            </h1>
           </motion.div>
 
+          {/* Description */}
           <motion.p
             variants={itemVariants}
-            className={`text-lg sm:text-xl font-medium mb-10 max-w-xl ${isLight ? "text-gray-600" : "text-gray-400"}`}
+            className={`text-[14px] sm:text-[15px] leading-[1.8] max-w-[480px] mb-8 font-medium ${isLight ? "text-gray-600" : "text-[#8b9099]"}`}
           >
-            I build elegant, high-performance digital experiences. Passionate about creating seamless user interfaces and robust architectures using modern technologies.
+            Architect of digital spaces. Crafting interfaces with{" "}
+            <span className={`font-bold ${isLight ? "text-blue-600" : "text-[#00e5ff]"}`}>clarity</span>, function, and
+            lasting design —{" "}
+            <br className="hidden lg:block" />
+            built one considered detail at a time.
           </motion.p>
 
-          <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6">
-            <motion.a
+          {/* CTA Buttons */}
+          <motion.div variants={itemVariants} className="flex items-center gap-3 sm:gap-4 mb-10">
+            <a
               href="#projects"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-[#00D4FF] text-[#030B1A] font-bold rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(0,212,255,0.3)] hover:shadow-[0_0_30px_rgba(0,212,255,0.5)] transition-all"
-            >
-              View Projects
-              <ArrowRight size={20} />
-            </motion.a>
-            <motion.a
-              href="#"
-              whileHover={{ scale: 1.05, backgroundColor: isLight ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.05)" }}
-              whileTap={{ scale: 0.95 }}
-              className={`px-8 py-4 border-2 font-bold rounded-full flex items-center gap-2 transition-all ${isLight ? "border-gray-900 text-gray-900" : "border-white/20 text-white hover:border-white/40"
+              className={`group relative px-6 py-3 border-[2px] text-[10px] sm:text-[11px] font-black tracking-[0.15em] uppercase transition-all duration-300 ${isLight
+                ? "border-blue-600 text-blue-600 hover:bg-blue-600/10 hover:shadow-[0_0_20px_rgba(37,99,235,0.25)]"
+                : "border-[#00e5ff] text-[#00e5ff] hover:bg-[#00e5ff]/10 hover:shadow-[0_0_20px_rgba(0,229,255,0.25)]"
                 }`}
             >
-              Download CV
-              <Download size={20} />
-            </motion.a>
+              VIEW WORK →
+            </a>
+            <a
+              href="#contact"
+              className={`px-6 py-3 border-[2px] text-[10px] sm:text-[11px] font-black tracking-[0.15em] uppercase transition-all duration-300 ${isLight
+                ? "border-gray-800 text-gray-700 hover:border-gray-900 hover:text-gray-900 hover:bg-gray-200/50"
+                : "border-[#1e2533] text-[#6b7280] hover:border-[#374151] hover:text-[#9ca3af] hover:bg-[#1e2533]/40"
+                }`}
+            >
+              CONTACT
+            </a>
+          </motion.div>
+
+          {/* Stats Row */}
+          <motion.div variants={itemVariants} className="flex items-start gap-8 sm:gap-12">
+            {stats.map((stat, i) => (
+              <div key={i} className="flex flex-col">
+                <span
+                  className={`text-[28px] sm:text-[36px] font-black leading-none tracking-tight ${isLight ? "text-gray-900" : "text-[#f8f9fa]"}`}
+                >
+                  {stat.value}
+                </span>
+                <span
+                  className={`text-[9px] sm:text-[10px] tracking-[0.15em] uppercase mt-1.5 font-black ${isLight ? "text-gray-500" : "text-[#4b5563]"}`}
+                >
+                  {stat.label}
+                </span>
+              </div>
+            ))}
           </motion.div>
         </div>
 
-        {/* Right Column: Image */}
+        {/* ============ RIGHT COLUMN: Image Card ============ */}
         <motion.div
           variants={itemVariants}
-          className="relative flex justify-center items-center mt-12 lg:mt-0"
+          className="relative flex justify-center w-full mx-auto max-w-[380px] lg:max-w-none"
         >
-          {/* Decorative Elements */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-[#00D4FF]/20 to-transparent rounded-full blur-3xl opacity-60" />
+          {/* Outer glow */}
+          <div
+            className="absolute inset-0 z-0 pointer-events-none"
+            style={{
+              background: isLight
+                ? "radial-gradient(ellipse at center, rgba(37,99,235,0.08) 0%, transparent 70%)"
+                : "radial-gradient(ellipse at center, rgba(0,229,255,0.08) 0%, transparent 70%)",
+            }}
+          />
 
-          <motion.div
-            animate={{ y: [-15, 15, -15] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] lg:w-[480px] lg:h-[480px]"
-          >
-            {/* Background Cards for Depth */}
-            <div className={`absolute inset-2 sm:inset-4 rounded-3xl transform rotate-3 transition-transform duration-500 border ${isLight ? "border-gray-200 bg-white/40" : "border-white/10 bg-[#0A192F]/40"} backdrop-blur-xl shadow-xl`} />
-            <div className={`absolute inset-2 sm:inset-4 rounded-3xl transform -rotate-3 transition-transform duration-500 border ${isLight ? "border-[#00D4FF]/20 bg-white/60" : "border-[#00D4FF]/20 bg-[#030B1A]/60"} backdrop-blur-xl shadow-2xl z-0`} />
+          {/* Main Frame */}
+          <div className={`relative w-full max-w-[360px] aspect-[4/5] border-[2px] z-20 mx-auto lg:my-auto ${isLight ? "border-blue-600 shadow-[0_0_25px_rgba(37,99,235,0.15)]" : "border-[#00e5ff] shadow-[0_0_25px_rgba(0,229,255,0.15)]"
+            }`}>
 
-            <Image
-              src="/profile.png"
-              alt="Shanmugaraja Kaveen"
-              fill
-              priority
-              sizes="(max-width: 768px) 320px, (max-width: 1024px) 400px, 480px"
-              className="object-contain drop-shadow-[0_20px_40px_rgba(0,212,255,0.25)] z-10 p-2 sm:p-4"
-            />
-          </motion.div>
+            {/* AVAILABLE badge */}
+            <div className={`absolute -top-[2px] right-[-2px] translate-x-[28px] sm:translate-x-[44px] -translate-y-[22px] border-[2px] px-4 py-[7px] flex items-center gap-2.5 z-30 ${isLight ? "bg-white border-blue-600" : "bg-[#070b14] border-[#00e5ff]"
+              }`}>
+              <motion.div
+                className={`w-[7px] h-[7px] rounded-full ${isLight ? "bg-blue-600" : "bg-[#00e5ff]"}`}
+                animate={{ opacity: pulse ? 1 : 0.25 }}
+                transition={{ duration: 0.3 }}
+              />
+              <span
+                className={`text-[10px] font-black tracking-[0.15em] uppercase ${isLight ? "text-blue-600" : "text-[#00e5ff]"}`}
+              >
+                AVAILABLE
+              </span>
+            </div>
+
+            {/* EST . 2025 tag */}
+            <div className={`absolute -bottom-[2px] left-[-2px] -translate-x-[28px] sm:-translate-x-[44px] translate-y-[22px] px-5 py-2.5 z-30 ${isLight ? "bg-blue-600" : "bg-[#00e5ff]"
+              }`}>
+              <span
+                className={`text-[10px] font-black tracking-[0.15em] uppercase ${isLight ? "text-white" : "text-[#070b14]"}`}
+              >
+                SE . 2026
+              </span>
+            </div>
+
+            {/* Inner padded image area */}
+            <div className="absolute inset-[14px] bg-transparent">
+              <Image
+                src="/profile.png"
+                alt="Shanmugaraja Kaveen"
+                fill
+                priority
+                className={`object-cover object-top transition-all duration-700 hover:grayscale ${isLight
+                  ? "hover:brightness-[0.95] hover:contrast-[1.1]"
+                  : "hover:brightness-[0.82] hover:contrast-[1.2]"
+                  }`}
+                sizes="(max-width: 768px) 340px, 360px"
+              />
+
+              {/* Vertical side text */}
+              <div className="absolute top-1/2 right-4 sm:right-5 transform -translate-y-1/2 rotate-90 origin-right mix-blend-difference opacity-70 pointer-events-none">
+                <span
+                  className="text-white text-[8px] tracking-[5px] uppercase whitespace-nowrap font-bold"
+                >
+                  ▲ FRAME ^__^ / SELF PORTRAIT
+                </span>
+              </div>
+            </div>
+
+          </div>
         </motion.div>
 
       </motion.div>
     </div>
   );
 }
-

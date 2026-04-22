@@ -103,7 +103,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="nav-pill"
-                        className="absolute inset-0 rounded-full bg-[#00D4FF] shadow-[0_0_35px_rgba(0,212,255,1)]"
+                        className="absolute inset-0 rounded-full bg-[#00D4FF] shadow-[0_0_15px_rgba(0,212,255,0.6)]"
                         transition={{ type: "spring", stiffness: 350, damping: 30 }}
                       />
                     )}
@@ -128,12 +128,12 @@ export default function Navbar() {
               {isLight ? <Moon size={18} /> : <Sun size={18} />}
             </button>
 
-            {/* Hire Me CTA Button */}
+            {/* Resume CTA Button */}
             <a
               href="#contact"
               className="hidden sm:flex items-center justify-center px-7 py-2.5 rounded-full bg-[#00D4FF] text-[#050a19] text-[13.5px] font-bold tracking-wide shadow-[0_0_20px_rgba(0,212,255,0.5)] hover:shadow-[0_0_40px_rgba(0,212,255,1)] transition-all duration-300"
             >
-              Hire Me
+              Resume
             </a>
 
             {/* Mobile Menu Button  */}
