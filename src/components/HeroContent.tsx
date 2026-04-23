@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useTheme } from "./ThemeProvider";
+import { TypeAnimation } from "react-type-animation";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -98,7 +99,7 @@ export default function HeroContent() {
             <span
               className={`text-[11px] font-black tracking-[0.15em] uppercase ${isLight ? "text-blue-600" : "text-[#00e5ff]"}`}
             >
-              // PORTFOLIO_ –
+              {"// PORTFOLIO_ –"}
             </span>
           </motion.div>
 
@@ -120,6 +121,28 @@ export default function HeroContent() {
             >
               Kaveen<span className={isLight ? "text-blue-600" : "text-[#00e5ff]"}>.</span>
             </h1>
+          </motion.div>
+
+          {/* Typewriter Effect */}
+          <motion.div variants={itemVariants} className="mb-6 min-h-[40px] sm:min-h-[48px]">
+            <h2 className={`text-[28px] sm:text-[36px] md:text-[40px] font-bold tracking-tight ${isLight ? "text-gray-900" : "text-[#f8f9fa]"}`}>
+              I am a{" "}
+              <span className={isLight ? "text-blue-600" : "text-[#00e5ff]"}>
+                <TypeAnimation
+                  sequence={[
+                    "Fullstack Developer",
+                    2000,
+                    "Mobile App Developer",
+                    2000,
+                    "AI Enthusiast",
+                    2000,
+                  ]}
+                  wrapper="span"
+                  speed={50}
+                  repeat={Infinity}
+                />
+              </span>
+            </h2>
           </motion.div>
 
           {/* Description */}
