@@ -62,7 +62,10 @@ export default function SkillBalls() {
     sizeRef.current = { w, h };
 
     ballsRef.current = SKILLS.map((skill, i) => {
-      const r = 44 + seededRand(i * 3 + 1) * 22; // 44–66px radius
+      const isMobile = w < 768;
+      const baseRadius = isMobile ? 25 : 44;
+      const varyRadius = isMobile ? 12 : 22;
+      const r = baseRadius + seededRand(i * 3 + 1) * varyRadius;
       return {
         id: i,
         x: r + seededRand(i * 7 + 2) * (w - r * 2),

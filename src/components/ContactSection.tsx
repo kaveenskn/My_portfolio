@@ -58,7 +58,7 @@ export default function ContactSection() {
           transition={{ duration: 0.6 }}
           className={`text-4xl md:text-6xl font-black tracking-tight mb-4 ${isLight ? "text-gray-900" : "text-white"}`}
         >
-          Let&apos;s <span className={`text-transparent bg-clip-text bg-gradient-to-r ${isLight ? "from-cyan-600 to-blue-800" : "from-cyan-400 to-blue-600"}`}>Connect</span>
+          Let&apos;s <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff]">Connect</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -91,9 +91,7 @@ export default function ContactSection() {
                 href="https://mail.google.com/mail/?view=cm&fs=1&to=shanmugarajakaveen4@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center justify-center gap-2 transition-all px-6 py-3.5 rounded-xl text-sm font-bold shadow-sm ${isLight 
-                  ? "bg-cyan-600 text-white hover:bg-cyan-700" 
-                  : "bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/10"}`}
+                className="inline-flex items-center justify-center gap-2 transition-all px-6 py-3.5 rounded-xl text-sm font-bold shadow-sm bg-gradient-to-r from-[#a855f7] to-[#00e5ff] text-white hover:opacity-90 border-none"
               >
                 Send Email <ArrowRight size={16} />
               </a>
@@ -209,7 +207,7 @@ export default function ContactSection() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              className={`w-full py-4 mt-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all text-white shadow-[0_15px_30px_-10px] ${isLight ? "bg-gradient-to-r from-blue-600 to-cyan-400 shadow-blue-500/40 hover:shadow-cyan-500/50" : "bg-gradient-to-r from-blue-500 to-cyan-400 shadow-blue-500/30"}`}
+              className="w-full py-4 mt-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all text-white bg-gradient-to-r from-[#a855f7] to-[#00e5ff] shadow-[0_15px_30px_-10px] shadow-[#a855f7]/30 hover:shadow-[#00e5ff]/50"
             >
               {status === "idle" && (
                 <>Send Message <Send size={16} /></>
@@ -233,10 +231,7 @@ export default function ContactSection() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className={`p-3 md:p-4 rounded-full transition-all text-white shadow-lg ${isLight
-                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-110"
-                  : "bg-gradient-to-r from-cyan-600 to-blue-700 shadow-cyan-900/40 hover:shadow-cyan-400/20 hover:scale-110"
-                }`}
+              className="p-3 md:p-4 rounded-full transition-all text-white shadow-lg bg-gradient-to-r from-[#a855f7] to-[#00e5ff] shadow-[#a855f7]/20 hover:shadow-[#00e5ff]/40 hover:scale-110"
               title={item.label}
             >
               <item.Icon size={20} />

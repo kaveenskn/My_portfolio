@@ -20,7 +20,7 @@ export default function StudiesAndSkillsSection() {
           transition={{ duration: 0.8 }}
           className={`text-3xl md:text-4xl lg:text-6xl font-black tracking-tight leading-none ${isLight ? "text-gray-900" : "text-white"}`}
         >
-          Studies & <span className={`text-transparent bg-clip-text bg-gradient-to-r ${isLight ? "from-cyan-600 to-blue-800" : "from-cyan-400 to-blue-600"}`}>Skills</span>
+          Studies & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff]">Skills</span>
         </motion.h2>
       </div>
 
@@ -33,9 +33,9 @@ export default function StudiesAndSkillsSection() {
            transition={{ duration: 0.8 }}
            className="w-full flex flex-col md:flex-row justify-between gap-12 md:gap-16"
         >
-          <div className="flex-1 relative pl-8 border-l-[3px] border-cyan-500/30 hover:border-cyan-500 transition-colors duration-300">
-             <div className="absolute left-[-9.5px] top-1 w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_12px_rgba(6,182,212,0.8)]" />
-             <div className={`text-xs font-black uppercase tracking-widest mb-3 ${isLight ? "text-cyan-600" : "text-cyan-400"}`}>Education</div>
+          <div className="flex-1 relative flex flex-col items-center text-center md:items-start md:text-left md:pl-8 border-t-[3px] md:border-t-0 md:border-l-[3px] pt-6 md:pt-0 border-[#a855f7]/30 hover:border-[#a855f7] transition-colors duration-300">
+             <div className="absolute top-[-9.5px] left-1/2 -translate-x-1/2 md:left-[-9.5px] md:top-1 md:translate-x-0 w-4 h-4 rounded-full bg-gradient-to-r from-[#a855f7] to-[#00e5ff] shadow-[0_0_15px_rgba(168,85,247,0.8)]" />
+             <div className={`text-xs font-black uppercase tracking-widest mb-3 ${isLight ? "text-purple-600" : "text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff]"}`}>Education</div>
              <h4 className={`text-2xl md:text-3xl font-black mb-2 leading-tight ${isLight ? "text-gray-900" : "text-white"}`}>
                BSc Hons in Software Engineering
              </h4>
@@ -47,9 +47,9 @@ export default function StudiesAndSkillsSection() {
              </p>
           </div>
 
-          <div className="flex-1 relative pl-8 border-l-[3px] border-cyan-500/20 hover:border-cyan-500/70 transition-colors duration-300">
-             <div className="absolute left-[-8.5px] top-1.5 w-3.5 h-3.5 rounded-full border-[3px] border-cyan-500 bg-transparent" />
-             <div className={`text-xs font-black uppercase tracking-widest mb-3 ${isLight ? "text-cyan-600" : "text-cyan-400"}`}>Secondary Education</div>
+          <div className="flex-1 relative flex flex-col items-center text-center md:items-start md:text-left md:pl-8 border-t-[3px] md:border-t-0 md:border-l-[3px] pt-6 md:pt-0 border-[#00e5ff]/30 hover:border-[#00e5ff] transition-colors duration-300 mt-6 md:mt-0">
+             <div className="absolute top-[-8.5px] left-1/2 -translate-x-1/2 md:left-[-8.5px] md:top-1.5 md:translate-x-0 w-3.5 h-3.5 rounded-full border-[3px] border-[#00e5ff] bg-transparent shadow-[0_0_10px_rgba(0,229,255,0.4)]" />
+             <div className={`text-xs font-black uppercase tracking-widest mb-3 ${isLight ? "text-cyan-600" : "text-[#00e5ff]"}`}>Secondary Education</div>
              <h4 className={`text-2xl md:text-3xl font-black mb-2 leading-tight ${isLight ? "text-gray-900" : "text-white"}`}>
                G.C.E. Advanced Level
              </h4>

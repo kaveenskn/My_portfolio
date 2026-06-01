@@ -222,8 +222,7 @@ export default function ProjectsSection() {
             className={`text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-none ${isLight ? "text-gray-900" : "text-white"
               }`}
           >
-            My <span className={`text-transparent bg-clip-text bg-gradient-to-r ${isLight ? "from-cyan-600 to-blue-800" : "from-cyan-400 to-blue-600"
-              }`}>Projects</span>
+            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff]">Projects</span>
           </motion.h2>
         </div>
       </div>

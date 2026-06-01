@@ -31,7 +31,7 @@ export const PROJECTS_DATA: Project[] = [
     image: "/project_images/icecreamshop.png",
     color: "from-blue-500/20 to-cyan-600/20",
     github: "https://github.com/kaveenskn/IceCream_shop.git",
-    Livelink: ""
+    Livelink: "https://ice-cream-shop-qu8d.vercel.app/"
   },
   {
     id: "03",
