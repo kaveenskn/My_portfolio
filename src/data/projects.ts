@@ -7,7 +7,8 @@ export interface Project {
   image: string;
   color: string;
   github?: string;
-  Livelink: string
+  Livelink: string;
+  images?: string[];
 }
 
 export const PROJECTS_DATA: Project[] = [
@@ -62,7 +63,8 @@ export const PROJECTS_DATA: Project[] = [
     category: "Mobile Application",
     desc: "Memory mapping mobile app that allows users to save trips on a map, store media in the cloud, share memories, follow users, chat, and manage private memories.",
     technologies: ["React Native", "Expo Go", "Tailwind CSS", "Firebase", "OpenStreetMap"],
-    image: "/project_images/memora.png",
+    image: "/project_images/memora1.jpeg",
+    images: ["/project_images/memora1.jpeg", "/project_images/memora2.jpeg"],
     color: "from-green-500/20 to-emerald-600/20",
     github: "https://github.com/Kavisheak/Memora.git",
     Livelink: ""

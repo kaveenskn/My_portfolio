@@ -12,7 +12,7 @@ export default function Background() {
       {/* Base Background Color */}
       <div 
         className={`absolute inset-0 transition-colors duration-700 ${
-          isLight ? "bg-[#F8FAFC]" : "bg-[#030B1A]"
+          isLight ? "bg-[#F8FAFC]" : "bg-[#030014]"
         }`} 
       />
 

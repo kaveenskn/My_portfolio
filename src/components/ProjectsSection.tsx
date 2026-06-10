@@ -16,6 +16,24 @@ import "swiper/css/pagination";
 import { Project, PROJECTS_DATA } from "@/data/projects";
 import ProjectBackground, { AnimatedGithubLogo } from "./ProjectBackground";
 
+const MultiImageDisplay = ({ images, title }: { images: string[]; title: string }) => {
+  return (
+    <div className="flex w-full h-full justify-center items-center gap-2 p-4">
+      {images.map((src, idx) => (
+        <div key={src} className="relative flex-1 h-full group-hover:scale-105 transition-transform duration-700">
+          <Image
+            src={src}
+            alt={`${title} - image ${idx + 1}`}
+            fill
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 16vw"
+            className="object-contain"
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 
 const ProjectCard = ({ project }: { project: Project }) => {
   const { theme } = useTheme();
@@ -102,13 +120,17 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
             {/* Project Image & Action Buttons */}
             <div className="relative mt-auto w-full h-[140px] md:h-[180px] rounded-[24px] overflow-hidden bg-white/[0.03] border border-white/5 group-hover:border-cyan-500/20">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-contain p-4 group-hover:scale-105 transition-transform duration-700"
-              />
+              {project.images && project.images.length > 0 ? (
+                <MultiImageDisplay images={project.images} title={project.title} />
+              ) : (
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-contain p-4 group-hover:scale-105 transition-transform duration-700"
+                />
+              )}
               <div className="absolute inset-0 flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/40 backdrop-blur-[2px]">
                 <a
                   href={project.github}

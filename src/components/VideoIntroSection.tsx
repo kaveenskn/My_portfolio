@@ -94,6 +94,7 @@ const VideoIntroSection = () => {
   const desktopVideoRef = useRef<HTMLVideoElement>(null);
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [videoOpacity, setVideoOpacity] = useState(1);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -118,6 +119,16 @@ const VideoIntroSection = () => {
           ref.current.currentTime = 0;
         }
       };
+
+      // The sticky container scrolls up when rect.bottom < window.innerHeight
+      // Let's pause the video when it's mostly out of view (e.g., bottom is less than half the screen height)
+      const isOutOfView = rect.bottom < window.innerHeight / 2;
+
+      if (isOutOfView) {
+        pauseVideo(desktopVideoRef);
+        pauseVideo(mobileVideoRef);
+        return;
+      }
 
       // Since this section is at the top, when we scroll down, rect.top becomes negative.
       // Let's start playing when we've scrolled down 50 pixels.
@@ -154,43 +165,69 @@ const VideoIntroSection = () => {
         {/* Desktop Video */}
         <video
           ref={desktopVideoRef}
-          src="/portfolioVideo.mp4"
-          className="hidden md:block w-full h-full object-cover object-top"
+          src="/newHero.mp4"
+          className="hidden md:block w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
+          style={{ 
+            opacity: videoOpacity,
+            filter: videoOpacity === 1 ? 'blur(0px) brightness(1)' : 'blur(12px) brightness(0.5)',
+            transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
+          }}
           preload="auto"
           muted
           playsInline
           disablePictureInPicture
           disableRemotePlayback
+          onTimeUpdate={(e) => {
+            const video = e.currentTarget;
+            if (video.duration && video.duration - video.currentTime <= 1.0 && videoOpacity === 1) {
+              setVideoOpacity(0);
+            }
+          }}
           onEnded={() => {
             setTimeout(() => {
               if (desktopVideoRef.current) {
+                desktopVideoRef.current.currentTime = 0;
                 desktopVideoRef.current.play().catch(e => console.log(e));
+                setVideoOpacity(1);
               }
-            }, 1000); // 1.0 second delay before looping again
+            }, 100);
           }}
         />
 
         {/* Mobile Video */}
         <video
           ref={mobileVideoRef}
-          src="/Mobilevideo.mp4"
-          className="block md:hidden w-full h-full object-cover object-top"
+          src="/newMobile.mp4"
+          className="block md:hidden w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
+          style={{ 
+            opacity: videoOpacity,
+            filter: videoOpacity === 1 ? 'blur(0px) brightness(1)' : 'blur(12px) brightness(0.5)',
+            transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
+          }}
           preload="auto"
           muted
           playsInline
           disablePictureInPicture
           disableRemotePlayback
+          onTimeUpdate={(e) => {
+            const video = e.currentTarget;
+            if (video.duration && video.duration - video.currentTime <= 1.0 && videoOpacity === 1) {
+              setVideoOpacity(0);
+            }
+          }}
           onEnded={() => {
             setTimeout(() => {
               if (mobileVideoRef.current) {
+                mobileVideoRef.current.currentTime = 0;
                 mobileVideoRef.current.play().catch(e => console.log(e));
+                setVideoOpacity(1);
               }
-            }, 1000); // 1.0 second delay before looping again
+            }, 100);
           }}
         />
 
         {/* Gradient overlay to blend text and background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030014]/40 via-[#030014]/60 to-[#030014] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#030014] pointer-events-none" />
 
         {/* Hero Content Overlay */}
         <AnimatePresence>
