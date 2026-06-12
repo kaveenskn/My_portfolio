@@ -197,7 +197,7 @@ const VideoIntroSection = () => {
             }, 100);
           }}
         >
-          <source src="/web.mp4#t=0.001" type="video/mp4" />
+          <source src="/newHero.mp4#t=0.001" type="video/mp4" />
         </video>
 
         {/* Mobile Video — hidden on desktop, only loads on <768px */}
