@@ -120,8 +120,6 @@ const VideoIntroSection = () => {
         }
       };
 
-      // The sticky container scrolls up when rect.bottom < window.innerHeight
-      // Let's pause the video when it's mostly out of view (e.g., bottom is less than half the screen height)
       const isOutOfView = rect.bottom < window.innerHeight / 2;
 
       if (isOutOfView) {
@@ -130,9 +128,7 @@ const VideoIntroSection = () => {
         return;
       }
 
-      // Since this section is at the top, when we scroll down, rect.top becomes negative.
-      // Let's start playing when we've scrolled down 50 pixels.
-      if (rect.top < -50) {
+      if (rect.top < -10) {
         playVideo(desktopVideoRef);
         playVideo(mobileVideoRef);
         setIsPlaying(true);
@@ -140,7 +136,6 @@ const VideoIntroSection = () => {
         pauseVideo(desktopVideoRef);
         pauseVideo(mobileVideoRef);
         
-        // Reset to initial frame when scrolling back to the very top
         if (rect.top >= -5) {
           resetVideo(desktopVideoRef);
           resetVideo(mobileVideoRef);
@@ -149,11 +144,30 @@ const VideoIntroSection = () => {
       }
     };
 
+    const unlockVideoPlayback = () => {
+      // Prime the videos so iOS allows playback during scroll
+      if (desktopVideoRef.current && desktopVideoRef.current.paused) {
+        desktopVideoRef.current.play().then(() => desktopVideoRef.current?.pause()).catch(() => {});
+      }
+      if (mobileVideoRef.current && mobileVideoRef.current.paused) {
+        mobileVideoRef.current.play().then(() => mobileVideoRef.current?.pause()).catch(() => {});
+      }
+      window.removeEventListener("touchstart", unlockVideoPlayback);
+      window.removeEventListener("click", unlockVideoPlayback);
+    };
+
+    window.addEventListener("touchstart", unlockVideoPlayback, { once: true, passive: true });
+    window.addEventListener("click", unlockVideoPlayback, { once: true, passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
-    // Trigger once on mount to handle initial state
+    
+    // Trigger once on mount
     handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("touchstart", unlockVideoPlayback);
+      window.removeEventListener("click", unlockVideoPlayback);
+    };
   }, []);
 
   return (

@@ -18,7 +18,7 @@ export const PROJECTS_DATA: Project[] = [
     category: "Web Application",
     desc: "Full Stack Web Platform for university students to explore projects, research ideas, and collaborate with AI-powered assistance.",
     technologies: ["React", "Node.js", "MongoDB", "AI Integration"],
-    image: "/project_images/futureHive.png",
+    image: "/project_images/FutureHive.png",
     color: "from-blue-500/20 to-cyan-600/20",
     github: "https://github.com/kaveenskn/FutureHive-CapstoneProject.git",
     Livelink: ""
@@ -52,7 +52,7 @@ export const PROJECTS_DATA: Project[] = [
     category: "E-commerce Web Application",
     desc: "Interactive saree shopping platform with virtual try-on (IDM-VTON) and smooth scroll-based animations to enhance user experience and satisfaction.",
     technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "IDM-VTON"],
-    image: "/project_images/sareebazar.png",
+    image: "/project_images/Sareebazar.png",
     color: "from-pink-500/20 to-rose-600/20",
     github: "https://github.com/yourusername/sareebazar",
     Livelink: ""
@@ -85,7 +85,7 @@ export const PROJECTS_DATA: Project[] = [
     category: "AI Web Application",
     desc: "RAG-based personal assistant that answers queries about the user using a local LLM (LLaMA 3 via Ollama) with intelligent and context-aware responses.",
     technologies: ["React", "FastAPI", "LangChain", "Ollama", "LLaMA 3"],
-    image: "/project_images/myassistant.png",
+    image: "/project_images/Myassistant.png",
     color: "from-orange-500/20 to-amber-600/20",
     github: "https://github.com/yourusername/myassistant",
     Livelink: ""
