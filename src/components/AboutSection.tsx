@@ -71,7 +71,7 @@ export default function AboutSection() {
 
           {/* Paragraph */}
           <p className={`text-base md:text-md leading-[1.8] mb-12 max-w-2xl font-medium ${isLight ? "text-gray-600" : "text-gray-400"}`}>
-            I'm a Software Engineering undergraduate at Sabaragamuwa University of Sri Lanka with a strong interest in software development, web technologies, and mobile application engineering. I enjoy building scalable, user-focused applications and solving real-world problems through clean and efficient software solutions. Passionate about continuous learning, I actively explore modern technologies while developing projects that strengthen my skills in full-stack and mobile application development.
+            I&apos;m a Software Engineering undergraduate at Sabaragamuwa University of Sri Lanka with a strong interest in software development, web technologies, and mobile application engineering. I enjoy building scalable, user-focused applications and solving real-world problems through clean and efficient software solutions. Passionate about continuous learning, I actively explore modern technologies while developing projects that strengthen my skills in full-stack and mobile application development.
           </p>
 
           {/* Contact Grid */}

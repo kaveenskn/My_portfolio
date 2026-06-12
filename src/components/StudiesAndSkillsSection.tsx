@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
 import SkillBalls from "./SkillBalls";
 

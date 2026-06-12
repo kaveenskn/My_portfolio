@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
@@ -15,7 +15,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const [activeTab, setActiveTab] = useState("#home");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -104,14 +104,14 @@ export default function Navbar() {
                     className={`relative px-5 py-2.5 rounded-full transition-colors duration-300 text-[14px] font-[600] tracking-wide ${
                       isActive
                         ? "text-white"
-                        : isLight ? "text-gray-600 hover:text-gray-900 hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-gray-300 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#a855f7] hover:to-[#00e5ff] hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.8)]"
+                        : isLight ? "text-gray-600 hover:text-[#00e5ff] hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-gray-300 hover:text-[#00e5ff] hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]"
                     }`}
                   >
                     <span className="relative z-10">{link.name}</span>
                     {isActive && (
                       <motion.div
                         layoutId="nav-pill"
-                        className="absolute inset-0 rounded-full bg-gradient-to-r from-[#a855f7] to-[#00e5ff] shadow-[0_0_20px_rgba(0,229,255,0.5),0_0_20px_rgba(168,85,247,0.5)]"
+                        className="absolute inset-0 rounded-full bg-gradient-to-r from-[#a855f7] to-[#00e5ff] shadow-[0_0_30px_rgba(0,229,255,0.6),0_0_30px_rgba(168,85,247,0.6)]"
                         transition={{ type: "spring", stiffness: 350, damping: 30 }}
                       />
                     )}
@@ -181,8 +181,8 @@ export default function Navbar() {
                         isActive
                           ? "bg-gradient-to-r from-[#a855f7] to-[#00e5ff] text-white font-bold shadow-[0_0_15px_rgba(0,229,255,0.3)]"
                           : isLight
-                          ? "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                          : "text-gray-300 hover:bg-white/5 hover:text-white"
+                          ? "text-gray-600 hover:bg-[#00e5ff]/10 hover:text-[#00e5ff]"
+                          : "text-gray-300 hover:bg-[#00e5ff]/10 hover:text-[#00e5ff]"
                       }`}
                     >
                       {link.name}

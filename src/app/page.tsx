@@ -2,7 +2,6 @@
 
 import Navbar from "@/components/Navbar";
 import SocialIcons from "@/components/SocialIcons";
-import HeroContent from "@/components/HeroContent";
 import AboutSection from "@/components/AboutSection";
 import StudiesAndSkillsSection from "@/components/StudiesAndSkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
