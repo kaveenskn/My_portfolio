@@ -62,7 +62,7 @@ export default function AboutSection() {
           </div>
 
           {/* Heading */}
-          <h2 className={`text-4xl lg:text-5xl font-black mb-6 leading-[1.1] tracking-tight ${isLight ? "text-gray-900" : "text-white"}`}>
+          <h2 className={`text-4xl lg:text-5xl font-black mb-6 leading-[1.3] tracking-tight ${isLight ? "text-gray-900" : "text-white"}`}>
             Building <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff]">
               innovative software

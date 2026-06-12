@@ -20,6 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preload" href="/web.mp4" as="video" type="video/mp4" media="(min-width: 768px)" />
+        <link rel="preload" href="/Mobile.mp4" as="video" type="video/mp4" media="(max-width: 767px)" />
+      </head>
       <body
         className={`${outfit.variable} font-sans antialiased`}
         style={{ fontFamily: 'var(--font-outfit)' }}
