@@ -97,67 +97,25 @@ const VideoIntroSection = () => {
   const [videoOpacity, setVideoOpacity] = useState(1);
 
   useEffect(() => {
+    // Force play on mount to ensure iOS starts buffering immediately
+    if (desktopVideoRef.current?.paused) desktopVideoRef.current.play().catch(() => {});
+    if (mobileVideoRef.current?.paused) mobileVideoRef.current.play().catch(() => {});
+
     const handleScroll = () => {
       if (!containerRef.current) return;
-
       const rect = containerRef.current.getBoundingClientRect();
 
-      const playVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && ref.current.paused) {
-          ref.current.play().catch((e) => console.log("Video play error:", e));
-        }
-      };
-
-      const pauseVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && !ref.current.paused) {
-          ref.current.pause();
-        }
-      };
-
-      const resetVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && ref.current.currentTime !== 0) {
-          ref.current.currentTime = 0;
-        }
-      };
-
-      const isOutOfView = rect.bottom < window.innerHeight / 2;
-
-      if (isOutOfView) {
-        pauseVideo(desktopVideoRef);
-        pauseVideo(mobileVideoRef);
-        return;
-      }
-
+      // Only manage text visibility on scroll.
+      // Videos will play continuously in the background for a smoother experience.
       if (rect.top < -10) {
         setIsPlaying(true);
-        playVideo(desktopVideoRef);
-        playVideo(mobileVideoRef);
       } else {
-        pauseVideo(desktopVideoRef);
-        pauseVideo(mobileVideoRef);
-        
         if (rect.top >= -5) {
-          resetVideo(desktopVideoRef);
-          resetVideo(mobileVideoRef);
           setIsPlaying(false);
         }
       }
     };
 
-    const unlockVideoPlayback = () => {
-      // Prime the videos so iOS allows playback during scroll
-      if (desktopVideoRef.current && desktopVideoRef.current.paused) {
-        desktopVideoRef.current.play().then(() => desktopVideoRef.current?.pause()).catch(() => {});
-      }
-      if (mobileVideoRef.current && mobileVideoRef.current.paused) {
-        mobileVideoRef.current.play().then(() => mobileVideoRef.current?.pause()).catch(() => {});
-      }
-      window.removeEventListener("touchstart", unlockVideoPlayback);
-      window.removeEventListener("click", unlockVideoPlayback);
-    };
-
-    window.addEventListener("touchstart", unlockVideoPlayback, { once: true, passive: true });
-    window.addEventListener("click", unlockVideoPlayback, { once: true, passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
     
     // Trigger once on mount
@@ -165,8 +123,6 @@ const VideoIntroSection = () => {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("touchstart", unlockVideoPlayback);
-      window.removeEventListener("click", unlockVideoPlayback);
     };
   }, []);
 
@@ -185,6 +141,7 @@ const VideoIntroSection = () => {
             filter: videoOpacity === 1 ? 'blur(0px) brightness(1)' : 'blur(12px) brightness(0.5)',
             transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
           }}
+          autoPlay
           preload="auto"
           muted
           playsInline
@@ -218,6 +175,7 @@ const VideoIntroSection = () => {
             filter: videoOpacity === 1 ? 'blur(0px) brightness(1)' : 'blur(12px) brightness(0.5)',
             transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
           }}
+          autoPlay
           preload="auto"
           muted
           playsInline
