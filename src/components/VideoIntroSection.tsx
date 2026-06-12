@@ -172,7 +172,6 @@ const VideoIntroSection = () => {
             transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
           }}
           preload="auto"
-          autoPlay
           muted
           playsInline
           disablePictureInPicture
@@ -193,7 +192,7 @@ const VideoIntroSection = () => {
             }, 100);
           }}
         >
-          <source src="/newHero.mp4" type="video/mp4" />
+          <source src="/newHero.mp4#t=0.001" type="video/mp4" />
         </video>
 
         {/* Mobile Video */}
@@ -206,7 +205,6 @@ const VideoIntroSection = () => {
             transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
           }}
           preload="auto"
-          autoPlay
           muted
           playsInline
           disablePictureInPicture
@@ -227,7 +225,7 @@ const VideoIntroSection = () => {
             }, 100);
           }}
         >
-          <source src="/newMobile.mp4" type="video/mp4" />
+          <source src="/newMobile.mp4#t=0.001" type="video/mp4" />
         </video>
 
         {/* Gradient overlay to blend text and background */}
