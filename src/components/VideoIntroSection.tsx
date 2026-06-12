@@ -165,7 +165,6 @@ const VideoIntroSection = () => {
         {/* Desktop Video */}
         <video
           ref={desktopVideoRef}
-          src="/newHero.mp4"
           className="hidden md:block w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
           style={{ 
             opacity: videoOpacity,
@@ -173,6 +172,7 @@ const VideoIntroSection = () => {
             transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
           }}
           preload="auto"
+          autoPlay
           muted
           playsInline
           disablePictureInPicture
@@ -192,12 +192,13 @@ const VideoIntroSection = () => {
               }
             }, 100);
           }}
-        />
+        >
+          <source src="/newHero.mp4" type="video/mp4" />
+        </video>
 
         {/* Mobile Video */}
         <video
           ref={mobileVideoRef}
-          src="/newMobile.mp4"
           className="block md:hidden w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
           style={{ 
             opacity: videoOpacity,
@@ -205,6 +206,7 @@ const VideoIntroSection = () => {
             transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
           }}
           preload="auto"
+          autoPlay
           muted
           playsInline
           disablePictureInPicture
@@ -224,7 +226,9 @@ const VideoIntroSection = () => {
               }
             }, 100);
           }}
-        />
+        >
+          <source src="/newMobile.mp4" type="video/mp4" />
+        </video>
 
         {/* Gradient overlay to blend text and background */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#030014] pointer-events-none" />
