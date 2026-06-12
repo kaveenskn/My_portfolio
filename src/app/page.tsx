@@ -9,6 +9,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
 import Background from "@/components/Background";
 import VideoIntroSection from "@/components/VideoIntroSection";
+import GsapSection from "@/components/GsapSection";
 
 
 export default function Home() {
@@ -31,24 +32,24 @@ export default function Home() {
 
 
         {/* About Section */}
-        <section id="about" className="w-full pt-0 pb-4 md:pb-8 scroll-mt-20">
+        <GsapSection id="about" className="w-full pt-0 pb-4 md:pb-8 scroll-mt-20">
           <AboutSection />
-        </section>
+        </GsapSection>
 
         {/* Studies & Skills Section */}
-        <section id="studies-skills" className="w-full scroll-mt-20 -mt-16 md:-mt-32">
+        <GsapSection id="studies-skills" className="w-full scroll-mt-20 -mt-16 md:-mt-32">
           <StudiesAndSkillsSection />
-        </section>
+        </GsapSection>
 
         {/* Projects Section */}
-        <div id="projects" className="w-full scroll-mt-20">
+        <GsapSection id="projects" className="w-full scroll-mt-20">
           <ProjectsSection />
-        </div>
+        </GsapSection>
 
         {/* Contact Section */}
-        <section id="contact" className="w-full pt-0 pb-16 md:pb-24 scroll-mt-20">
+        <GsapSection id="contact" className="w-full pt-0 pb-16 md:pb-24 scroll-mt-20">
           <ContactSection />
-        </section>
+        </GsapSection>
       </div>
 
     </main>

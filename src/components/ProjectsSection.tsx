@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import Image from "next/image";
 
@@ -224,11 +224,8 @@ export default function ProjectsSection() {
         {/* Project background hexagons removed - now handled by global Background.tsx */}
 
         <div className="flex flex-row items-center justify-center gap-5 md:gap-10 relative z-20">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex-shrink-0"
+          <div
+            className="gsap-reveal-left flex-shrink-0"
           >
             <AnimatedGithubLogo
               size={isLight ? 70 : 85}
@@ -236,25 +233,25 @@ export default function ProjectsSection() {
               glowColor={isLight ? "rgba(6,182,212,0.4)" : "rgba(6,182,212,0.7)"}
               className={`relative opacity-100 ${isLight ? "text-cyan-700" : "text-cyan-400"}`}
             />
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className={`text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-none ${isLight ? "text-gray-900" : "text-white"
+          <h2
+            className={`gsap-reveal-right text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-none ${isLight ? "text-gray-900" : "text-white"
               }`}
           >
             My <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff]">Projects</span>
-          </motion.h2>
+          </h2>
         </div>
       </div>
 
       {/* Slider Container */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6">
+      <div className="gsap-reveal relative z-10 w-full max-w-[1400px] mx-auto px-6 group/slider">
         <Swiper
           modules={[Autoplay, Pagination, Navigation]}
-          navigation={true}
+          navigation={{
+            nextEl: '.custom-swiper-next',
+            prevEl: '.custom-swiper-prev',
+          }}
           slidesPerView={1}
           spaceBetween={20}
           breakpoints={{
@@ -277,16 +274,35 @@ export default function ProjectsSection() {
           }}
           speed={1000}
           grabCursor={true}
-          className="w-full overflow-hidden"
+          className="w-full overflow-hidden !py-10"
         >
           {PROJECTS_DATA.map((project) => (
-            <SwiperSlide key={project.id} className="py-10">
+            <SwiperSlide key={project.id} className="py-2">
               <div className="flex justify-center">
                 <ProjectCard project={project} />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Custom Navigation Buttons */}
+        <div className={`custom-swiper-prev absolute left-0 md:-left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full cursor-pointer transition-all duration-300 backdrop-blur-md opacity-0 md:opacity-100 group-hover/slider:opacity-100 group-hover/slider:-translate-x-2 ${
+          isLight 
+            ? "bg-white/90 border border-gray-200 text-cyan-600 shadow-[0_10px_20px_rgba(0,0,0,0.1)] hover:bg-gradient-to-r hover:from-[#a855f7] hover:to-[#00e5ff] hover:text-white hover:border-transparent" 
+            : "bg-[#0a0a0a]/80 border border-cyan-500/30 text-cyan-400 shadow-[0_0_20px_rgba(0,229,255,0.15)] hover:bg-gradient-to-r hover:from-[#a855f7] hover:to-[#00e5ff] hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(0,229,255,0.4)]"
+          } hover:scale-110`}
+        >
+          <ChevronLeft size={22} strokeWidth={2.5} />
+        </div>
+        
+        <div className={`custom-swiper-next absolute right-0 md:-right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-full cursor-pointer transition-all duration-300 backdrop-blur-md opacity-0 md:opacity-100 group-hover/slider:opacity-100 group-hover/slider:translate-x-2 ${
+          isLight 
+            ? "bg-white/90 border border-gray-200 text-cyan-600 shadow-[0_10px_20px_rgba(0,0,0,0.1)] hover:bg-gradient-to-r hover:from-[#a855f7] hover:to-[#00e5ff] hover:text-white hover:border-transparent" 
+            : "bg-[#0a0a0a]/80 border border-cyan-500/30 text-cyan-400 shadow-[0_0_20px_rgba(0,229,255,0.15)] hover:bg-gradient-to-r hover:from-[#a855f7] hover:to-[#00e5ff] hover:text-white hover:border-transparent hover:shadow-[0_0_30px_rgba(0,229,255,0.4)]"
+          } hover:scale-110`}
+        >
+          <ChevronRight size={22} strokeWidth={2.5} />
+        </div>
       </div>
     </section>
   );

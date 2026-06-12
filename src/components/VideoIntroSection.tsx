@@ -298,12 +298,26 @@ const VideoIntroSection = () => {
                 <motion.div variants={itemVariants} className="flex items-center gap-4 sm:gap-6 mb-10">
                   <a
                     href="#projects"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const target = document.querySelector('#projects');
+                      if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                     className="flex items-center justify-center px-7 py-3 rounded-full bg-gradient-to-r from-[#a855f7] to-[#00e5ff] text-[#030014] text-[12px] sm:text-[13px] font-bold tracking-[0.1em] uppercase shadow-[0_0_20px_rgba(0,229,255,0.4),0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(0,229,255,0.6),0_0_40px_rgba(168,85,247,0.6)] transition-all duration-300"
                   >
                     VIEW WORK →
                   </a>
                   <a
                     href="#contact"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const target = document.querySelector('#contact');
+                      if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                     className="flex items-center justify-center px-7 py-3 rounded-full border border-white/20 text-white text-[12px] sm:text-[13px] font-bold tracking-[0.1em] uppercase hover:bg-white/10 hover:border-white/40 transition-all duration-300"
                   >
                     CONTACT

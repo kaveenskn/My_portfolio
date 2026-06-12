@@ -93,7 +93,14 @@ export default function Navbar() {
                 <li key={link.name} className="relative">
                   <Link
                     href={link.href}
-                    onClick={() => setActiveTab(link.href)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setActiveTab(link.href);
+                      const target = document.querySelector(link.href);
+                      if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                     className={`relative px-5 py-2.5 rounded-full transition-colors duration-300 text-[14px] font-[600] tracking-wide ${
                       isActive
                         ? "text-white"
@@ -161,9 +168,14 @@ export default function Navbar() {
                   <li key={link.name} className="w-full">
                     <Link
                       href={link.href}
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.preventDefault();
                         setActiveTab(link.href);
                         setIsMobileMenuOpen(false);
+                        const target = document.querySelector(link.href);
+                        if (target) {
+                          target.scrollIntoView({ behavior: 'smooth' });
+                        }
                       }}
                       className={`block w-full px-4 py-3 rounded-xl transition-all duration-300 text-[15px] font-[600] tracking-wide ${
                         isActive

@@ -52,32 +52,23 @@ export default function ContactSection() {
     <div className="w-full flex flex-col pt-20 pb-10">
       {/* Title Header */}
       <div className="w-full max-w-7xl mx-auto px-6 mb-16 flex flex-col items-center justify-center text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className={`text-4xl md:text-6xl font-black tracking-tight mb-4 ${isLight ? "text-gray-900" : "text-white"}`}
+        <h2
+          className={`gsap-reveal text-4xl md:text-6xl font-black tracking-tight mb-4 ${isLight ? "text-gray-900" : "text-white"}`}
         >
           Let&apos;s <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff]">Connect</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className={`max-w-xl text-sm md:text-base ${isLight ? "text-gray-600" : "text-gray-400"}`}
+        </h2>
+        <p
+          className={`gsap-reveal max-w-xl text-sm md:text-base ${isLight ? "text-gray-600" : "text-gray-400"}`}
         >
           Have a project in mind or just want to say hello? I&apos;d love to hear from you.
-        </motion.p>
+        </p>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
         {/* Left Side: Info Cards */}
         <div className="md:col-span-5 flex flex-col gap-4">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className={`p-8 rounded-[40px] shadow-xl relative overflow-hidden mb-2 transition-all border ${isLight 
+          <div
+            className={`gsap-reveal-left p-8 rounded-[40px] shadow-xl relative overflow-hidden mb-2 transition-all border ${isLight 
               ? "bg-white/80 border-gray-200/50 shadow-[0_20px_50px_rgba(0,0,0,0.12)] text-gray-900" 
               : "bg-gradient-to-b from-blue-600/20 via-[#0D0D0D] to-[#101010] border-blue-500/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)] text-white"
             }`}
@@ -98,19 +89,16 @@ export default function ContactSection() {
             </div>
             {/* Soft background shape */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-          </motion.div>
+          </div>
 
           {/* Small contact list cards */}
           {contactInfo.map((item, idx) => (
-            <motion.a
+            <a
               key={idx}
               href={item.href}
               target={item.href !== "#" ? "_blank" : undefined}
               rel={item.href !== "#" ? "noopener noreferrer" : undefined}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 + idx * 0.1 }}
-              className={`flex items-center gap-4 py-3 px-4 rounded-2xl border transition-all ${isLight
+              className={`gsap-reveal-left flex items-center gap-4 py-3 px-4 rounded-2xl border transition-all ${isLight
                 ? "bg-white/80 border-gray-200/50 shadow-md hover:border-cyan-500/30"
                 : "bg-gradient-to-b from-blue-600/10 via-[#0D0D0D] to-[#101010] border-blue-500/20 hover:border-cyan-500/50 shadow-lg"
                 }`}
@@ -126,16 +114,13 @@ export default function ContactSection() {
                   {item.value}
                 </p>
               </div>
-            </motion.a>
+            </a>
           ))}
         </div>
 
         {/* Right Side: Contact Form (Phone Mockup) */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          className="md:col-span-7 flex justify-center items-center relative py-6"
+        <div
+          className="gsap-reveal-right md:col-span-7 flex justify-center items-center relative py-6"
         >
           {/* Ambient Glow behind phone */}
           <div className="absolute inset-0 bg-gradient-to-tr from-[#a855f7]/20 to-[#00e5ff]/20 blur-[80px] rounded-full pointer-events-none" />
@@ -169,7 +154,7 @@ export default function ContactSection() {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className={`w-full px-4 py-3 rounded-2xl border bg-transparent outline-none transition-all text-sm font-medium ${isLight
                       ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)] bg-gray-50/50"
-                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#111]"
+                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-white/60 bg-[#111]"
                       }`}
                     placeholder="Your name"
                   />
@@ -184,7 +169,7 @@ export default function ContactSection() {
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className={`w-full px-4 py-3 rounded-2xl border bg-transparent outline-none transition-all text-sm font-medium ${isLight
                       ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)] bg-gray-50/50"
-                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#111]"
+                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-white/60 bg-[#111]"
                       }`}
                     placeholder="your@email.com"
                   />
@@ -199,7 +184,7 @@ export default function ContactSection() {
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className={`w-full px-4 py-3 rounded-2xl border bg-transparent outline-none transition-all text-sm font-medium ${isLight
                       ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)] bg-gray-50/50"
-                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#111]"
+                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-white/60 bg-[#111]"
                       }`}
                     placeholder="What's this about?"
                   />
@@ -214,7 +199,7 @@ export default function ContactSection() {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className={`w-full px-4 py-3 rounded-2xl border bg-transparent outline-none transition-all resize-none text-sm font-medium ${isLight
                       ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)] bg-gray-50/50"
-                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#111]"
+                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-white/60 bg-[#111]"
                       }`}
                     placeholder="Tell me about your project..."
                   />
@@ -239,7 +224,7 @@ export default function ContactSection() {
               <div className={`w-1/3 h-1 md:h-1.5 rounded-full ${isLight ? "bg-gray-300" : "bg-[#333]"}`}></div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Social Icons mapped dynamically at the end */}

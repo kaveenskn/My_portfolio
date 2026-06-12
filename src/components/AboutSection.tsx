@@ -43,26 +43,18 @@ export default function AboutSection() {
     <div className="relative w-full flex flex-col pt-4 pb-24 px-6 md:px-12 lg:pl-36 lg:pr-10 overflow-hidden">
       {/* Section Title */}
       <div className="w-full flex items-center justify-center mb-16 md:mb-20">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className={`text-4xl md:text-6xl lg:text-6xl font-black tracking-tight leading-none text-center ${isLight ? "text-gray-900" : "text-white"}`}
+        <h2
+          className={`gsap-reveal text-4xl md:text-6xl lg:text-6xl font-black tracking-tight leading-none text-center ${isLight ? "text-gray-900" : "text-white"}`}
         >
           About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff]">Me</span>
-        </motion.h2>
+        </h2>
       </div>
 
       <div className="relative z-10 w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
         {/* Left Column */}
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex flex-col items-center text-center lg:items-start lg:text-left"
+        <div
+          className="gsap-reveal-left flex flex-col items-center text-center lg:items-start lg:text-left"
         >
           {/* Pill */}
           <div className={`w-fit px-5 py-2 rounded-full text-[11px] font-black tracking-[0.2em] uppercase mb-6 ${isLight ? "bg-cyan-100/80 text-cyan-500" : "bg-cyan-900/30 text-cyan-400"}`}>
@@ -113,15 +105,11 @@ export default function AboutSection() {
             Download CV
             <Download size={18} />
           </motion.a>
-        </motion.div>
+        </div>
 
         {/* Right Column — Profile Image */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative flex justify-center w-full mx-auto max-w-[380px] lg:max-w-none lg:justify-center py-10 lg:py-0"
+        <div
+          className="gsap-reveal-right relative flex justify-center w-full mx-auto max-w-[380px] lg:max-w-none lg:justify-center py-10 lg:py-0"
         >
           {/* Outer glow */}
           <div
@@ -194,7 +182,7 @@ export default function AboutSection() {
 
             </div>
           </div>
-        </motion.div>
+        </div>
 
       </div>
     </div>

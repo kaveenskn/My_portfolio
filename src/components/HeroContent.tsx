@@ -161,6 +161,13 @@ export default function HeroContent() {
           <motion.div variants={itemVariants} className="flex items-center gap-3 sm:gap-4 mb-10">
             <a
               href="#projects"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.querySelector('#projects');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
               className={`group relative px-6 py-3 border-[2px] text-[10px] sm:text-[11px] font-black tracking-[0.15em] uppercase transition-all duration-300 ${isLight
                 ? "border-blue-600 text-blue-600 hover:bg-blue-600/10 hover:shadow-[0_0_20px_rgba(37,99,235,0.25)]"
                 : "border-[#00e5ff] text-[#00e5ff] hover:bg-[#00e5ff]/10 hover:shadow-[0_0_20px_rgba(0,229,255,0.25)]"
@@ -170,6 +177,13 @@ export default function HeroContent() {
             </a>
             <a
               href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                const target = document.querySelector('#contact');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
               className={`px-6 py-3 border-[2px] text-[10px] sm:text-[11px] font-black tracking-[0.15em] uppercase transition-all duration-300 ${isLight
                 ? "border-gray-800 text-gray-700 hover:border-gray-900 hover:text-gray-900 hover:bg-gray-200/50"
                 : "border-[#1e2533] text-[#6b7280] hover:border-[#374151] hover:text-[#9ca3af] hover:bg-[#1e2533]/40"

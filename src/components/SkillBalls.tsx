@@ -63,7 +63,7 @@ export default function SkillBalls() {
 
     ballsRef.current = SKILLS.map((skill, i) => {
       const isMobile = w < 768;
-      const baseRadius = isMobile ? 25 : 44;
+      const baseRadius = isMobile ? 24 : 44;
       const varyRadius = isMobile ? 12 : 22;
       const r = baseRadius + seededRand(i * 3 + 1) * varyRadius;
       return {
@@ -92,6 +92,13 @@ export default function SkillBalls() {
       sizeRef.current = { w, h };
       canvas.width = w;
       canvas.height = h;
+
+      const isMobile = w < 768;
+      const baseRadius = isMobile ? 24 : 44;
+      const varyRadius = isMobile ? 12 : 22;
+      ballsRef.current.forEach((b, i) => {
+        b.r = baseRadius + seededRand(i * 3 + 1) * varyRadius;
+      });
     };
     onResize();
     window.addEventListener("resize", onResize);
