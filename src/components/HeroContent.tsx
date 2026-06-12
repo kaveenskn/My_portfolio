@@ -150,11 +150,7 @@ export default function HeroContent() {
             variants={itemVariants}
             className={`text-[14px] sm:text-[15px] leading-[1.8] max-w-[480px] mb-8 font-medium ${isLight ? "text-gray-600" : "text-[#8b9099]"}`}
           >
-            Architect of digital spaces. Crafting interfaces with{" "}
-            <span className={`font-bold ${isLight ? "text-blue-600" : "text-[#00e5ff]"}`}>clarity</span>, function, and
-            lasting design —{" "}
-            <br className="hidden lg:block" />
-            built one considered detail at a time.
+            Transforming complex ideas into seamless digital experiences. Writing <span className={`font-bold ${isLight ? "text-blue-600" : "text-[#00e5ff]"}`}>clean code</span> and scalable architecture to bridge the gap between innovative design and robust engineering.
           </motion.p>
 
           {/* CTA Buttons */}

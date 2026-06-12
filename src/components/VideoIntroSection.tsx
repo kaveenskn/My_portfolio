@@ -287,11 +287,7 @@ const VideoIntroSection = () => {
                   variants={itemVariants}
                   className="text-[14px] sm:text-[15px] leading-[1.8] max-w-[480px] mb-8 font-medium text-white"
                 >
-                  Architect of digital spaces. Crafting interfaces with{" "}
-                  <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff]">clarity</span>, function, and
-                  lasting design —{" "}
-                  <br className="hidden lg:block" />
-                  built one considered detail at a time.
+                  Transforming complex ideas into seamless digital experiences. Writing <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff]">clean code</span> and scalable architecture to bridge the gap between innovative design and robust engineering.
                 </motion.p>
 
                 {/* CTA Buttons */}
