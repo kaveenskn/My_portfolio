@@ -52,7 +52,7 @@ export const PROJECTS_DATA: Project[] = [
     category: "E-commerce Web Application",
     desc: "Interactive saree shopping platform with virtual try-on (IDM-VTON) and smooth scroll-based animations to enhance user experience and satisfaction.",
     technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "IDM-VTON"],
-    image: "/project_images/sareeBazar.png",
+    image: "/project_images/sareebazar.png",
     color: "from-pink-500/20 to-rose-600/20",
     github: "https://github.com/yourusername/sareebazar",
     Livelink: ""

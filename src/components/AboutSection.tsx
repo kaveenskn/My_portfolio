@@ -102,14 +102,17 @@ export default function AboutSection() {
           </div>
 
           {/* Button */}
-          <motion.button
+          <motion.a
+            href="/ShanmugarajaKaveen.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="w-fit px-8 py-4 rounded-full font-bold flex items-center gap-3 text-white shadow-[0_15px_30px_-10px] text-sm transition-all bg-gradient-to-r from-[#a855f7] to-[#00e5ff] shadow-[#a855f7]/30 hover:shadow-[#00e5ff]/50"
           >
             Download CV
             <Download size={18} />
-          </motion.button>
+          </motion.a>
         </motion.div>
 
         {/* Right Column — Profile Image */}

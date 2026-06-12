@@ -9,9 +9,10 @@ import Image from "next/image";
 
 // Swiper imports
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 import { Project, PROJECTS_DATA } from "@/data/projects";
 import ProjectBackground, { AnimatedGithubLogo } from "./ProjectBackground";
@@ -252,7 +253,8 @@ export default function ProjectsSection() {
       {/* Slider Container */}
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6">
         <Swiper
-          modules={[Autoplay, Pagination]}
+          modules={[Autoplay, Pagination, Navigation]}
+          navigation={true}
           slidesPerView={1}
           spaceBetween={20}
           breakpoints={{

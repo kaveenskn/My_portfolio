@@ -120,7 +120,9 @@ export default function Navbar() {
 
             {/* Resume CTA Button */}
             <a
-              href="#contact"
+              href="/ShanmugarajaKaveen.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden sm:flex items-center justify-center px-7 py-2.5 rounded-full bg-gradient-to-r from-[#a855f7] to-[#00e5ff] text-[#030014] text-[13.5px] font-bold tracking-wide shadow-[0_0_20px_rgba(0,229,255,0.4),0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(0,229,255,0.6),0_0_40px_rgba(168,85,247,0.6)] transition-all duration-300"
             >
               Resume
@@ -179,7 +181,9 @@ export default function Navbar() {
               
               <li className="w-full pt-2 mt-2 border-t border-white/10">
                 <a
-                  href="#contact"
+                  href="/ShanmugarajaKaveen.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center justify-center w-full px-7 py-3 mt-2 rounded-xl bg-gradient-to-r from-[#a855f7] to-[#00e5ff] text-[#030014] text-[14px] font-bold tracking-wide shadow-[0_0_20px_rgba(0,229,255,0.3),0_0_20px_rgba(168,85,247,0.3)] transition-all duration-300"
                 >

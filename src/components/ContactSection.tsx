@@ -130,92 +130,115 @@ export default function ContactSection() {
           ))}
         </div>
 
-        {/* Right Side: Contact Form */}
+        {/* Right Side: Contact Form (Phone Mockup) */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className={`md:col-span-7 p-6 md:p-8 rounded-[40px] border transition-all ${isLight
-              ? "bg-white/80 border-gray-200/50 shadow-[0_20px_50px_rgba(0,0,0,0.12)]"
-              : "bg-gradient-to-b from-blue-600/20 via-[#0D0D0D] to-[#101010] border-blue-500/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
-            }`}
+          className="md:col-span-7 flex justify-center items-center relative py-6"
         >
-          <h3 className={`text-xl font-black tracking-tight mb-8 ${isLight ? "text-gray-900" : "text-white"}`}>Send a Message</h3>
+          {/* Ambient Glow behind phone */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#a855f7]/20 to-[#00e5ff]/20 blur-[80px] rounded-full pointer-events-none" />
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-2">
-              <div className="space-y-2">
-                <label className={`text-[10px] font-black uppercase tracking-[0.15em] ${isLight ? "text-gray-500" : "text-gray-400"}`}>Name</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className={`w-full px-4 py-3.5 rounded-xl border bg-transparent outline-none transition-all text-sm font-medium ${isLight
-                    ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)]"
-                    : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#0a0a0a]"
-                    }`}
-                  placeholder="Your name"
-                />
+          {/* Phone Mockup Container */}
+          <div className={`relative w-full max-w-[380px] rounded-[2.5rem] md:rounded-[3rem] border-[10px] md:border-[14px] shadow-2xl overflow-hidden transition-all ${
+            isLight 
+              ? "border-gray-900 bg-gray-50 shadow-[0_30px_60px_rgba(0,0,0,0.2)]" 
+              : "border-[#151515] bg-[#0a0a0a] shadow-[0_30px_60px_rgba(0,0,0,0.8)]"
+          }`}>
+            
+            {/* Phone Camera Notch */}
+            <div className="absolute top-0 inset-x-0 flex justify-center z-20 pointer-events-none">
+              <div className={`w-32 h-6 md:h-7 rounded-b-3xl ${isLight ? "bg-gray-900" : "bg-[#151515]"}`}></div>
+            </div>
+
+              {/* Phone Screen Content */}
+              <div className={`h-full w-full px-5 py-8 pt-10 md:pt-12 flex flex-col relative z-10 ${isLight ? "bg-white" : "bg-[#0d0d0d]"}`}>
+              <div className="text-center mb-6">
+                <h3 className={`text-xl md:text-2xl font-black tracking-tight ${isLight ? "text-gray-900" : "text-white"}`}>Message Me</h3>
+                <p className={`text-[10px] font-bold uppercase tracking-widest mt-1 ${isLight ? "text-cyan-600" : "text-cyan-400"}`}>Stay Connected</p>
               </div>
-              <div className="space-y-2">
-                <label className={`text-[10px] font-black uppercase tracking-[0.15em] ${isLight ? "text-gray-500" : "text-gray-400"}`}>Email</label>
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className={`w-full px-4 py-3.5 rounded-xl border bg-transparent outline-none transition-all text-sm font-medium ${isLight
-                    ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)]"
-                    : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#0a0a0a]"
-                    }`}
-                  placeholder="your@email.com"
-                />
-              </div>
-            </div>
 
-            <div className="space-y-2">
-              <label className={`text-[10px] font-black uppercase tracking-[0.15em] ${isLight ? "text-gray-500" : "text-gray-400"}`}>Subject</label>
-              <input
-                type="text"
-                required
-                value={formData.subject}
-                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                className={`w-full px-4 py-3.5 rounded-xl border bg-transparent outline-none transition-all text-sm font-medium ${isLight
-                  ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)]"
-                  : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#0a0a0a]"
-                  }`}
-                placeholder="What's this about?"
-              />
-            </div>
+              <form onSubmit={handleSubmit} className="space-y-4 flex-1">
+                <div className="space-y-1.5">
+                  <label className={`text-[9px] font-black uppercase tracking-[0.1em] ${isLight ? "text-gray-500" : "text-gray-400"}`}>Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className={`w-full px-4 py-3 rounded-2xl border bg-transparent outline-none transition-all text-sm font-medium ${isLight
+                      ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)] bg-gray-50/50"
+                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#111]"
+                      }`}
+                    placeholder="Your name"
+                  />
+                </div>
+                
+                <div className="space-y-1.5">
+                  <label className={`text-[9px] font-black uppercase tracking-[0.1em] ${isLight ? "text-gray-500" : "text-gray-400"}`}>Email</label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className={`w-full px-4 py-3 rounded-2xl border bg-transparent outline-none transition-all text-sm font-medium ${isLight
+                      ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)] bg-gray-50/50"
+                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#111]"
+                      }`}
+                    placeholder="your@email.com"
+                  />
+                </div>
 
-            <div className="space-y-2">
-              <label className={`text-[10px] font-black uppercase tracking-[0.15em] ${isLight ? "text-gray-500" : "text-gray-400"}`}>Message</label>
-              <textarea
-                required
-                rows={5}
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className={`w-full px-4 py-3.5 rounded-xl border bg-transparent outline-none transition-all resize-none text-sm font-medium ${isLight
-                  ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)]"
-                  : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#0a0a0a]"
-                  }`}
-                placeholder="Tell me about your project or just say hi.."
-              />
-            </div>
+                <div className="space-y-1.5">
+                  <label className={`text-[9px] font-black uppercase tracking-[0.1em] ${isLight ? "text-gray-500" : "text-gray-400"}`}>Subject</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className={`w-full px-4 py-3 rounded-2xl border bg-transparent outline-none transition-all text-sm font-medium ${isLight
+                      ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)] bg-gray-50/50"
+                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#111]"
+                      }`}
+                    placeholder="What's this about?"
+                  />
+                </div>
 
-            <button
-              type="submit"
-              disabled={status === "submitting"}
-              className="w-full py-4 mt-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all text-white bg-gradient-to-r from-[#a855f7] to-[#00e5ff] shadow-[0_15px_30px_-10px] shadow-[#a855f7]/30 hover:shadow-[#00e5ff]/50"
-            >
-              {status === "idle" && (
-                <>Send Message <Send size={16} /></>
-              )}
-              {status === "submitting" && "Sending..."}
-              {status === "success" && "Message Delivered!"}
-            </button>
-          </form>
+                <div className="space-y-1.5 pb-2">
+                  <label className={`text-[9px] font-black uppercase tracking-[0.1em] ${isLight ? "text-gray-500" : "text-gray-400"}`}>Message</label>
+                  <textarea
+                    required
+                    rows={3}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className={`w-full px-4 py-3 rounded-2xl border bg-transparent outline-none transition-all resize-none text-sm font-medium ${isLight
+                      ? "border-gray-200 focus:border-cyan-500 text-gray-900 placeholder:text-gray-400 focus:shadow-[0_0_0_4px_rgba(6,182,212,0.1)] bg-gray-50/50"
+                      : "border-[#222] focus:border-cyan-500 text-white placeholder:text-[#555] bg-[#111]"
+                      }`}
+                    placeholder="Tell me about your project..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="w-full py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition-all text-white bg-gradient-to-r from-[#a855f7] to-[#00e5ff] shadow-[0_10px_20px_-10px] shadow-[#a855f7]/40 hover:shadow-[#00e5ff]/60 mb-2"
+                >
+                  {status === "idle" && (
+                    <>Send Message <Send size={16} /></>
+                  )}
+                  {status === "submitting" && "Sending..."}
+                  {status === "success" && "Delivered!"}
+                </button>
+              </form>
+            </div>
+            
+            {/* Phone Home Bar */}
+            <div className="absolute bottom-1.5 inset-x-0 flex justify-center pointer-events-none z-20">
+              <div className={`w-1/3 h-1 md:h-1.5 rounded-full ${isLight ? "bg-gray-300" : "bg-[#333]"}`}></div>
+            </div>
+          </div>
         </motion.div>
       </div>
 
