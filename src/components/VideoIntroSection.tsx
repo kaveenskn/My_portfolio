@@ -91,66 +91,42 @@ const AnimatedText = ({ text, className }: { text: string, className?: string })
 
 const VideoIntroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const desktopVideoRef = useRef<HTMLVideoElement>(null);
-  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoOpacity, setVideoOpacity] = useState(1);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || !videoRef.current) return;
 
+      const video = videoRef.current;
       const rect = containerRef.current.getBoundingClientRect();
-
-      const playVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && ref.current.paused) {
-          ref.current.play().catch((e) => console.log("Video play error:", e));
-        }
-      };
-
-      const pauseVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && !ref.current.paused) {
-          ref.current.pause();
-        }
-      };
-
-      const resetVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && ref.current.currentTime !== 0) {
-          ref.current.currentTime = 0;
-        }
-      };
-
       const isOutOfView = rect.bottom < window.innerHeight / 2;
 
       if (isOutOfView) {
-        pauseVideo(desktopVideoRef);
-        pauseVideo(mobileVideoRef);
+        if (!video.paused) video.pause();
         return;
       }
 
       if (rect.top < -10) {
-        playVideo(desktopVideoRef);
-        playVideo(mobileVideoRef);
         setIsPlaying(true);
+        if (video.paused) {
+          video.play().catch((e) => console.log("Video play error:", e));
+        }
       } else {
-        pauseVideo(desktopVideoRef);
-        pauseVideo(mobileVideoRef);
+        if (!video.paused) video.pause();
         
         if (rect.top >= -5) {
-          resetVideo(desktopVideoRef);
-          resetVideo(mobileVideoRef);
+          if (video.currentTime !== 0) video.currentTime = 0;
           setIsPlaying(false);
         }
       }
     };
 
     const unlockVideoPlayback = () => {
-      // Prime the videos so iOS allows playback during scroll
-      if (desktopVideoRef.current && desktopVideoRef.current.paused) {
-        desktopVideoRef.current.play().then(() => desktopVideoRef.current?.pause()).catch(() => {});
-      }
-      if (mobileVideoRef.current && mobileVideoRef.current.paused) {
-        mobileVideoRef.current.play().then(() => mobileVideoRef.current?.pause()).catch(() => {});
+      // Prime the video so iOS allows playback during scroll
+      if (videoRef.current && videoRef.current.paused) {
+        videoRef.current.play().then(() => videoRef.current?.pause()).catch(() => {});
       }
       window.removeEventListener("touchstart", unlockVideoPlayback);
       window.removeEventListener("click", unlockVideoPlayback);
@@ -176,10 +152,10 @@ const VideoIntroSection = () => {
       className="relative w-full h-[200vh]"
     >
       <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center bg-[#030014]">
-        {/* Desktop Video */}
+        {/* Background Video */}
         <video
-          ref={desktopVideoRef}
-          className="hidden md:block w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
+          ref={videoRef}
+          className="w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
           style={{ 
             opacity: videoOpacity,
             filter: videoOpacity === 1 ? 'blur(0px) brightness(1)' : 'blur(12px) brightness(0.5)',
@@ -198,48 +174,16 @@ const VideoIntroSection = () => {
           }}
           onEnded={() => {
             setTimeout(() => {
-              if (desktopVideoRef.current) {
-                desktopVideoRef.current.currentTime = 0;
-                desktopVideoRef.current.play().catch(e => console.log(e));
+              if (videoRef.current) {
+                videoRef.current.currentTime = 0;
+                videoRef.current.play().catch(e => console.log(e));
                 setVideoOpacity(1);
               }
             }, 100);
           }}
         >
-          <source src="/newHero.mp4#t=0.001" type="video/mp4" />
-        </video>
-
-        {/* Mobile Video */}
-        <video
-          ref={mobileVideoRef}
-          className="block md:hidden w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
-          style={{ 
-            opacity: videoOpacity,
-            filter: videoOpacity === 1 ? 'blur(0px) brightness(1)' : 'blur(12px) brightness(0.5)',
-            transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
-          }}
-          preload="auto"
-          muted
-          playsInline
-          disablePictureInPicture
-          disableRemotePlayback
-          onTimeUpdate={(e) => {
-            const video = e.currentTarget;
-            if (video.duration && video.duration - video.currentTime <= 1.0 && videoOpacity === 1) {
-              setVideoOpacity(0);
-            }
-          }}
-          onEnded={() => {
-            setTimeout(() => {
-              if (mobileVideoRef.current) {
-                mobileVideoRef.current.currentTime = 0;
-                mobileVideoRef.current.play().catch(e => console.log(e));
-                setVideoOpacity(1);
-              }
-            }, 100);
-          }}
-        >
-          <source src="/newMobile.mp4#t=0.001" type="video/mp4" />
+          <source src="/newHero.mp4" media="(min-width: 768px)" type="video/mp4" />
+          <source src="/newMobile.mp4" type="video/mp4" />
         </video>
 
         {/* Gradient overlay to blend text and background */}
