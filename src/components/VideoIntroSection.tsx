@@ -91,8 +91,7 @@ const AnimatedText = ({ text, className }: { text: string, className?: string })
 
 const VideoIntroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const desktopVideoRef = useRef<HTMLVideoElement>(null);
-  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoOpacity, setVideoOpacity] = useState(1);
 
@@ -102,62 +101,45 @@ const VideoIntroSection = () => {
 
       const rect = containerRef.current.getBoundingClientRect();
 
-      const playVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && ref.current.paused) {
-          ref.current.play().catch((e) => console.log("Video play error:", e));
+      const playVideo = () => {
+        if (videoRef.current && videoRef.current.paused) {
+          const p = videoRef.current.play();
+          if (p) p.catch((e) => console.log("Video play error:", e));
         }
       };
 
-      const pauseVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && !ref.current.paused) {
-          ref.current.pause();
+      const pauseVideo = () => {
+        if (videoRef.current && !videoRef.current.paused) {
+          videoRef.current.pause();
         }
       };
 
-      const resetVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && ref.current.currentTime !== 0) {
-          ref.current.currentTime = 0;
+      const resetVideo = () => {
+        if (videoRef.current && videoRef.current.currentTime !== 0) {
+          videoRef.current.currentTime = 0;
         }
       };
 
       const isOutOfView = rect.bottom < window.innerHeight / 2;
 
       if (isOutOfView) {
-        pauseVideo(desktopVideoRef);
-        pauseVideo(mobileVideoRef);
+        pauseVideo();
         return;
       }
 
       if (rect.top < -10) {
-        playVideo(desktopVideoRef);
-        playVideo(mobileVideoRef);
+        playVideo();
         setIsPlaying(true);
       } else {
-        pauseVideo(desktopVideoRef);
-        pauseVideo(mobileVideoRef);
+        pauseVideo();
         
         if (rect.top >= -5) {
-          resetVideo(desktopVideoRef);
-          resetVideo(mobileVideoRef);
+          resetVideo();
           setIsPlaying(false);
         }
       }
     };
 
-    const unlockVideoPlayback = () => {
-      // Prime the videos so iOS allows playback during scroll
-      if (desktopVideoRef.current && desktopVideoRef.current.paused) {
-        desktopVideoRef.current.play().then(() => desktopVideoRef.current?.pause()).catch(() => {});
-      }
-      if (mobileVideoRef.current && mobileVideoRef.current.paused) {
-        mobileVideoRef.current.play().then(() => mobileVideoRef.current?.pause()).catch(() => {});
-      }
-      window.removeEventListener("touchstart", unlockVideoPlayback);
-      window.removeEventListener("click", unlockVideoPlayback);
-    };
-
-    window.addEventListener("touchstart", unlockVideoPlayback, { once: true, passive: true });
-    window.addEventListener("click", unlockVideoPlayback, { once: true, passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
     
     // Trigger once on mount
@@ -165,8 +147,6 @@ const VideoIntroSection = () => {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("touchstart", unlockVideoPlayback);
-      window.removeEventListener("click", unlockVideoPlayback);
     };
   }, []);
 
@@ -176,10 +156,10 @@ const VideoIntroSection = () => {
       className="relative w-full h-[200vh]"
     >
       <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center bg-[#030014]">
-        {/* Desktop Video */}
+        {/* Video */}
         <video
-          ref={desktopVideoRef}
-          className="hidden md:block w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
+          ref={videoRef}
+          className="w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
           style={{ 
             opacity: videoOpacity,
             filter: videoOpacity === 1 ? 'blur(0px) brightness(1)' : 'blur(12px) brightness(0.5)',
@@ -198,47 +178,16 @@ const VideoIntroSection = () => {
           }}
           onEnded={() => {
             setTimeout(() => {
-              if (desktopVideoRef.current) {
-                desktopVideoRef.current.currentTime = 0;
-                desktopVideoRef.current.play().catch(e => console.log(e));
+              if (videoRef.current) {
+                videoRef.current.currentTime = 0;
+                const p = videoRef.current.play();
+                if (p) p.catch(e => console.log(e));
                 setVideoOpacity(1);
               }
             }, 100);
           }}
         >
-          <source src="/newHero.mp4#t=0.001" type="video/mp4" />
-        </video>
-
-        {/* Mobile Video */}
-        <video
-          ref={mobileVideoRef}
-          className="block md:hidden w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
-          style={{ 
-            opacity: videoOpacity,
-            filter: videoOpacity === 1 ? 'blur(0px) brightness(1)' : 'blur(12px) brightness(0.5)',
-            transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
-          }}
-          preload="auto"
-          muted
-          playsInline
-          disablePictureInPicture
-          disableRemotePlayback
-          onTimeUpdate={(e) => {
-            const video = e.currentTarget;
-            if (video.duration && video.duration - video.currentTime <= 1.0 && videoOpacity === 1) {
-              setVideoOpacity(0);
-            }
-          }}
-          onEnded={() => {
-            setTimeout(() => {
-              if (mobileVideoRef.current) {
-                mobileVideoRef.current.currentTime = 0;
-                mobileVideoRef.current.play().catch(e => console.log(e));
-                setVideoOpacity(1);
-              }
-            }, 100);
-          }}
-        >
+          <source src="/newHero.mp4#t=0.001" media="(min-width: 768px)" type="video/mp4" />
           <source src="/newMobile.mp4#t=0.001" type="video/mp4" />
         </video>
 
