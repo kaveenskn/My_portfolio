@@ -63,7 +63,7 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className={`w-full md:w-[75%] rounded-full pointer-events-auto transition-all duration-300 ${
+        className={`w-full md:w-[95%] lg:w-[85%] xl:w-[75%] rounded-full pointer-events-auto transition-all duration-300 ${
           isScrolled 
             ? isLight 
               ? "bg-white/95 shadow-[0_0_20px_rgba(0,229,255,0.3),0_0_20px_rgba(168,85,247,0.3)] border border-[#00e5ff]/30 backdrop-blur-xl" 
@@ -73,20 +73,20 @@ export default function Navbar() {
               : "bg-[#030014]/80 backdrop-blur-lg border border-[#a855f7]/20 shadow-[0_0_15px_rgba(0,229,255,0.2),0_0_15px_rgba(168,85,247,0.2)]"
         }`}
       >
-        <div className="w-full mx-auto flex items-center justify-between h-[70px] px-6 lg:px-8">
+        <div className="w-full mx-auto flex items-center justify-between h-[70px] px-4 md:px-6 lg:px-8">
           
           {/* Logo / Brand */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className={`flex items-center justify-center w-10 h-10 rounded-full ${isLight ? "bg-[#00e5ff]/20" : "bg-[#a855f7]/10"} border border-[#a855f7]/50 shadow-[0_0_20px_rgba(0,229,255,0.5),0_0_20px_rgba(168,85,247,0.5)] group-hover:shadow-[0_0_35px_rgba(0,229,255,0.8),0_0_35px_rgba(168,85,247,0.8)] transition-all duration-300`}>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff] font-bold text-[15px] tracking-wider">SK</span>
+          <Link href="/" className="flex items-center gap-2 lg:gap-3 group shrink-0">
+            <div className={`flex items-center justify-center w-8 h-8 lg:w-10 lg:h-10 rounded-full ${isLight ? "bg-[#00e5ff]/20" : "bg-[#a855f7]/10"} border border-[#a855f7]/50 shadow-[0_0_20px_rgba(0,229,255,0.5),0_0_20px_rgba(168,85,247,0.5)] group-hover:shadow-[0_0_35px_rgba(0,229,255,0.8),0_0_35px_rgba(168,85,247,0.8)] transition-all duration-300`}>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] to-[#00e5ff] font-bold text-[13px] lg:text-[15px] tracking-wider">SK</span>
             </div>
-            <span className={`font-[700] text-xl md:text-lg tracking-wide transition-colors ${isLight ? "text-gray-900 group-hover:text-gray-700" : "text-white group-hover:text-white/90"}`}>
+            <span className={`font-[700] text-lg lg:text-xl tracking-wide transition-colors ${isLight ? "text-gray-900 group-hover:text-gray-700" : "text-white group-hover:text-white/90"}`}>
               S.Kaveen
             </span>
           </Link>
 
           {/* Menu Items */}
-          <ul className="hidden md:flex items-center gap-2 lg:gap-4 xl:gap-6">
+          <ul className="hidden md:flex items-center gap-1 lg:gap-4 xl:gap-6 shrink-0">
             {navLinks.map((link) => {
               const isActive = activeTab === link.href;
               return (
@@ -101,7 +101,7 @@ export default function Navbar() {
                         target.scrollIntoView({ behavior: 'smooth' });
                       }
                     }}
-                    className={`relative px-5 py-2.5 rounded-full transition-colors duration-300 text-[14px] font-[600] tracking-wide ${
+                    className={`relative px-3 lg:px-5 py-2 lg:py-2.5 rounded-full transition-colors duration-300 text-[13px] lg:text-[14px] font-[600] tracking-wide whitespace-nowrap ${
                       isActive
                         ? "text-white"
                         : isLight ? "text-gray-600 hover:text-[#00e5ff] hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]" : "text-gray-300 hover:text-[#00e5ff] hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]"
@@ -122,15 +122,13 @@ export default function Navbar() {
           </ul>
 
           {/* Right Side Tools */}
-          <div className="flex items-center gap-4">
-            {/* Removed Theme Toggle Button as requested */}
-
+          <div className="flex items-center gap-3 lg:gap-4 shrink-0">
             {/* Resume CTA Button */}
             <a
               href="/ShanmugarajaKaveen.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center justify-center px-7 py-2.5 rounded-full bg-gradient-to-r from-[#a855f7] to-[#00e5ff] text-[#030014] text-[13.5px] font-bold tracking-wide shadow-[0_0_20px_rgba(0,229,255,0.4),0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(0,229,255,0.6),0_0_40px_rgba(168,85,247,0.6)] transition-all duration-300"
+              className="hidden sm:flex items-center justify-center px-4 lg:px-7 py-2 lg:py-2.5 rounded-full bg-gradient-to-r from-[#a855f7] to-[#00e5ff] text-[#030014] text-[12px] lg:text-[13.5px] font-bold tracking-wide shadow-[0_0_20px_rgba(0,229,255,0.4),0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(0,229,255,0.6),0_0_40px_rgba(168,85,247,0.6)] transition-all duration-300 whitespace-nowrap"
             >
               Resume
             </a>
