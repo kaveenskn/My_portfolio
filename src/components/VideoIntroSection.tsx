@@ -97,20 +97,54 @@ const VideoIntroSection = () => {
   const [videoOpacity, setVideoOpacity] = useState(1);
 
   useEffect(() => {
-    // Force play on mount to ensure iOS starts buffering immediately
-    if (desktopVideoRef.current?.paused) desktopVideoRef.current.play().catch(() => {});
-    if (mobileVideoRef.current?.paused) mobileVideoRef.current.play().catch(() => {});
+    const playVideo = (ref: React.RefObject<HTMLVideoElement>) => {
+      const video = ref.current;
+      if (video && video.paused) {
+        const p = video.play();
+        if (p !== undefined) {
+          p.catch((e) => {
+            if (e.name !== 'AbortError') console.log("Video play error:", e);
+          });
+        }
+      }
+    };
+
+    const pauseVideo = (ref: React.RefObject<HTMLVideoElement>) => {
+      const video = ref.current;
+      if (video && !video.paused) {
+        video.pause();
+      }
+    };
+
+    const resetVideo = (ref: React.RefObject<HTMLVideoElement>) => {
+      const video = ref.current;
+      if (video && video.currentTime !== 0) {
+        video.currentTime = 0;
+      }
+    };
 
     const handleScroll = () => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
+      const isOutOfView = rect.bottom < window.innerHeight / 2;
 
-      // Only manage text visibility on scroll.
-      // Videos will play continuously in the background for a smoother experience.
+      if (isOutOfView) {
+        pauseVideo(desktopVideoRef);
+        pauseVideo(mobileVideoRef);
+        return;
+      }
+
       if (rect.top < -10) {
         setIsPlaying(true);
+        playVideo(desktopVideoRef);
+        playVideo(mobileVideoRef);
       } else {
+        pauseVideo(desktopVideoRef);
+        pauseVideo(mobileVideoRef);
+        
         if (rect.top >= -5) {
+          resetVideo(desktopVideoRef);
+          resetVideo(mobileVideoRef);
           setIsPlaying(false);
         }
       }
@@ -118,7 +152,7 @@ const VideoIntroSection = () => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     
-    // Trigger once on mount
+    // Trigger once on mount to evaluate scroll and pause if at top
     handleScroll();
 
     return () => {
