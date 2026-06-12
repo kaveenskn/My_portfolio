@@ -97,35 +97,29 @@ const VideoIntroSection = () => {
   const [videoOpacity, setVideoOpacity] = useState(1);
 
   useEffect(() => {
-    const playVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-      const video = ref.current;
-      if (video && video.paused) {
-        const p = video.play();
-        if (p !== undefined) {
-          p.catch((e) => {
-            if (e.name !== 'AbortError') console.log("Video play error:", e);
-          });
-        }
-      }
-    };
-
-    const pauseVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-      const video = ref.current;
-      if (video && !video.paused) {
-        video.pause();
-      }
-    };
-
-    const resetVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-      const video = ref.current;
-      if (video && video.currentTime !== 0) {
-        video.currentTime = 0;
-      }
-    };
-
     const handleScroll = () => {
       if (!containerRef.current) return;
+
       const rect = containerRef.current.getBoundingClientRect();
+
+      const playVideo = (ref: React.RefObject<HTMLVideoElement>) => {
+        if (ref.current && ref.current.paused) {
+          ref.current.play().catch((e) => console.log("Video play error:", e));
+        }
+      };
+
+      const pauseVideo = (ref: React.RefObject<HTMLVideoElement>) => {
+        if (ref.current && !ref.current.paused) {
+          ref.current.pause();
+        }
+      };
+
+      const resetVideo = (ref: React.RefObject<HTMLVideoElement>) => {
+        if (ref.current && ref.current.currentTime !== 0) {
+          ref.current.currentTime = 0;
+        }
+      };
+
       const isOutOfView = rect.bottom < window.innerHeight / 2;
 
       if (isOutOfView) {
@@ -150,13 +144,29 @@ const VideoIntroSection = () => {
       }
     };
 
+    const unlockVideoPlayback = () => {
+      // Prime the videos so iOS allows playback during scroll
+      if (desktopVideoRef.current && desktopVideoRef.current.paused) {
+        desktopVideoRef.current.play().then(() => desktopVideoRef.current?.pause()).catch(() => {});
+      }
+      if (mobileVideoRef.current && mobileVideoRef.current.paused) {
+        mobileVideoRef.current.play().then(() => mobileVideoRef.current?.pause()).catch(() => {});
+      }
+      window.removeEventListener("touchstart", unlockVideoPlayback);
+      window.removeEventListener("click", unlockVideoPlayback);
+    };
+
+    window.addEventListener("touchstart", unlockVideoPlayback, { once: true, passive: true });
+    window.addEventListener("click", unlockVideoPlayback, { once: true, passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
     
-    // Trigger once on mount to evaluate scroll and pause if at top
+    // Trigger once on mount
     handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("touchstart", unlockVideoPlayback);
+      window.removeEventListener("click", unlockVideoPlayback);
     };
   }, []);
 
@@ -175,7 +185,6 @@ const VideoIntroSection = () => {
             filter: videoOpacity === 1 ? 'blur(0px) brightness(1)' : 'blur(12px) brightness(0.5)',
             transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
           }}
-          autoPlay
           preload="auto"
           muted
           playsInline
@@ -209,7 +218,6 @@ const VideoIntroSection = () => {
             filter: videoOpacity === 1 ? 'blur(0px) brightness(1)' : 'blur(12px) brightness(0.5)',
             transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
           }}
-          autoPlay
           preload="auto"
           muted
           playsInline
