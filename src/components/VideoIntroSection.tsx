@@ -95,34 +95,8 @@ const VideoIntroSection = () => {
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoOpacity, setVideoOpacity] = useState(1);
-  const videoUnlocked = useRef(false);
 
   useEffect(() => {
-    // Immediately pause both videos after autoPlay unlocks them
-    const primeVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-      const video = ref.current;
-      if (!video) return;
-
-      const handleCanPlay = () => {
-        video.pause();
-        video.currentTime = 0;
-        videoUnlocked.current = true;
-        video.removeEventListener("canplay", handleCanPlay);
-      };
-
-      if (video.readyState >= 3) {
-        // Already loaded enough to play
-        video.pause();
-        video.currentTime = 0;
-        videoUnlocked.current = true;
-      } else {
-        video.addEventListener("canplay", handleCanPlay);
-      }
-    };
-
-    primeVideo(desktopVideoRef);
-    primeVideo(mobileVideoRef);
-
     const handleScroll = () => {
       if (!containerRef.current) return;
 
@@ -130,7 +104,7 @@ const VideoIntroSection = () => {
 
       const playVideo = (ref: React.RefObject<HTMLVideoElement>) => {
         if (ref.current && ref.current.paused) {
-          ref.current.play().catch(() => {});
+          ref.current.play().catch((e) => console.log("Video play error:", e));
         }
       };
 
@@ -170,11 +144,29 @@ const VideoIntroSection = () => {
       }
     };
 
+    const unlockVideoPlayback = () => {
+      // Prime the videos so iOS allows playback during scroll
+      if (desktopVideoRef.current && desktopVideoRef.current.paused) {
+        desktopVideoRef.current.play().then(() => desktopVideoRef.current?.pause()).catch(() => {});
+      }
+      if (mobileVideoRef.current && mobileVideoRef.current.paused) {
+        mobileVideoRef.current.play().then(() => mobileVideoRef.current?.pause()).catch(() => {});
+      }
+      window.removeEventListener("touchstart", unlockVideoPlayback);
+      window.removeEventListener("click", unlockVideoPlayback);
+    };
+
+    window.addEventListener("touchstart", unlockVideoPlayback, { once: true, passive: true });
+    window.addEventListener("click", unlockVideoPlayback, { once: true, passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
+    
+    // Trigger once on mount
     handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("touchstart", unlockVideoPlayback);
+      window.removeEventListener("click", unlockVideoPlayback);
     };
   }, []);
 
@@ -194,7 +186,6 @@ const VideoIntroSection = () => {
             transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
           }}
           preload="auto"
-          autoPlay
           muted
           playsInline
           disablePictureInPicture
@@ -215,7 +206,7 @@ const VideoIntroSection = () => {
             }, 100);
           }}
         >
-          <source src="/newHero.mp4" type="video/mp4" />
+          <source src="/newHero.mp4#t=0.001" type="video/mp4" />
         </video>
 
         {/* Mobile Video */}
@@ -228,7 +219,6 @@ const VideoIntroSection = () => {
             transform: videoOpacity === 1 ? 'scale(1)' : 'scale(1.05)'
           }}
           preload="auto"
-          autoPlay
           muted
           playsInline
           disablePictureInPicture
@@ -249,7 +239,7 @@ const VideoIntroSection = () => {
             }, 100);
           }}
         >
-          <source src="/newMobile.mp4" type="video/mp4" />
+          <source src="/newMobile.mp4#t=0.001" type="video/mp4" />
         </video>
 
         {/* Gradient overlay to blend text and background */}
