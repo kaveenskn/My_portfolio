@@ -194,10 +194,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
             <div className="mt-8 pt-8 border-t border-white/5">
               <button
                 onClick={handleFlip}
-                className={`w-full py-4 rounded-2xl font-bold uppercase tracking-widest text-xs transition-all ${isLight
-                  ? "bg-black text-white hover:bg-gray-800"
-                  : "bg-cyan-600 text-white hover:bg-cyan-700 shadow-[0_5px_20px_rgba(59,130,246,0.3)]"
-                  }`}
+                className="w-full py-4 rounded-2xl font-bold uppercase tracking-widest text-[12px] md:text-xs transition-all bg-gradient-to-r from-[#a855f7] to-[#00e5ff] text-[#030014] shadow-[0_0_15px_rgba(0,229,255,0.3),0_0_15px_rgba(168,85,247,0.3)] hover:shadow-[0_0_30px_rgba(0,229,255,0.5),0_0_30px_rgba(168,85,247,0.5)]"
               >
                 Go Back
               </button>
