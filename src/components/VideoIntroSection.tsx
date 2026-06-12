@@ -93,74 +93,65 @@ const VideoIntroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const desktopVideoRef = useRef<HTMLVideoElement>(null);
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const videoUnlockedRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoOpacity, setVideoOpacity] = useState(1);
 
   useEffect(() => {
+    // Get the active video ref based on screen width
+    const getActiveVideo = () => {
+      return window.innerWidth >= 768 ? desktopVideoRef : mobileVideoRef;
+    };
+
     const handleScroll = () => {
       if (!containerRef.current) return;
 
       const rect = containerRef.current.getBoundingClientRect();
-
-      const playVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && ref.current.paused) {
-          ref.current.play().catch((e) => console.log("Video play error:", e));
-        }
-      };
-
-      const pauseVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && !ref.current.paused) {
-          ref.current.pause();
-        }
-      };
-
-      const resetVideo = (ref: React.RefObject<HTMLVideoElement>) => {
-        if (ref.current && ref.current.currentTime !== 0) {
-          ref.current.currentTime = 0;
-        }
-      };
+      const activeRef = getActiveVideo();
+      const video = activeRef.current;
+      if (!video) return;
 
       const isOutOfView = rect.bottom < window.innerHeight / 2;
 
       if (isOutOfView) {
-        pauseVideo(desktopVideoRef);
-        pauseVideo(mobileVideoRef);
+        if (!video.paused) video.pause();
         return;
       }
 
       if (rect.top < -10) {
+        if (video.paused) {
+          video.play().catch((e) => console.log("Video play error:", e));
+        }
         setIsPlaying(true);
-        playVideo(desktopVideoRef);
-        playVideo(mobileVideoRef);
       } else {
-        pauseVideo(desktopVideoRef);
-        pauseVideo(mobileVideoRef);
-        
+        if (!video.paused) video.pause();
         if (rect.top >= -5) {
-          resetVideo(desktopVideoRef);
-          resetVideo(mobileVideoRef);
+          if (video.currentTime !== 0) video.currentTime = 0;
           setIsPlaying(false);
         }
       }
     };
 
     const unlockVideoPlayback = () => {
-      // Prime the videos so iOS allows playback during scroll
-      if (desktopVideoRef.current && desktopVideoRef.current.paused) {
-        desktopVideoRef.current.play().then(() => desktopVideoRef.current?.pause()).catch(() => {});
+      if (videoUnlockedRef.current) return;
+      videoUnlockedRef.current = true;
+      // Prime the active video so iOS allows programmatic playback on scroll
+      const video = getActiveVideo().current;
+      if (video && video.paused) {
+        video.play().then(() => {
+          // Immediately pause — we just needed iOS to grant permission
+          video.pause();
+          video.currentTime = 0;
+        }).catch(() => {});
       }
-      if (mobileVideoRef.current && mobileVideoRef.current.paused) {
-        mobileVideoRef.current.play().then(() => mobileVideoRef.current?.pause()).catch(() => {});
-      }
-      window.removeEventListener("touchstart", unlockVideoPlayback);
-      window.removeEventListener("click", unlockVideoPlayback);
     };
 
+    // Listen for the very first user gesture to unlock iOS video
     window.addEventListener("touchstart", unlockVideoPlayback, { once: true, passive: true });
     window.addEventListener("click", unlockVideoPlayback, { once: true, passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
-    
-    // Trigger once on mount
+
+    // Check initial state
     handleScroll();
 
     return () => {
@@ -176,7 +167,7 @@ const VideoIntroSection = () => {
       className="relative w-full h-[200vh]"
     >
       <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center bg-[#030014]">
-        {/* Desktop Video */}
+        {/* Desktop Video — hidden on mobile, only loads on ≥768px */}
         <video
           ref={desktopVideoRef}
           className="hidden md:block w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
@@ -206,10 +197,10 @@ const VideoIntroSection = () => {
             }, 100);
           }}
         >
-          <source src="/newHero.mp4" media="(min-width: 768px)" type="video/mp4" />
+          <source src="/web.mp4#t=0.001" type="video/mp4" />
         </video>
 
-        {/* Mobile Video */}
+        {/* Mobile Video — hidden on desktop, only loads on <768px */}
         <video
           ref={mobileVideoRef}
           className="block md:hidden w-full h-full object-cover object-top transition-all duration-1000 ease-in-out"
@@ -239,7 +230,7 @@ const VideoIntroSection = () => {
             }, 100);
           }}
         >
-          <source src="/newMobile.mp4" media="(max-width: 767px)" type="video/mp4" />
+          <source src="/Mobile.mp4#t=0.001" type="video/mp4" />
         </video>
 
         {/* Gradient overlay to blend text and background */}
